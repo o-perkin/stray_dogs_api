@@ -1,15 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<div>
-  
-  <h1><%= @dog.name %></h1>
-  
-  <p>Breed: <%= @dog.breed.name %></p>
-  <p>City: <%= @dog.city.name %></p>
-  <p>Age: <%= @dog.age.years %></p>
-  <h3>About: </h3>
-  <p><%= @dog.description %></p>
-
+<div class="card mb-3" style="max-width: 1000px;">
+  <div class="row no-gutters">
+    <div class="col-md-6">
+       <%= image_tag("example.jpg", class: 'card-img-top') %>
+    </div>
+    <div class="col-md-6">
+      <div class="card-body">
+        <h1 class="card-title"><%= @dog.name %></h1>
+        <p class="card-text"><b>Breed: </b><%= @dog.breed.name %></p>
+        <p class="card-text"><b>City: </b><%= @dog.city.name %></p>
+        <p class="card-text"><b>Age: </b><%= @dog.age.years %></p>
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutters">
+    <div class="col-md-12">
+      <h3>About</h3>
+      <p class="card-text"><%= @dog.description %></p>
+    </div>        
+  </div>
 </div>
  
 
@@ -17,3 +27,5 @@
 
 <%= link_to 'Edit', edit_dog_path(@dog), class: 'btn btn-warning' %> 
 <%= link_to 'Back', dogs_path, class: 'btn btn-primary' %>
+
+
