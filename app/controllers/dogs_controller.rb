@@ -4,7 +4,7 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.all
+    @dogs = Dog.page(params[:page]).per(3)
   end
 
   # GET /dogs/1
