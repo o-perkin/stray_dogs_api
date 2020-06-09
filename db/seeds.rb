@@ -1,4 +1,3 @@
-
 5.times do |breed|
   Breed.create!(
     name: "Breed #{breed}"
@@ -28,7 +27,8 @@ puts '10 ages created'
     name: "Dog #{dog}",
     breed_id: 4,
     city_id: 2,
-    age_id: 3
+    age_id: 3,
+    description: "This is description of the dog"
   )
 end
 

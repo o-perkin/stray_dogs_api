@@ -2,15 +2,18 @@
 
 <div>
   
-  <p>Name: <%= @dog.name %></p>
+  <h1><%= @dog.name %></h1>
+  
   <p>Breed: <%= @dog.breed.name %></p>
   <p>City: <%= @dog.city.name %></p>
   <p>Age: <%= @dog.age.years %></p>
+  <h3>About: </h3>
+  <p><%= @dog.description %></p>
 
 </div>
  
 
 
 
-<%= link_to 'Edit', edit_dog_path(@dog) %> |
-<%= link_to 'Back', dogs_path %>
+<%= link_to 'Edit', edit_dog_path(@dog), class: 'btn btn-warning' %> 
+<%= link_to 'Back', dogs_path, class: 'btn btn-primary' %>

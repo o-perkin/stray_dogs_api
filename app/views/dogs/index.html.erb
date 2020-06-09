@@ -2,7 +2,7 @@
 
 <h1>All stray dogs</h1>
 
-<%= link_to 'New', new_dog_path %>
+<%= link_to 'Add new animal', new_dog_path, class: 'btn btn-primary' %>
 
   <div>
     <% @dogs.each do |dog| %>
@@ -14,9 +14,9 @@
       <p>City: <%= dog.city.name %></p>
       <p>Age: <%= dog.age.years %></p>
 
-      <%= link_to 'Show', dog %>
-      <%= link_to 'Edit', edit_dog_path(dog) %>
-      <%= link_to 'Destroy', dog, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Show', dog, class: 'btn btn-primary' %>
+      <%= link_to 'Edit', edit_dog_path(dog), class: 'btn btn-warning' %>
+      <%= link_to 'Destroy', dog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning' %>
     
     <% end %>
   </div>
