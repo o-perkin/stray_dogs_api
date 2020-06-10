@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="card mb-3" style="max-width: 1000px;">
-  <div class="row no-gutters">
+  <div class="row no-gutters row-on-the-show">
     <div class="col-md-6">
        <%= image_tag("example.jpg", class: 'card-img-top') %>
     </div>
@@ -14,7 +14,10 @@
       </div>
     </div>
   </div>
-  <div class="row no-gutters">
+
+  <hr> 
+
+  <div class="row no-gutters row-on-the-show">
     <div class="col-md-12">
       <h3>About</h3>
       <p class="card-text"><%= @dog.description %></p>
@@ -25,7 +28,7 @@
 
 
 
-<%= link_to 'Edit', edit_dog_path(@dog), class: 'btn btn-warning' %> 
-<%= link_to 'Back', dogs_path, class: 'btn btn-primary' %>
+<%= link_to 'Edit information', edit_dog_path(@dog), class: 'btn btn-warning' %> 
+
 
 

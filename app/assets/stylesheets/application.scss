@@ -23,7 +23,7 @@ body {
 }
 
 body {
-  padding-top: 56px;
+  padding-top: 70px;
 }
 
 @media (max-width: 991.98px) {
@@ -93,3 +93,13 @@ body {
 .lh-100 { line-height: 1; }
 .lh-125 { line-height: 1.25; }
 .lh-150 { line-height: 1.5; }
+
+/* Custom Styles */
+
+.form-select {
+  max-width: 150px;
+}
+
+.row-on-the-show {
+  padding: .8em;
+}
