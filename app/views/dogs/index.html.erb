@@ -26,10 +26,9 @@
         <div class="card-body">
           <%= link_to 'Show', dog, class: 'btn btn-primary' %>
           <%= link_to 'Edit', edit_dog_path(dog), class: 'btn btn-warning' if logged_in?(:site_admin) %>
-          <%= link_to 'Destroy', dog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning' if logged_in?(:site_admin) %>
+          <%= link_to 'Destroy', dog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-dark' if logged_in?(:site_admin) %>
         </div>
-      </div>
-    
+      </div>    
     <% end %>
   </div>
 

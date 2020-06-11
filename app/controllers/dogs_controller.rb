@@ -1,6 +1,6 @@
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
-  access all: [:show, :index, :home], user: {except: [:destroy, :new, :create, :update, :edit]}, site_admin: :all
+  access all: [:show, :index, :home, :favorites], user: {except: [:destroy, :new, :create, :update, :edit]}, site_admin: :all
 
   # GET /dogs
   # GET /dogs.json
@@ -11,9 +11,13 @@ class DogsController < ApplicationController
   def home
   end
 
+  def favorites
+  end
+
   # GET /dogs/1
   # GET /dogs/1.json
   def show
+    @favorite_exists = Favorite.where(dog: @dog, user: current_user) == [] ? false : true
   end
 
   # GET /dogs/new
