@@ -1,1 +1,4 @@
 $('#favorite_link').text("<%= favorite_text %>");
+$("#favorite-<%= params[:dog]%>").text("<%= current_user.favorites.find_by_dog_id(params[:dog]) ? 'Remove' : 'Add' %>");
+
+ 

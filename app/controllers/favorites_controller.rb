@@ -1,7 +1,6 @@
 class FavoritesController < ApplicationController
   def update
     favorite = Favorite.where(dog: Dog.find(params[:dog]), user: current_user)
-
     if favorite == []
       Favorite.create(dog: Dog.find(params[:dog]), user: current_user)
       @favorite_exists = true
@@ -15,3 +14,4 @@ class FavoritesController < ApplicationController
     end
   end
 end
+ 
