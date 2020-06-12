@@ -28,7 +28,7 @@
           <%= link_to 'Edit', edit_dog_path(dog), class: 'btn btn-warning' if logged_in?(:site_admin) %>
           <%= link_to 'Destroy', dog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-dark' if logged_in?(:site_admin) %>
         </div>
-        <%= link_to current_user.favorites.find_by_dog_id(dog.id) ? "Remove" : "Add", favorites_update_path(dog: dog.id), id: "favorite-#{dog.id}", remote: true, class: 'btn btn-danger' if current_user %>
+        <%= link_to current_user.favorites.find_by_dog_id(dog.id) ? "Remove from favorites" : "Add to favorites", favorites_update_path(dog: dog.id), id: "favorite-#{dog.id}", remote: true, class: 'btn btn-danger' if current_user %>
       </div>    
     <% end %>
   </div>
