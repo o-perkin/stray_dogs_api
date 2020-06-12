@@ -13,5 +13,14 @@ class FavoritesController < ApplicationController
       format.js {}
     end
   end
+
+  def destroy
+    favorite = Favorite.find(params[:id])
+    favorite.destroy
+    respond_to do |format|
+      format.html { redirect_to my_favorites_path, notice: 'Dog was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
 end
  
