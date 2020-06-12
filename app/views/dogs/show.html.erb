@@ -24,7 +24,7 @@
         <p class="card-text"><%= @dog.description %></p>
       </div>        
     </div>
-    <%= link_to favorite_text, favorites_update_path(dog: @dog), id: 'favorite_link', remote: true, class: 'btn btn-danger' if logged_in?(:site_admin) %>
+    <%= link_to favorite_text, favorites_update_path(dog: @dog), id: 'favorite_link', remote: true, class: 'btn btn-danger' if current_user %>
     <%= link_to 'Edit information', edit_dog_path(@dog), class: 'btn btn-warning' if logged_in?(:site_admin) %>
   </div>
 
