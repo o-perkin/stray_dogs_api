@@ -12,9 +12,6 @@
   </head>
 
   <body>   
-    
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
     <%= render 'shared/navbar' %>
 
@@ -31,6 +28,8 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8 blog-main">
+              <p class="notice"><%= notice %></p>
+              <p class="alert"><%= alert %></p>
           <%= yield %>
         </div>
         <aside class="col-md-4 blog-sidebar">

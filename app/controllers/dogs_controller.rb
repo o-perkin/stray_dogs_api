@@ -1,6 +1,6 @@
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
-  access all: [:show, :index, :home, :favorites, :destroy, :new, :create, :update, :edit, :my_list], site_admin: :all
+  access all: [:show, :index, :home], user: {except: [:test]}, site_admin: :all
 
   # GET /dogs
   # GET /dogs.json
@@ -16,6 +16,9 @@ class DogsController < ApplicationController
 
   def my_list
     @dogs = Dog.where(user_id: current_user.id)
+  end
+
+  def test
   end
 
   # GET /dogs/1
