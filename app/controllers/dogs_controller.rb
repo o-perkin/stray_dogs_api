@@ -33,6 +33,7 @@ class DogsController < ApplicationController
   # POST /dogs.json
   def create
     @dog = Dog.new(dog_params)
+    @dog.user_id = current_user.id
 
     respond_to do |format|
       if @dog.save
@@ -77,6 +78,6 @@ class DogsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def dog_params
-      params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description)
+      params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id)
     end
 end

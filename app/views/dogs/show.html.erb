@@ -9,6 +9,7 @@
       <div class="col-md-6">
         <div class="card-body">
           <h1 class="card-title"><%= @dog.name %></h1>
+          <h3 class="card-title">Author: <%= @dog.user.first_name if @dog.user %> <%= @dog.user.last_name if @dog.user %></h3>
           <p class="card-text"><b>Breed: </b><%= @dog.breed.name %></p>
           <p class="card-text"><b>City: </b><%= @dog.city.name %></p>
           <p class="card-text"><b>Age: </b><%= @dog.age.years %></p>

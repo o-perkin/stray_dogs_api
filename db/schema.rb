@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_124139) do
+ActiveRecord::Schema.define(version: 2020_06_15_130352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_06_11_124139) do
     t.integer "city_id"
     t.integer "age_id"
     t.text "description"
+    t.integer "user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
