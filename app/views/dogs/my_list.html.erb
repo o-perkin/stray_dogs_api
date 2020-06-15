@@ -1,10 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h3 class="pb-4 mb-4 font-italic border-bottom">
-  All stray dogs <%= link_to 'Add new Dog', new_dog_path, class: 'btn btn-primary add-dog-btn' if logged_in?(:site_admin) %>
+  My list <%= link_to 'Add new Dog', new_dog_path, class: 'btn btn-primary add-dog-btn' if current_user %>
 </h3>
- 
-<%= paginate @dogs %>
 
 <div class="blog-post">
   <% @dogs.each do |dog| %>
@@ -32,9 +30,4 @@
 </div>
 
 <br>
-
-<%= paginate @dogs %>
-
-
-
 
