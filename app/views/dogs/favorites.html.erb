@@ -2,6 +2,17 @@
   Your favourite dogs
 </h3>
 
+<nav class="nav nav-pills flex-column flex-sm-row">
+  <span class="flex-sm-fill text-sm-center nav-link" >Sort by</span>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">Name</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">Age</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">Breed</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">City</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">Date</a>
+</nav>
+
+<br>
+
 <div class="blog-post">
 
   <% current_user.favorites.each do |favorite| %>

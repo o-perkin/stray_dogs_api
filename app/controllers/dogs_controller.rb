@@ -5,7 +5,15 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.page(params[:page]).per(3)
+    if params[:sort_by] == "breed" 
+      @dogs = Dog.order("breed_id ASC").page(params[:page]).per(3) 
+    elsif params[:sort_by] == "age" 
+      @dogs = Dog.order("age_id ASC").page(params[:page]).per(3) 
+    elsif params[:sort_by] == "city" 
+      @dogs = Dog.order("city_id ASC").page(params[:page]).per(3) 
+    else
+      @dogs = Dog.order("created_at DESC").page(params[:page]).per(3) 
+    end
   end
 
   def home

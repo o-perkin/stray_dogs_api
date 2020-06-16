@@ -2,6 +2,15 @@
   My list <%= link_to 'Add new Dog', new_dog_path, class: 'btn btn-primary add-dog-btn' if current_user %>
 </h3>
 
+<nav class="nav nav-pills flex-column flex-sm-row">
+  <span class="flex-sm-fill text-sm-center nav-link" >Sort by</span>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">Name</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">Age</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">Breed</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">City</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">Date</a>
+</nav>
+
 <div class="blog-post">
   <% @dogs.each do |dog| %>
   
