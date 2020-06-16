@@ -1,40 +1,8 @@
 <h3 class="pb-4 mb-4 font-italic border-bottom">
   My list <%= link_to 'Add new Dog', new_dog_path, class: 'btn btn-primary add-dog-btn' if current_user %>
-</h3>
+</h3> 
 
-<nav class="nav nav-pills flex-column flex-sm-row">
-  <span class="flex-sm-fill text-sm-center nav-link" >Sort by</span>
-  <a class="flex-sm-fill text-sm-center nav-link" href="#">Name</a>
-  <a class="flex-sm-fill text-sm-center nav-link" href="#">Age</a>
-  <a class="flex-sm-fill text-sm-center nav-link" href="#">Breed</a>
-  <a class="flex-sm-fill text-sm-center nav-link" href="#">City</a>
-  <a class="flex-sm-fill text-sm-center nav-link" href="#">Date</a>
-</nav>
-
-<div class="blog-post">
-  <% @dogs.each do |dog| %>
-  
-  <hr>
-  
-    <div class="card" style="width: 18rem;">
-      <%= image_tag("example.jpg", class: 'card-img-top') %>
-      <div class="card-body">
-        <h5 class="card-title"><%= dog.name %></h5>
-        <p class="card-text">Breed: <%= dog.breed.name %></p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">City: <%= dog.city.name %></li>
-        <li class="list-group-item">Age: <%= dog.age.years %></li>
-      </ul>
-      <div class="card-body">
-        <%= link_to 'Show', dog, class: 'btn btn-primary' %>
-        <%= link_to 'Edit', edit_dog_path(dog), class: 'btn btn-warning' %>
-        <%= link_to 'Delete', dog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-dark' %>
-      </div>
-      <%= link_to current_user.favorites.find_by_dog_id(dog.id) ? "Remove from favorites" : "Add to favorites", favorites_update_path(dog: dog.id), id: "favorite-#{dog.id}", remote: true, class: 'btn btn-danger' %>
-    </div>    
-  <% end %>
+<div id="my-list">
+  <%= render "shared/my_list" %>
 </div>
- 
-<br>
 

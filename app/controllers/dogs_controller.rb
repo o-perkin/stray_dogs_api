@@ -23,7 +23,15 @@ class DogsController < ApplicationController
   end
 
   def my_list
-    @dogs = Dog.where(user_id: current_user.id)
+    if params[:sort_by] == "breed" 
+      @dogs = Dog.where(user_id: current_user.id).order("breed_id ASC")
+    elsif params[:sort_by] == "age" 
+      @dogs = Dog.where(user_id: current_user.id).order("age_id ASC")
+    elsif params[:sort_by] == "city" 
+      @dogs = Dog.where(user_id: current_user.id).order("city_id ASC") 
+    else
+      @dogs = Dog.where(user_id: current_user.id).order("created_at DESC")
+    end
   end
 
   def test
