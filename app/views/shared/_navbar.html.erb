@@ -7,16 +7,16 @@
   <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <%= link_to 'List of Dogs', dogs_path, class: 'nav-link' %>
+        <%= link_to "List of Dogs", dogs_path, class: "nav-link #{active? dogs_path}" %>
       </li>
       <li class="nav-item">
-        <%= link_to 'My list', my_list_path, class: 'nav-link' %>
+        <%= link_to "My list", my_list_path, class: "nav-link #{active? my_list_path}" %>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Profile</a>
       </li>
       <li class="nav-item">
-        <%= link_to 'Favorites', my_favorites_path, class: 'nav-link' if current_user %>
+        <%= link_to "Favorites", my_favorites_path, class: "nav-link #{active? my_favorites_path}" if current_user %>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
