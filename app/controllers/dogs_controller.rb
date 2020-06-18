@@ -6,7 +6,7 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.order(sort_column + " " + sort_direction)
+    @dogs = Dog.search(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(2)
   end
 
   def home
@@ -94,7 +94,7 @@ class DogsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def dog_params
-      params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id)
+      params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id, :sort, :direction)
     end
 
     def sort_column

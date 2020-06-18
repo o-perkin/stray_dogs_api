@@ -8,7 +8,7 @@
 
 <br>
 
-
+<%= paginate @dogs, remote: true %>
 
 <div class="blog-post">
   <% @dogs.each do |dog| %>
@@ -36,4 +36,6 @@
 </div>
 
 <br>
+
+<%= paginate @dogs, remote: true %>
 

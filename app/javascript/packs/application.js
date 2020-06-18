@@ -28,5 +28,6 @@ document.addEventListener("turbolinks:load", () => {
       $('.offcanvas-collapse').toggleClass('open')
     })
   })
+
 })
 
