@@ -1,4 +1,4 @@
-<%= form_with(model: @dog, url: dogs_path, method: 'get') do |form| %>
+<%= form_with(model: @dog, url: (current_page?(dogs_path) ? dogs_path : my_list_path), method: 'get') do |form| %>
   <%= hidden_field_tag :direction, params[:direction] %>
   <%= hidden_field_tag :sort, params[:sort] %>
 

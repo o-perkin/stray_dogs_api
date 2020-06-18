@@ -1,12 +1,14 @@
-<nav class="nav nav-pills flex-column flex-sm-row">
-  <span class="flex-sm-fill text-sm-center nav-link" >Sort by: </span>
-  <%= link_to 'Date', my_list_path, remote: true, class: "flex-sm-fill text-sm-center nav-link #{(active? my_list_path) unless params.has_key?(:sort_by)}" %>
-  <%= link_to 'Breed', my_list_path(sort_by: 'breed'), remote: true, class: "flex-sm-fill text-sm-center nav-link #{active? my_list_path(sort_by: 'breed')}" %>
-  <%= link_to 'Age', my_list_path(sort_by: 'age'), remote: true, class: "flex-sm-fill text-sm-center nav-link #{active? my_list_path(sort_by: 'age')}" %>
-  <%= link_to 'City', my_list_path(sort_by: 'city'), remote: true, class: "flex-sm-fill text-sm-center nav-link #{active? my_list_path(sort_by: 'city')}" %>
-</nav>
+<%= content_tag :nav, class: "nav nav-pills flex-column flex-sm-row #{dropup}" do %>
+  <span class="flex-sm-fill text-sm-center nav-link " >Sort by: </span>
+  <%= sortable_my_list "created_at", "Date" %>
+  <%= sortable_my_list "breed_id", "Breed" %>
+  <%= sortable_my_list "age_id", "Age" %>
+  <%= sortable_my_list "city_id", "City" %>
+<% end %>
 
 <br>
+
+<%= paginate @dogs, remote: true %>
 
 <div class="blog-post">
   <% @dogs.each do |dog| %>
@@ -33,4 +35,6 @@
   <% end %>
 </div>
  
-<br>
+<br> 
+
+<%= paginate @dogs, remote: true %>

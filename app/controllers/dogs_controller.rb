@@ -16,15 +16,7 @@ class DogsController < ApplicationController
   end
 
   def my_list
-    if params[:sort_by] == "breed" 
-      @dogs = Dog.where(user_id: current_user.id).order("breed_id ASC")
-    elsif params[:sort_by] == "age" 
-      @dogs = Dog.where(user_id: current_user.id).order("age_id ASC")
-    elsif params[:sort_by] == "city" 
-      @dogs = Dog.where(user_id: current_user.id).order("city_id ASC") 
-    else
-      @dogs = Dog.where(user_id: current_user.id).order("created_at DESC")
-    end
+    @dogs = Dog.search(params[:search]).filters(params[:breed_id], params[:city_id], params[:age_id]).where(user_id: current_user.id).order(sort_column + " " + sort_direction).page(params[:page]).per(2)
   end
 
   def test
