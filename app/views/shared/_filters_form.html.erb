@@ -1,0 +1,23 @@
+<%= form_with(model: @dog, url: dogs_path, method: 'get') do |form| %>
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+
+  <div class="form-group">
+    <%= form.label :breed_id %> 
+    <%= form.collection_select(:breed_id, Breed.all, :id, :name, { include_blank:"Select breed" }, class: 'form-control form-select') %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :city_id %>
+    <%= form.collection_select(:city_id, City.all, :id, :name, { include_blank:"Select city" }, class: 'form-control form-select') %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :age_id %>
+    <%= form.collection_select(:age_id, Age.all, :id, :years, { include_blank:"Select age" }, class: 'form-control form-select') %>
+  </div>
+
+  <div>
+    <%= submit_tag "Search", :name => nil, class: "btn btn-info" %>
+  </div> 
+<% end %> 

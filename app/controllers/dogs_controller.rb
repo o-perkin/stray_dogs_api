@@ -6,7 +6,7 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.search(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(2)
+    @dogs = Dog.search(params[:search]).filters(params[:breed_id], params[:city_id], params[:age_id]).order(sort_column + " " + sort_direction).page(params[:page]).per(2)
   end
 
   def home
