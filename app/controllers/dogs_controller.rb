@@ -1,19 +1,12 @@
 class DogsController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
   access all: [:show, :index, :home], user: {except: [:test]}, site_admin: :all
 
   # GET /dogs
   # GET /dogs.json
   def index
-    if params[:sort_by] == "breed" 
-      @dogs = Dog.order("breed_id ASC").page(params[:page]).per(3) 
-    elsif params[:sort_by] == "age" 
-      @dogs = Dog.order("age_id ASC").page(params[:page]).per(3) 
-    elsif params[:sort_by] == "city" 
-      @dogs = Dog.order("city_id ASC").page(params[:page]).per(3) 
-    else
-      @dogs = Dog.order("created_at DESC").page(params[:page]).per(3) 
-    end
+    @dogs = Dog.order(sort_column + " " + sort_direction)
   end
 
   def home
@@ -102,5 +95,13 @@ class DogsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def dog_params
       params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id)
+    end
+
+    def sort_column
+      Dog.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
 end
