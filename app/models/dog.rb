@@ -7,7 +7,7 @@ class Dog < ApplicationRecord
 
   def self.search(search)
     if search 
-      where('name LIKE ?', "%#{search}%")
+      where(name: search)
     else 
       all
     end
@@ -33,7 +33,10 @@ class Dog < ApplicationRecord
     elsif age
       where(age_id: age)
     else
-      all
+      unscoped
     end
   end
+
+ scope :current_user, ->(id) { where(user_id: id) }
+
 end

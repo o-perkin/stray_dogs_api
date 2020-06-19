@@ -55,3 +55,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'petergate', '~> 2.0', '>= 2.0.1'
+gem 'perkin_view_tool', '~> 0.1.0'

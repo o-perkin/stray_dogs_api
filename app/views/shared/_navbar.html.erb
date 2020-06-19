@@ -7,17 +7,17 @@
   <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <%= link_to "List of Dogs", dogs_path, class: "nav-link #{active? dogs_path}" %>
+        <%= link_to "Dogs", dogs_path, class: "nav-link #{active? dogs_path}" %>
       </li>
       <li class="nav-item">
-        <%= link_to "My list", my_list_path, class: "nav-link #{active? my_list_path}" %>
+        <%= link_to "My list", my_list_path, class: "nav-link #{active? my_list_path}" if current_user %>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Profile</a>
       </li>
       <li class="nav-item">
         <%= link_to "Favorites", my_favorites_path, class: "nav-link #{active? my_favorites_path}" if current_user %>
-      </li>
+      </li> 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -42,13 +42,8 @@
       
     </ul>
 
-    <%= form_with(url: dogs_path, method: 'get', remote: true, class: "form-inline my-2 my-lg-0") do %>
-      <%= hidden_field_tag :direction, params[:direction] %>
-      <%= hidden_field_tag :sort, params[:sort] %>
-      <div>
-        <%= text_field_tag :search, params[:search], placeholder: "Search", class: "form-control mr-sm-2" %>
-        <%= submit_tag "Search", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
-      </div> 
-    <% end %> 
+   <%= render "shared/search_form" %>
+
+
   </div> 
 </nav>

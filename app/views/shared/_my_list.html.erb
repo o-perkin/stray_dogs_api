@@ -1,40 +1,9 @@
-<%= content_tag :nav, class: "nav nav-pills flex-column flex-sm-row #{dropup}" do %>
-  <span class="flex-sm-fill text-sm-center nav-link " >Sort by: </span>
-  <%= sortable_my_list "created_at", "Date" %>
-  <%= sortable_my_list "breed_id", "Breed" %>
-  <%= sortable_my_list "age_id", "Age" %>
-  <%= sortable_my_list "city_id", "City" %>
-<% end %>
-
+<%= render "shared/sortable_header", page:'' %>
+ 
 <br>
 
 <%= paginate @dogs, remote: true %>
 
-<div class="blog-post">
-  <% @dogs.each do |dog| %>
-  
-  <hr>
-  
-    <div class="card" style="width: 18rem;">
-      <%= image_tag("example.jpg", class: 'card-img-top') %>
-      <div class="card-body">
-        <h5 class="card-title"><%= dog.name %></h5>
-        <p class="card-text">Breed: <%= dog.breed.name %></p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">City: <%= dog.city.name %></li>
-        <li class="list-group-item">Age: <%= dog.age.years %></li>
-      </ul>
-      <div class="card-body">
-        <%= link_to 'Show', dog, class: 'btn btn-primary' %>
-        <%= link_to 'Edit', edit_dog_path(dog), class: 'btn btn-warning' %>
-        <%= link_to 'Delete', dog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-dark' %>
-      </div>
-      <%= link_to current_user.favorites.find_by_dog_id(dog.id) ? "Remove from favorites" : "Add to favorites", favorites_update_path(dog: dog.id), id: "favorite-#{dog.id}", remote: true, class: 'btn btn-danger' %>
-    </div>    
-  <% end %>
-</div>
- 
-<br> 
+<%= render "shared/list_of_dogs", page: '' %>
 
 <%= paginate @dogs, remote: true %>

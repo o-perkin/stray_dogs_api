@@ -1,5 +1,6 @@
 <h3 class="pb-4 mb-4 font-italic border-bottom">
-  All stray dogs <%= link_to 'Add new Dog', new_dog_path, class: 'btn btn-primary add-dog-btn' if logged_in?(:site_admin) %>
+  All stray dogs
+  <%= link_to 'Add new Dog', new_dog_path, class: 'btn btn-primary add-dog-btn' if logged_in?(:site_admin) %>
 </h3>
 
 <div id="index-list">
