@@ -1,7 +1,9 @@
-<%= content_tag :nav, class: "nav nav-pills flex-column flex-sm-row #{dropup}" do %>
+<%= content_tag :nav, class: "nav nav-pills flex-column flex-sm-row #{define_dropup_css_class}" do %>
+
   <span class="flex-sm-fill text-sm-center nav-link " >Sort by: </span>
   <%= sortable "created_at", "Date", page %>
   <%= sortable "breed_id", "Breed", page %>
   <%= sortable "age_id", "Age", page %>
   <%= sortable "city_id", "City", page %>
+  
 <% end %>
