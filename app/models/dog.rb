@@ -13,10 +13,14 @@ class Dog < ApplicationRecord
     end
   end
 
-  def self.filters(breed, city, age)
+  def self.filters(breed, city, age_from, age_to)
+
     breed = nil if breed == ""
     city = nil if city == ""
-    age = nil if age == ""
+    age_from = nil if age_from == ""
+    age_to = nil if age_to == ""
+    
+    age = set_age(age_from, age_to)
 
     if breed && city && age
       where(breed_id: breed, city_id: city, age_id: age)
@@ -37,6 +41,22 @@ class Dog < ApplicationRecord
     end
   end
 
- scope :current_user, ->(id) { where(user_id: id) }
+  scope :current_user, ->(id) { where(user_id: id) }
+
+  private 
+
+  def self.set_age(age_from, age_to)
+    if age_from && age_to
+      (age_from..age_to)
+    elsif age_from 
+      "#{age_from}.."
+    elsif age_to
+      1..age_to.to_i
+    else 
+      nil
+    end
+  end
+
 
 end
+
