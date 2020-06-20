@@ -16,7 +16,7 @@ class DogsController < ApplicationController
   end
 
   def my_list
-    @dogs = Dog.filters(params[:breed_id], params[:city_id], params[:age_id]).order(sort_column + " " + sort_direction).page(params[:page]).per(2).current_user(current_user.id)
+    @dogs = Dog.filters(params[:breed_id], params[:city_id], params[:age_from], params[:age_to]).order(sort_column + " " + sort_direction).page(params[:page]).per(2).current_user(current_user.id)
   end
 
   def test
