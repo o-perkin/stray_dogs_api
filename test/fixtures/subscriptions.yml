@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subscribe: one
+  breed: one
+  city: one
+  age_from: MyString
+  age_to: MyString
+
+two:
+  subscribe: two
+  breed: two
+  city: two
+  age_from: MyString
+  age_to: MyString
