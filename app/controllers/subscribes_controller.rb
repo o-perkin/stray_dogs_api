@@ -11,7 +11,7 @@ class SubscribesController < ApplicationController
   def new
     unless current_user.subscribe
       @subscribe = Subscribe.new
-      1.times { @subscribe.subscriptions.build }
+      3.times { @subscribe.subscriptions.build }
     else
       redirect_to subscribes_path, notice: 'You have alerady subscribed'
     end
