@@ -14,6 +14,7 @@ class SubscribesController < ApplicationController
   # GET /subscribes/new
   def new
     @subscribe = Subscribe.new
+    1.times { @subscribe.subscriptions.build }
   end
 
   # GET /subscribes/1/edit
@@ -23,6 +24,7 @@ class SubscribesController < ApplicationController
   # POST /subscribes
   def create
     @subscribe = Subscribe.new(subscribe_params)
+    @subscribe.user_id = current_user.id
 
     if @subscribe.save
       redirect_to @subscribe, notice: 'Subscribe was successfully created.'
