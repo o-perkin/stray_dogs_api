@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :subscribes
   get 'favorites/update'
   get '/my_list', to: 'dogs#my_list'
   resources :favorites, only: [:destroy]
