@@ -1,20 +1,20 @@
 class SubscribesController < ApplicationController
-  before_action :set_subscribe, only: [:show, :edit, :update, :destroy]
-  access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
+  before_action :set_subscribe, only: [:edit, :update, :destroy]
+  access all: [:index, :new, :edit, :create, :update, :destroy], user: :all
 
   # GET /subscribes
   def index
-    @subscribes = Subscribe.all
-  end
-
-  # GET /subscribes/1
-  def show
+    @subscribe = current_user.subscribe
   end
 
   # GET /subscribes/new
   def new
-    @subscribe = Subscribe.new
-    1.times { @subscribe.subscriptions.build }
+    unless current_user.subscribe
+      @subscribe = Subscribe.new
+      1.times { @subscribe.subscriptions.build }
+    else
+      redirect_to subscribes_path, notice: 'You have alerady subscribed'
+    end
   end
 
   # GET /subscribes/1/edit
@@ -27,7 +27,7 @@ class SubscribesController < ApplicationController
     @subscribe.user_id = current_user.id
 
     if @subscribe.save
-      redirect_to @subscribe, notice: 'Subscribe was successfully created.'
+      redirect_to subscribes_path, notice: 'Subscribe was successfully created.'
     else
       render :new
     end
@@ -56,6 +56,6 @@ class SubscribesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def subscribe_params
-      params.require(:subscribe).permit(:user_id)
+      params.require(:subscribe).permit(:user_id, subscriptions_attributes: [:breed_id, :city_id, :age_from, :age_to, :id])
     end
 end

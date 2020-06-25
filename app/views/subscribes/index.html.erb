@@ -1,27 +1,25 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Subscribes</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @subscribes.each do |subscribe| %>
-      <tr>
-        <td><%= subscribe.user_id %></td>
-        <td><%= link_to 'Show', subscribe %></td>
-        <td><%= link_to 'Edit', edit_subscribe_path(subscribe) %></td>
-        <td><%= link_to 'Destroy', subscribe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<% if @subscribe %>
+  <div>
+    <% @subscribe.subscriptions.each do |subscription| %>
+      <p>Breed: <%= subscription.breed.name %> </p>
+      <p>City: <%= subscription.city.name %> </p>
+      <p>Age from: <%= subscription.age_from %> </p>
+      <p>Age to: <%= subscription.age_to %> </p>
     <% end %>
-  </tbody>
-</table>
+  </div>
+  <%= link_to 'Destroy', @subscribe, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Edit', edit_subscribe_path(@subscribe) %>
+<% end %>
+
+
+
+
+
+      
+    
 
 <br>
 
-<%= link_to 'New Subscribe', new_subscribe_path %>
+<%= link_to 'New Subscribe', new_subscribe_path unless current_user.subscribe %>
