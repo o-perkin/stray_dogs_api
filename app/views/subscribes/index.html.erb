@@ -3,8 +3,8 @@
 <% if @subscribe %>
   <div>
     <% @subscribe.subscriptions.each do |subscription| %>
-      <p>Breed: <%= subscription.breed.name %> </p>
-      <p>City: <%= subscription.city.name %> </p>
+      <p>Breed: <%= subscription.breed.name if subscription.breed %> </p>
+      <p>City: <%= subscription.city.name if subscription.city %> </p>
       <p>Age from: <%= subscription.age_from %> </p>
       <p>Age to: <%= subscription.age_to %> </p>
     <% end %>
@@ -12,13 +12,6 @@
   <%= link_to 'Destroy', @subscribe, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%= link_to 'Edit', edit_subscribe_path(@subscribe) %>
 <% end %>
-
-
-
-
-
-      
-    
 
 <br>
 

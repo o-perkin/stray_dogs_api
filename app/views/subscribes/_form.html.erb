@@ -12,20 +12,12 @@
   <% end %>
 
   <%= form.fields_for :subscriptions do |subscription| %>
-    <div>
-      <%= subscription.label :breed_id, 'Breed:' %>
-      <%= subscription.collection_select(:breed_id, Breed.all, :id, :name, { include_blank:"Select breed" }) %>
-
-      <%= subscription.label :city_id, 'City:' %>
-      <%= subscription.collection_select(:city_id, City.all, :id, :name, { include_blank:"Select city" }) %>
-
-      <%= subscription.label :age_id, 'Age from:' %>
-      <%= subscription.collection_select(:age_from, Age.all, :id, :years, { include_blank:"Select age" }) %>
-
-      <%= subscription.label :age_id, 'Age to:' %>
-      <%= subscription.collection_select(:age_to, Age.all, :id, :years, { include_blank:"Select age" }) %>
-    </div>
+    <%= render 'subscription_fields', f: subscription %>
   <% end %> 
+
+  <div>
+    <%= link_to_add_association 'Add Subscription', form, :subscriptions %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

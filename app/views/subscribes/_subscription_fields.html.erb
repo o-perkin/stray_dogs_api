@@ -1,0 +1,15 @@
+<div class="nested-fields">
+  <%= f.label :breed_id, 'Breed:' %>
+  <%= f.collection_select(:breed_id, Breed.all, :id, :name, { include_blank:"Select breed" }) %>
+
+  <%= f.label :city_id, 'City:' %>
+  <%= f.collection_select(:city_id, City.all, :id, :name, { include_blank:"Select city" }) %>
+
+  <%= f.label :age_id, 'Age from:' %>
+  <%= f.collection_select(:age_from, Age.all, :id, :years, { include_blank:"Select age" }) %>
+
+  <%= f.label :age_id, 'Age to:' %>
+  <%= f.collection_select(:age_to, Age.all, :id, :years, { include_blank:"Select age" }) %>
+  <%= link_to_remove_association 'Remove', f %>
+</div>
+

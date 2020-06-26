@@ -1,17 +1,15 @@
 class SubscribesController < ApplicationController
-  before_action :set_subscribe, only: [:edit, :update, :destroy]
+  before_action :set_subscribe, only: [:index, :edit, :update, :destroy]
   access all: [:index, :new, :edit, :create, :update, :destroy], user: :all
 
   # GET /subscribes
   def index
-    @subscribe = current_user.subscribe
   end
 
   # GET /subscribes/new
   def new
     unless current_user.subscribe
       @subscribe = Subscribe.new
-      3.times { @subscribe.subscriptions.build }
     else
       redirect_to subscribes_path, notice: 'You have alerady subscribed'
     end
@@ -35,8 +33,8 @@ class SubscribesController < ApplicationController
 
   # PATCH/PUT /subscribes/1
   def update
-    if @subscribe.update(subscribe_params)
-      redirect_to @subscribe, notice: 'Subscribe was successfully updated.'
+    if @subscribe.update(subscribe_params) 
+      redirect_to subscribes_path, notice: 'Subscribe was successfully updated.'
     else
       render :edit
     end
@@ -51,11 +49,11 @@ class SubscribesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subscribe
-      @subscribe = Subscribe.find(params[:id])
+      @subscribe = current_user.subscribe
     end
 
     # Only allow a trusted parameter "white list" through.
     def subscribe_params
-      params.require(:subscribe).permit(:user_id, subscriptions_attributes: [:breed_id, :city_id, :age_from, :age_to, :id])
+      params.require(:subscribe).permit(:user_id, subscriptions_attributes: [:id, :breed_id, :city_id, :age_from, :age_to, :_destroy])
     end
 end
