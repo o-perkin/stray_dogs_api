@@ -17,7 +17,7 @@ require('jquery')
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 import 'bootstrap';
-import 'cocoon';
+import 'cocoon-js'
 
 document.addEventListener("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()
@@ -28,6 +28,29 @@ document.addEventListener("turbolinks:load", () => {
     $('[data-toggle="offcanvas"]').on('click', function () {
       $('.offcanvas-collapse').toggleClass('open')
     })
+  })
+
+  $(function() {
+    // limits the number of categories
+    $('#categories').on('cocoon:after-insert', function() {
+      console.log('after-insert: ' + $('#categories .nested-fields:visible').length);
+      check_to_hide_or_show_add_link();
+    });
+
+    $('#categories').on('cocoon:after-remove', function() {
+      console.log('after-remove: ' + $('#categories .nested-fields:visible').length);
+      check_to_hide_or_show_add_link();
+    });
+
+    check_to_hide_or_show_add_link();
+
+    function check_to_hide_or_show_add_link() {
+      if ($('#categories .nested-fields:visible').length == 3) {
+        $('#add-category a').hide();
+      } else {
+        $('#add-category a').show();
+      }
+    }
   })
 
 })

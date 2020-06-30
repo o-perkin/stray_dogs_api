@@ -1,25 +1,30 @@
-<%= form_with(model: subscribe, local: true) do |form| %>
-  <% if subscribe.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(subscribe.errors.count, "error") %> prohibited this subscribe from being saved:</h2>
+<div id="categories">
+  <%= form_with(model: subscribe, local: true, id: "forma") do |form| %>
+    <% if subscribe.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(subscribe.errors.count, "error") %> prohibited this subscribe from being saved:</h2>
 
-      <ul>
-        <% subscribe.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% subscribe.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.fields_for :subscriptions do |subscription| %>
+        <%= render 'subscription_fields', f: subscription %>
+      <% end %> 
+    </div>
+
+    <div id="add-category">
+      <%= link_to_add_association 'Add Subscription', form, :subscriptions%>
+    </div>
+
+
+    <div class="actions">
+      <%= form.submit %>
     </div>
   <% end %>
-
-  <%= form.fields_for :subscriptions do |subscription| %>
-    <%= render 'subscription_fields', f: subscription %>
-  <% end %> 
-
-  <div>
-    <%= link_to_add_association 'Add Subscription', form, :subscriptions %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
