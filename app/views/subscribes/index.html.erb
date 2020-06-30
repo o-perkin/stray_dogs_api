@@ -1,4 +1,6 @@
-<h1>Subscribes</h1>
+<h3 class="pb-4 mb-4 font-italic border-bottom">
+  Subscribes
+</h3>
 
 <% if @subscribe %>
   <div>
@@ -13,6 +15,6 @@
 <%= link_to 'Edit', edit_subscribe_path(@subscribe) %>
 <% end %>
 
-<br>
+<p>If you have not found the dog you need, you can subscribe by specifying the criteria of the dog you need. When the dog with your description appears on the site, we will send an letter to your email</p>
 
-<%= link_to 'New Subscribe', new_subscribe_path unless current_user.subscribe %>
+<%= link_to 'Create Subscription', new_subscribe_path, class: 'btn btn-primary create-subscription-btn' unless current_user.subscribe %>
