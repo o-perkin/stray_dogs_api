@@ -10,6 +10,7 @@ class SubscribesController < ApplicationController
   def new
     unless current_user.subscribe
       @subscribe = Subscribe.new
+      @subscribe.subscriptions.build
     else
       redirect_to subscribes_path, notice: 'You have alerady subscribed'
     end

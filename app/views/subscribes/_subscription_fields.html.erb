@@ -11,5 +11,6 @@
   <%= f.label :age_id, 'Age to:' %>
   <%= f.collection_select(:age_to, Age.all, :id, :years, { include_blank:"Select age" }) %>
   <%= link_to_remove_association 'Remove', f %>
+  <%=  %>
 </div>
 

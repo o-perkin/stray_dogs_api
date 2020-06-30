@@ -42,6 +42,8 @@ document.addEventListener("turbolinks:load", () => {
       check_to_hide_or_show_add_link();
     });
 
+    $('#submited-fields .nested-fields:first-child a.remove_fields').hide()
+
     check_to_hide_or_show_add_link();
 
     function check_to_hide_or_show_add_link() {
