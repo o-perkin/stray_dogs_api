@@ -34,16 +34,21 @@ class SubscribesController < ApplicationController
 
   # PATCH/PUT /subscribes/1
   def update
+    age_validation = true;
     params[:subscribe][:subscriptions_attributes].each do |k, v| 
       if v[:age_from].to_i > v[:age_to].to_i
-        redirect_to edit_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
-      elsif @subscribe.update(subscribe_params) 
-        
-        redirect_to subscribes_path, notice: 'Subscribe was successfully updated.'
-      else
-        render :edit
+        age_validation = false;
       end
     end
+
+    if age_validation == false
+      redirect_to edit_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
+    elsif @subscribe.update(subscribe_params)         
+      redirect_to subscribes_path, notice: 'Subscribe was successfully updated.'
+    else
+      render :edit
+    end
+    
   end
 
   # DELETE /subscribes/1
