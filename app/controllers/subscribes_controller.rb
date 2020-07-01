@@ -1,5 +1,6 @@
 class SubscribesController < ApplicationController
   before_action :set_subscribe, only: [:index, :edit, :update, :destroy]
+  before_action :age_validation, only: [:create, :update]
   access all: [:index, :new, :edit, :create, :update, :destroy], user: :all
 
   # GET /subscribes
@@ -22,10 +23,12 @@ class SubscribesController < ApplicationController
 
   # POST /subscribes
   def create
+
     @subscribe = Subscribe.new(subscribe_params)
     @subscribe.user_id = current_user.id
-
-    if @subscribe.save
+    if @age == false
+      redirect_to new_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
+    elsif @subscribe.save
       redirect_to subscribes_path, notice: 'Subscribe was successfully created.'
     else
       render :new
@@ -34,14 +37,7 @@ class SubscribesController < ApplicationController
 
   # PATCH/PUT /subscribes/1
   def update
-    age_validation = true;
-    params[:subscribe][:subscriptions_attributes].each do |k, v| 
-      if v[:age_from].to_i > v[:age_to].to_i
-        age_validation = false;
-      end
-    end
-
-    if age_validation == false
+    if @age == false 
       redirect_to edit_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
     elsif @subscribe.update(subscribe_params)         
       redirect_to subscribes_path, notice: 'Subscribe was successfully updated.'
@@ -66,5 +62,15 @@ class SubscribesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def subscribe_params
       params.require(:subscribe).permit(:user_id, subscriptions_attributes: [:id, :breed_id, :city_id, :age_from, :age_to, :_destroy])
+    end
+
+    def age_validation
+      params[:subscribe][:subscriptions_attributes].each do |k, v| 
+        if v[:age_from].to_i > v[:age_to].to_i
+          @age = false
+        else
+          @age = true
+        end
+      end
     end
 end
