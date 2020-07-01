@@ -1,20 +1,38 @@
 <h3 class="pb-4 mb-4 font-italic border-bottom">
-  Subscribes
+  My subscriptions
 </h3>
 
-<% if @subscribe %>
-  <div>
-    <% @subscribe.subscriptions.each do |subscription| %>
-      <p>Breed: <%= subscription.breed.name if subscription.breed %> </p>
-      <p>City: <%= subscription.city.name if subscription.city %> </p>
-      <p>Age from: <%= subscription.age_from %> </p>
-      <p>Age to: <%= subscription.age_to %> </p>
-    <% end %>
-  </div>
-  <%= link_to 'Destroy', @subscribe, method: :delete, data: { confirm: 'Are you sure?' } %>
-<%= link_to 'Edit', edit_subscribe_path(@subscribe) %>
-<% end %>
+<% unless current_user.subscribe %>
 
 <p>If you have not found the dog you need, you can subscribe by specifying the criteria of the dog you need. When the dog with your description appears on the site, we will send an letter to your email</p>
+
+<% end %>
+
+<% if @subscribe %>
+
+ <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Breed</th>
+      <th scope="col">City</th>
+      <th scope="col">Age</th>
+    </tr>
+  </thead>
+  <tbody id="subscription-table-body">
+      <% @subscribe.subscriptions.each do |subscription| %>
+        <tr>
+          <th scope="row" class="subscription-number"></th>
+          <td><%= subscription.breed.name if subscription.breed %></td>
+          <td><%= subscription.city.name if subscription.city %></td>
+          <td><%= subscription.age_from %> - <%= subscription.age_to %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <%= link_to 'Unsubscribe', @subscribe, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+<%= link_to 'Edit', edit_subscribe_path(@subscribe), class: 'btn btn-warning' %>
+<% end %>
 
 <%= link_to 'Create Subscription', new_subscribe_path, class: 'btn btn-primary create-subscription-btn' unless current_user.subscribe %>

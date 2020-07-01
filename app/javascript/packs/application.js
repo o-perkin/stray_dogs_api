@@ -55,5 +55,12 @@ document.addEventListener("turbolinks:load", () => {
     }
   })
 
+  $(function() {
+
+    $('#subscription-table-body th:first-child').each(function (index) {
+      $(this).html('Dog ' + (index + 1));
+    })
+  })
+
 })
 
