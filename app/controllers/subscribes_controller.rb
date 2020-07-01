@@ -34,10 +34,15 @@ class SubscribesController < ApplicationController
 
   # PATCH/PUT /subscribes/1
   def update
-    if @subscribe.update(subscribe_params) 
-      redirect_to subscribes_path, notice: 'Subscribe was successfully updated.'
-    else
-      render :edit
+    params[:subscribe][:subscriptions_attributes].each do |k, v| 
+      if v[:age_from].to_i > v[:age_to].to_i
+        redirect_to edit_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
+      elsif @subscribe.update(subscribe_params) 
+        
+        redirect_to subscribes_path, notice: 'Subscribe was successfully updated.'
+      else
+        render :edit
+      end
     end
   end
 
