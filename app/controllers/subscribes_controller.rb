@@ -1,6 +1,7 @@
 class SubscribesController < ApplicationController
   before_action :set_subscribe, only: [:index, :edit, :update, :destroy]
   before_action :age_validation, only: [:create, :update]
+  before_action :get_parameters_of_dogs, only: [:create]
   access all: [:index, :new, :edit, :create, :update, :destroy], user: :all
 
   # GET /subscribes
@@ -29,7 +30,7 @@ class SubscribesController < ApplicationController
     if @age == false
       redirect_to new_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
     elsif @subscribe.save
-      UserMailer.welcome_email(current_user).deliver
+      UserMailer.welcome_email(current_user, @parameters_of_dogs).deliver
       redirect_to subscribes_path, notice: 'Subscribe was successfully created.'
     else
       render :new
@@ -74,4 +75,16 @@ class SubscribesController < ApplicationController
         end
       end
     end
+
+    def get_parameters_of_dogs
+      breed = Hash.new
+      city = Hash.new
+      age = Hash.new
+      params[:subscribe][:subscriptions_attributes].each do |k, v|         
+        breed[k] = v[:breed_id] 
+        city[k] = v[:city_id] 
+        age[k] = (v[:age_from].to_i..v[:age_to].to_i)       
+      end 
+      @parameters_of_dogs = { breed: breed, city: city, age: age }
+    end 
 end

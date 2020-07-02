@@ -6,7 +6,22 @@
   <body>
     <h1>Welcome to example.com, <%= @user.first_name %></h1>
     <p>
-      You have successfully signed up to example.com <br>
+      <br>
+    </p>
+    <p>Dog breed: <%= @breed.values[0] %>
+       Dog city: <%= @city.values[0] %>
+      Dog age: <%= @age.values[0] %>
+    </p>
+    <p>Dog 2 breed: <%= @breed.values[1] %>
+       Dog 2 city: <%= @city.values[1] %>
+      Dog 2 age: <%= @age.values[1] %>
+    </p>
+    <p>Dog 3 breed: <%= @breed.values[2] %>
+       Dog 3 city: <%= @city.values[2] %>
+      Dog 3 age: <%= @age.values[2] %>
+    </p>
+    <p>
+      You have successfully signed up to example.com      
     </p>
     <p>
       To login to the site, just follow this link: <%= @url %>.
@@ -14,3 +29,4 @@
     <p>Thanks for joining and have a great day!</p>
   </body>
 </html>
+     
