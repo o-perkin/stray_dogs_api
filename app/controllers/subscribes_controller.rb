@@ -2,6 +2,7 @@ class SubscribesController < ApplicationController
   before_action :set_subscribe, only: [:index, :edit, :update, :destroy]
   before_action :age_validation, only: [:create, :update]
   before_action :get_parameters_of_dogs, only: [:create]
+  before_action :identify_needed_dogs, only: [:create]
   access all: [:index, :new, :edit, :create, :update, :destroy], user: :all
 
   # GET /subscribes
@@ -24,13 +25,12 @@ class SubscribesController < ApplicationController
 
   # POST /subscribes
   def create
-
     @subscribe = Subscribe.new(subscribe_params)
     @subscribe.user_id = current_user.id
     if @age == false
       redirect_to new_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
     elsif @subscribe.save
-      UserMailer.welcome_email(current_user, @parameters_of_dogs).deliver
+      UserMailer.welcome_email(current_user, @parameters_of_dogs, @needed_dogs).deliver
       redirect_to subscribes_path, notice: 'Subscribe was successfully created.'
     else
       render :new
@@ -83,8 +83,16 @@ class SubscribesController < ApplicationController
       params[:subscribe][:subscriptions_attributes].each do |k, v|         
         breed[k] = v[:breed_id] 
         city[k] = v[:city_id] 
-        age[k] = (v[:age_from].to_i..v[:age_to].to_i)       
+        age[k] = ((v[:age_from].to_i)..(v[:age_to].to_i))       
       end 
       @parameters_of_dogs = { breed: breed, city: city, age: age }
     end 
+
+    def identify_needed_dogs
+      @needed_dogs = []
+      params[:subscribe][:subscriptions_attributes].each do |k, v|
+        @needed_dogs << Dog.where(breed_id: v[:breed_id], city_id: v[:city_id], age_id: ((v[:age_from].to_i)..(v[:age_to].to_i)))
+      end
+      @needed_dogs
+    end
 end

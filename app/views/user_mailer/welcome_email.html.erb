@@ -2,31 +2,62 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   </head>
   <body>
-    <h1>Welcome to example.com, <%= @user.first_name %></h1>
-    <p>
-      <br>
-    </p>
-    <p>Dog breed: <%= @breed.values[0] %>
-       Dog city: <%= @city.values[0] %>
-      Dog age: <%= @age.values[0] %>
-    </p>
-    <p>Dog 2 breed: <%= @breed.values[1] %>
-       Dog 2 city: <%= @city.values[1] %>
-      Dog 2 age: <%= @age.values[1] %>
-    </p>
-    <p>Dog 3 breed: <%= @breed.values[2] %>
-       Dog 3 city: <%= @city.values[2] %>
-      Dog 3 age: <%= @age.values[2] %>
-    </p>
-    <p>
-      You have successfully signed up to example.com      
-    </p>
-    <p>
-      To login to the site, just follow this link: <%= @url %>.
-    </p>
-    <p>Thanks for joining and have a great day!</p>
+    <h1><%= @user.first_name %>, thanks for your subscription!</h1>
+    
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Breed</th>
+          <th scope="col">City</th>
+          <th scope="col">Age</th>
+        </tr>
+      </thead>
+      <tbody id="subscription-table-body">
+          <tr>
+            <th scope="row" class="subscription-number"><b>Dog 1 </b></th>
+            <td><%= Breed.where(id: @parameters_of_dogs[:breed].values[0]).first.name %></td>
+            <td><%= City.where(id: @parameters_of_dogs[:city].values[0]).first.name %></td>
+            <td><%= @parameters_of_dogs[:age].values[0] %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="subscription-number"><b>Dog 2 </b></th>
+            <td><%= Breed.where(id: @parameters_of_dogs[:breed].values[1]).first.name %></td>
+            <td><%= City.where(id: @parameters_of_dogs[:city].values[1]).first.name %></td>
+            <td><%= @parameters_of_dogs[:age].values[1] %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="subscription-number"><b>Dog 3 </b></th>
+            <td><%= Breed.where(id: @parameters_of_dogs[:breed].values[2]).first.name %></td>
+            <td><%= City.where(id: @parameters_of_dogs[:city].values[2]).first.name %></td>
+            <td><%= @parameters_of_dogs[:age].values[2] %></td>
+          </tr>
+      </tbody>
+    </table>
+
+    <p>Звертаю вашу увагу на те, що на сайті вже є потрібна вам собака: </p>
+
+    <div>
+      <% @needed_dogs.each do |dog| %>
+        <% if dog.first != nil %>
+          <div>
+            Ім'я собаки: <%= dog.first.name %> <br>
+            Порода: <%= dog.first.breed.name %> <br>
+            Місто: <%= dog.first.city.name %> <br>
+            Вік: <%= dog.first.age.years %> <br>
+            Власник собаки: <%= dog.first.user.last_name %> <%= dog.first.user.first_name %><br>
+            Email власника собаки: <%= dog.first.user.email %> <br>
+          </div>
+          <hr>
+        <% end %>
+      <% end %> 
+    </div>
+
+    <p>To unsubscribe, just follow this link: http://stray-dogs.herokuapp.com/subscribes</p>
+    <p> Have a great day!</p>
   </body>
 </html>
      

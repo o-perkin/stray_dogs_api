@@ -25,7 +25,7 @@
           <th scope="row" class="subscription-number"></th>
           <td><%= subscription.breed.name if subscription.breed %></td>
           <td><%= subscription.city.name if subscription.city %></td>
-          <td><%= subscription.age_from - 1 %> - <%= subscription.age_to - 1 %></td>
+          <td><%= subscription.age_from %> - <%= subscription.age_to %></td>
         </tr>
       <% end %>
     </tbody>
