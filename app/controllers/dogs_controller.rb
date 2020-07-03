@@ -46,7 +46,11 @@ class DogsController < ApplicationController
 
     respond_to do |format|
       if @dog.save
-        UserMailer.available_subscription_email(current_user, @subscriptions).deliver
+        if @subscriptions != []
+          UserMailer.available_subscription_email(current_user, @subscriptions).deliver
+        else
+          UserMailer.new_dog_email(current_user).deliver
+        end
         format.html { redirect_to @dog, notice: 'Dog was successfully created.' }
         format.json { render :show, status: :created, location: @dog }
       else
