@@ -30,7 +30,7 @@ class SubscribesController < ApplicationController
     if @age == false
       redirect_to new_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
     elsif @subscribe.save
-      UserMailer.welcome_email(current_user, @parameters_of_dogs, @needed_dogs).deliver
+      UserMailer.subscription_email(current_user, @parameters_of_dogs, @needed_dogs).deliver
       redirect_to subscribes_path, notice: 'Subscribe was successfully created.'
     else
       render :new
@@ -42,7 +42,7 @@ class SubscribesController < ApplicationController
     if @age == false 
       redirect_to edit_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
     elsif @subscribe.update(subscribe_params)
-      UserMailer.welcome_email(current_user, @parameters_of_dogs, @needed_dogs).deliver         
+      UserMailer.subscription_email(current_user, @parameters_of_dogs, @needed_dogs).deliver         
       redirect_to subscribes_path, notice: 'Subscribe was successfully updated.'
     else
       render :edit

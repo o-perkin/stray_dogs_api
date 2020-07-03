@@ -1,6 +1,7 @@
 class DogsController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
+  before_action :find_subscription, only: [:create]
   access all: [:show, :index, :home], user: {except: [:test]}, site_admin: :all
 
   # GET /dogs
@@ -45,6 +46,7 @@ class DogsController < ApplicationController
 
     respond_to do |format|
       if @dog.save
+        UserMailer.available_subscription_email(current_user, @subscriptions).deliver
         format.html { redirect_to @dog, notice: 'Dog was successfully created.' }
         format.json { render :show, status: :created, location: @dog }
       else
@@ -95,5 +97,12 @@ class DogsController < ApplicationController
 
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+    end
+
+    def find_subscription
+      dog_params = params[:dog]
+      subscription_without_age = Subscription.where(breed_id: dog_params[:breed_id], city_id: dog_params[:city_id])
+      subscription_without_age_to = subscription_without_age.where("age_from <= ?", dog_params[:age_id])
+      @subscriptions = subscription_without_age_to.where("age_to >= ?", dog_params[:age_id])
     end
 end
