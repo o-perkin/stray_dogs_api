@@ -48,6 +48,7 @@ class DogsController < ApplicationController
       if @dog.save
         if @subscriptions != []
           UserMailer.available_subscription_email(current_user, @subscriptions).deliver
+          UserMailer.send_notification_to_subscriber(@subscriptions).deliver
         else
           UserMailer.new_dog_email(current_user).deliver
         end
