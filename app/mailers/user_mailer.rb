@@ -20,9 +20,10 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Ви додали собаку!')
   end
 
-  def send_notification_to_subscriber(subscriptions)
+  def send_notification_to_subscriber(subscriptions, dog)
     subscriptions.each do |subscription|
       @user = subscription.subscribe.user
+      @dog = dog
       mail(to: @user.email, subject: "На сайті з'явилась потрібна вам собака!")  
     end 
   end 

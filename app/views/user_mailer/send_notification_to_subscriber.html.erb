@@ -6,11 +6,20 @@
   </head>
   <body>
     <h1><%= @user.first_name %>, на сайті зявилась потрібна вам собака!</h1>
-
+    
     <div>
-      
+      <p>
+        <b>Ім'я:</b> <%= @dog.name %>
+      </p>
+      <p>
+        <b>Порода:</b> <%= @dog.breed.name %>
+      </p>
+      <p>
+        <b>Місто:</b> <%= @dog.city.name %>
+      </p>
+      <p>
+        <b>Вік:</b> <%= @dog.age.years %>
+      </p>
     </div>
-
-    <p> Have a great day!</p>
   </body>
 </html>
