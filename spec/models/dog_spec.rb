@@ -53,6 +53,10 @@ RSpec.describe Dog, :type => :model do
   end
 
   describe "Associations" do
+    it { should belong_to(:breed) }
+    it { should belong_to(:city) }
+    it { should belong_to(:age) }
     it { should belong_to(:user) }
+    it { should have_many(:favorites) }
   end
 end
