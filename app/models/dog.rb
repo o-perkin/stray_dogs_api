@@ -6,7 +6,7 @@ class Dog < ApplicationRecord
   has_many :favorites, dependent: :delete_all
 
   def self.search(search)
-    if search 
+    if search && search != ""
       where(name: search)
     else 
       all
@@ -23,7 +23,7 @@ class Dog < ApplicationRecord
     age = set_age(age_from, age_to)
 
     if breed && city && age
-      where(breed_id: breed, city_id: city, age_id: age)
+      where(breed_id: breed, city_id: city).where("age_id >= ?", age_from).where("age_id <= ?", age_to)
     elsif breed && city 
       where(breed_id: breed, city_id: city)
     elsif breed && age
@@ -56,7 +56,6 @@ class Dog < ApplicationRecord
       nil
     end
   end
-
 
 end
 

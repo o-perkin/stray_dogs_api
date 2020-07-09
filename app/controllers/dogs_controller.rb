@@ -3,7 +3,7 @@ class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
   before_action :find_subscription, only: [:create]
   access all: [:show, :index, :home], user: {except: [:test]}, site_admin: :all
-
+ 
   # GET /dogs
   # GET /dogs.json
   def index 
