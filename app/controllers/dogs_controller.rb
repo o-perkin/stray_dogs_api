@@ -7,7 +7,7 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index 
-    @dogs = Dog.filters(params[:breed_id], params[:city_id], params[:age_from], params[:age_to]).order(sort_column + " " + sort_direction).page(params[:page]).per(5).search(params[:search])
+    @dogs = Dog.filters(filter_params).order(sort_column + " " + sort_direction).page(params[:page]).per(5).search(params[:search])
   end
 
   def home
@@ -17,7 +17,7 @@ class DogsController < ApplicationController
   end
 
   def my_list
-    @dogs = Dog.filters(params[:breed_id], params[:city_id], params[:age_from], params[:age_to]).order(sort_column + " " + sort_direction).page(params[:page]).per(2).current_user(current_user.id)
+    @dogs = Dog.filters(filter_params).order(sort_column + " " + sort_direction).page(params[:page]).per(2).current_user(current_user.id)
   end
 
   def test
@@ -94,6 +94,10 @@ class DogsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def dog_params
       params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id, :sort, :direction, :search, :age_from, :age_to)
+    end
+
+    def filter_params
+      {breed: params[:breed_id], city: params[:city_id], age_from: params[:age_from], age_to: params[:age_to]}
     end
 
     def sort_column

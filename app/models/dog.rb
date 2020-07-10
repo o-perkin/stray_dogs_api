@@ -13,32 +13,12 @@ class Dog < ApplicationRecord
     end
   end
 
-  def self.filters(breed, city, age_from, age_to)
+  def self.filters(params = { breed: nil, city: nil, age_from: nil, age_to: nil })
 
-    breed = nil if breed == ""
-    city = nil if city == ""
-    age_from = nil if age_from == ""
-    age_to = nil if age_to == ""
-    
-    age = set_age(age_from, age_to)
+    modified_params = params.transform_values {|v| v == "" ? v = nil : v}    
+    breed_city = modified_params.select { |k, v| v != nil && (k.to_s == "breed" || k.to_s == "city")}
 
-    if breed && city && age
-      where(breed_id: breed, city_id: city).where("age_id >= ?", age_from).where("age_id <= ?", age_to)
-    elsif breed && city 
-      where(breed_id: breed, city_id: city)
-    elsif breed && age
-      where(breed_id: breed, age_id: age)
-    elsif city && age
-      where(city_id: city, age_id: age)
-    elsif breed
-      where(breed_id: breed)
-    elsif city
-      where(city_id: city)
-    elsif age
-      where(age_id: age)
-    else
-      unscoped
-    end
+    where(breed_city).set_age(modified_params[:age_from], modified_params[:age_to]).all
   end
 
   scope :current_user, ->(id) { where(user_id: id) }
@@ -46,14 +26,13 @@ class Dog < ApplicationRecord
   private 
 
   def self.set_age(age_from, age_to)
-    if age_from && age_to
-      (age_from..age_to)
-    elsif age_from 
-      "#{age_from}.."
-    elsif age_to
-      1..age_to.to_i
-    else 
-      nil
+    
+    if age_from.nil? && age_to.nil?
+      all
+    else
+      age_from.nil? ? age_from = 1 : age_from
+      age_to.nil? ? age_to = Age.last.id : age_to
+      where("age_id >= ? AND age_id <= ?", age_from, age_to)
     end
   end
 
