@@ -13,11 +13,11 @@ class Dog < ApplicationRecord
     end
   end
 
-  def self.filters(params = { breed: nil, city: nil, age_from: nil, age_to: nil })
+  def self.filters(params)
 
     modified_params = params.transform_values {|v| v == "" ? v = nil : v}    
     breed_city = modified_params.select { |k, v| v != nil && (k.to_s == "breed" || k.to_s == "city")}
-
+    
     where(breed_city).set_age(modified_params[:age_from], modified_params[:age_to]).all
   end
 
@@ -27,12 +27,12 @@ class Dog < ApplicationRecord
 
   def self.set_age(age_from, age_to)
     
-    if age_from.nil? && age_to.nil?
-      all
-    else
-      age_from.nil? ? age_from = 1 : age_from
-      age_to.nil? ? age_to = Age.last.id : age_to
+    if age_from || age_to
+      age_from = 1 if age_from.nil?
+      age_to = Age.last.id if age_to.nil?
       where("age_id >= ? AND age_id <= ?", age_from, age_to)
+    else
+      all
     end
   end
 
