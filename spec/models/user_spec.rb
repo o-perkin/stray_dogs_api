@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, :type => :model do  
 
   let(:user) { build(:user) }
-  before { user.save }
+  before(:each) { user.save }
 
   context 'email uniqueness' do
     let(:user1) { build(:user) }

@@ -4,7 +4,7 @@ RSpec.describe Dog, :type => :model do
 
   context "Vadidations" do
 
-    before(:all) do
+    before(:each) do
       @dog = build(:dog)
     end
 
