@@ -8,14 +8,6 @@ module DogsHelper
                                                                       }
   end
 
-  def define_access_to_edit(page)
-    if page == "index"
-      logged_in?(:site_admin) 
-    else
-      true
-    end
-  end 
-
   private 
 
     def define_path_for_sortable(column, direction, page)
@@ -45,5 +37,13 @@ module DogsHelper
 
     def define_dropup_css_class
       sort_direction == "desc" ? "dropup" : ""
+    end
+
+    def sort_column
+      Dog.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
 end

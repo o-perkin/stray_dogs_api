@@ -19,8 +19,12 @@
 
       <div class="card-body">
         <%= link_to 'Show', dog, class: 'btn btn-primary' %>
-        <%= link_to 'Edit', edit_dog_path(dog), class: 'btn btn-warning' if define_access_to_edit(page) %>
-        <%= link_to 'Delete', dog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-dark' if define_access_to_edit(page) %>
+        <% if page == "index" %>
+          <%= render "shared/edit_and_delete_buttons", dog: dog if logged_in?(:site_admin) %>           
+        <% else %>
+          <%= render "shared/edit_and_delete_buttons", dog: dog %>
+        <% end %>
+        
       </div>
 
       <%= link_to favorite_text_for_list(current_user, dog.id), favorites_update_path(dog: dog.id), id: "favorite-#{dog.id}", remote: true, class: 'btn btn-danger' if current_user %>

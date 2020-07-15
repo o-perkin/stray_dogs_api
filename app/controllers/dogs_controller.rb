@@ -1,4 +1,5 @@
 class DogsController < ApplicationController
+  include DogsHelper
   helper_method :sort_column, :sort_direction
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
   before_action :find_subscription, only: [:create]
@@ -98,14 +99,6 @@ class DogsController < ApplicationController
 
     def filter_params
       {breed: params[:breed_id], city: params[:city_id], age_from: params[:age_from], age_to: params[:age_to]}
-    end
-
-    def sort_column
-      Dog.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
 
     def find_subscription
