@@ -12,6 +12,11 @@ RSpec.describe Dog, :type => :model do
       expect(@dog).to be_valid
     end
 
+    it "is not valid without a name" do
+      @dog.name = nil
+      expect(@dog).to_not be_valid
+    end
+
     it "is not valid without a breed" do
       @dog.breed_id = nil
       expect(@dog).to_not be_valid

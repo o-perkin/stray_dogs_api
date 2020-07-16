@@ -45,7 +45,7 @@
       
     </ul>
 
-   <%= render "shared/search_form" %>
+   <%= render "shared/search_form" if (current_page? dogs_path) || (current_page? my_list_path) %>
 
 
   </div> 
