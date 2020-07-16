@@ -6,18 +6,18 @@ module DogsHelper
                                                                         class: define_css_class(column),
                                                                         remote: true
                                                                       }
-  end
+  end  
 
   private 
 
     def define_path_for_sortable(column, direction, page)
-      merged_params = request.parameters.merge({sort: column, direction: direction, page: nil})
+      merged_params = request.parameters.merge({sort: column, direction: direction})
       if page == "index"
         dogs_path(merged_params)
       else
         my_list_path(merged_params)
       end
-    end
+    end    
 
     def define_css_class(column)
       if column == sort_column
