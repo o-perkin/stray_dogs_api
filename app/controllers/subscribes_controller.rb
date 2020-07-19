@@ -3,7 +3,7 @@ class SubscribesController < ApplicationController
   before_action :age_validation, only: [:create, :update]
   before_action :get_parameters_of_dogs, only: [:create, :update]
   before_action :identify_needed_dogs, only: [:create, :update]
-  access all: [:index, :new, :edit, :create, :update, :destroy], user: :all
+  access [:user, :site_admin] => :all
 
   # GET /subscribes
   def index
@@ -59,7 +59,7 @@ class SubscribesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subscribe
-      @subscribe = current_user.subscribe
+      @subscribe = current_user.subscribe if current_user
     end
 
     # Only allow a trusted parameter "white list" through.

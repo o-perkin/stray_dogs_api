@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Dogs", type: :request do
 
+  let!(:dog) { create(:dog) }
+  let!(:user) { create(:user) }
+
   context "Get requests" do 
 
     describe "GET root_path" do
@@ -25,7 +28,6 @@ RSpec.describe "Dogs", type: :request do
       end
 
       it "should render my_list template if the user is logged in" do
-        user = create(:user)
         sign_in user
         get my_list_path
         expect(response).to render_template(:_my_list)
@@ -39,7 +41,6 @@ RSpec.describe "Dogs", type: :request do
       end
 
       it "should render favorites template if the user is logged in" do
-        user = create(:user)
         sign_in user
         get my_favorites_path
         expect(response).to render_template(:favorites)
@@ -53,14 +54,11 @@ RSpec.describe "Dogs", type: :request do
       end
 
       it "should render favorites template if the user is logged in" do
-        user = create(:user)
         sign_in user
         get new_dog_path
         expect(response).to render_template(:new)
       end
     end
-
-    let(:dog) { create(:dog) }
 
     describe "GET #edit" do
       it "should redirect to login page if the user is not logged in" do
@@ -68,17 +66,24 @@ RSpec.describe "Dogs", type: :request do
         expect(response).to redirect_to(new_user_session_path)
       end
 
-      it "should render favorites template if the user is logged in" do
-        user = create(:user)
+      it "should render edit template if the user is logged in" do
         sign_in user
         get edit_dog_path(dog.id)
         expect(response).to render_template(:edit)
+      end
+
+      it "should render edit template with notice that not enough permissions" do
+        user2 = create(:user, id: "12")
+        dog2 = create(:dog, user_id: "12")
+        sign_in user
+        get edit_dog_path(dog2.id)
+        expect(response).to render_template(:edit)
+        expect(response.body).to include("Not enough permissions to view page")
       end
     end
 
     describe "GET #show" do
       it "should render show template" do
-        dog = create(:dog)
         get dog_path(dog.id)
         expect(response).to render_template(:show)
       end
@@ -89,7 +94,6 @@ RSpec.describe "Dogs", type: :request do
 
     describe "Post #create" do
       it "should redirect to new dog show path and render show template with notice" do
-        user = create(:user)
         sign_in user
         post dogs_path, params: { dog: { name: "Fred", breed_id: "1", city_id: "1", age_id: "1", description: "asdasd" } }
 
@@ -101,7 +105,6 @@ RSpec.describe "Dogs", type: :request do
       end
 
       it "should render new template if not all parameters were specified" do
-        user = create(:user)
         sign_in user
         post dogs_path, params: { dog: { name: "", breed_id: "1", city_id: "1", age_id: "1", description: "asdasd" } }
 
@@ -112,9 +115,7 @@ RSpec.describe "Dogs", type: :request do
 
     describe "PATCH #update" do
       it "should redirect to new dog show path and render show template with notice" do
-        user = create(:user)
         sign_in user
-        dog = create(:dog)
         patch dog_path(dog.id), params: { dog: { name: "Fred", breed_id: "1", city_id: "1", age_id: "1", description: "asdasd" } }
 
         expect(response).to redirect_to(assigns(:dog))
@@ -126,24 +127,19 @@ RSpec.describe "Dogs", type: :request do
     end
 
     it "should render new template if not all parameters were specified" do
-      user = create(:user)
       sign_in user
-      dog = create(:dog)
       patch dog_path(dog.id), params: { dog: { name: "asd", breed_id: "", city_id: "1", age_id: "1", description: "asdasd" } }
 
       expect(response).to render_template(:edit)             
     end
   end
 
-  context "DELETE requests" do
+  context "DELETE requests" do    
 
     describe "DELETE #destroy" do
 
-      it "should redirect to dogs path and render index with notice if user tried to delete dog drom main list" do
-        user = create(:user)
+      it "should render index with notice if user deleted dog" do
         sign_in user
-        dog = create(:dog)
-        get dogs_path
         delete dog_path(dog.id)
         expect(response).to redirect_to(dogs_path)
         follow_redirect!

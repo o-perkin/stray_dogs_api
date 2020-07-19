@@ -3,7 +3,7 @@ class DogsController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
   before_action :find_subscription, only: [:create]
-  access all: [:show, :index, :home], user: {except: [:test]}, site_admin: :all
+  access all: [:show, :index, :home], user: :all, site_admin: :all
  
   # GET /dogs
   # GET /dogs.json
@@ -19,9 +19,6 @@ class DogsController < ApplicationController
 
   def my_list
     @dogs = Dog.filters(filter_params).order(sort_column + " " + sort_direction).page(params[:page]).per(2).current_user(current_user.id)
-  end
-
-  def test
   end
 
   # GET /dogs/1
