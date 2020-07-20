@@ -70,4 +70,5 @@ RSpec.configure do |config|
   end
 
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 end
