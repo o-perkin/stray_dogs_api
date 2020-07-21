@@ -1,4 +1,4 @@
-<% if current_user.dogs.where(id: params[:id]) != [] %>
+<% if current_user.dogs.where(id: params[:id]) != [] || logged_in?(:site_admin) %>
 
 <div class="col-sm-8 blog-main">
 
