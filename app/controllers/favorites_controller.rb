@@ -1,4 +1,5 @@
 class FavoritesController < ApplicationController
+  protect_from_forgery except: :update
 
   def update
   
@@ -10,10 +11,7 @@ class FavoritesController < ApplicationController
       favorite.destroy_all
       @favorite_exists = false
     end
-    respond_to do |format|
-      format.html {}
-      format.js {}
-    end
+    respond_to :js
   end
 
   def destroy
@@ -21,7 +19,6 @@ class FavoritesController < ApplicationController
     favorite.destroy
     respond_to do |format|
       format.html { redirect_to my_favorites_path, notice: 'Dog was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 end
