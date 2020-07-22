@@ -11,8 +11,8 @@ RSpec.describe 'Removing from favorites', type: :feature, js: true do
     expect(page).to have_content('James')
     click_on 'Add to favorites', match: :first
     wait_for_ajax
-    expect(page).to have_content('Remove from favorites')
     click_on 'Remove from favorites', match: :first
+    wait_for_ajax
     visit my_favorites_path
     expect(page).to have_no_content('James')    
   end
@@ -23,10 +23,22 @@ RSpec.describe 'Removing from favorites', type: :feature, js: true do
     expect(page).to have_content('Mikie')
     click_on 'Add to favorites', match: :first
     wait_for_ajax
-    expect(page).to have_content('Remove from favorites')
     click_on 'Remove from favorites', match: :first
+    wait_for_ajax
     visit my_favorites_path
     expect(page).to have_no_content('Mikie')    
+  end
+
+  scenario 'from show page' do    
+    dog = create(:dog, name: "Qwerqwer", user_id: user.id)
+    visit dog_path(id: dog.id)
+    expect(page).to have_content('Qwerqwer')
+    click_on 'Add to favorites', match: :first
+    wait_for_ajax
+    click_on 'Remove from favorites', match: :first
+    wait_for_ajax
+    visit my_favorites_path
+    expect(page).to have_no_content('Qwerqwer')    
   end
 
   scenario 'from favorites list' do    
@@ -36,6 +48,7 @@ RSpec.describe 'Removing from favorites', type: :feature, js: true do
     wait_for_ajax
     visit my_favorites_path
     click_on 'Remove', match: :first
+    wait_for_ajax
     expect(page).to have_no_content('Jordan')    
   end
 end

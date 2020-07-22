@@ -6,8 +6,6 @@ RSpec.describe 'Deleting a dog', type: :feature do
       user = create(:user)
       sign_in user
       dog = create(:dog, name: "Alexandro", user_id: user.id)
-      visit dogs_path
-      expect(page).to have_content('Alexandro')
       visit my_list_path
       expect(page).to have_content('Alexandro')
       click_on 'Delete'
@@ -16,9 +14,10 @@ RSpec.describe 'Deleting a dog', type: :feature do
   end
   feature "Admin" do
     scenario 'success' do
-      user = create(:user, roles: "site_admin")
-      sign_in user
-      dog = create(:dog, name: "Vasya", user_id: user.id)
+      regular_user = create(:user)
+      dog = create(:dog, name: "Vasya", user_id: regular_user.id)
+      admin = create(:user, roles: "site_admin")
+      sign_in admin      
       visit dogs_path
       expect(page).to have_content('Vasya')
       click_on 'Delete', match: :first

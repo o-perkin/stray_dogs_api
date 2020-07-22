@@ -20,7 +20,7 @@
       <div class="card-body">
         <%= link_to 'Show', dog, class: 'btn btn-primary' %>
         <% if page == "index" %>
-          <%= render "shared/edit_and_delete_buttons", dog: dog if logged_in?(:site_admin) %>           
+          <%= render "shared/edit_and_delete_buttons", dog: dog if logged_in?(:site_admin) %>          
         <% else %>
           <%= render "shared/edit_and_delete_buttons", dog: dog %>
         <% end %>

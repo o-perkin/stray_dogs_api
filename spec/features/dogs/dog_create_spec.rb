@@ -7,7 +7,8 @@ RSpec.describe 'Creating a dog', type: :feature do
         let!(:user) { create(:user) }
         before(:each) do
           sign_in user
-          visit new_dog_path   
+          visit my_list_path
+          click_on 'Add new Dog'  
         end
 
         scenario 'valid inputs' do
