@@ -13,8 +13,8 @@ RSpec.describe 'Creating a dog', type: :feature do
 
         scenario 'valid inputs' do
             fill_in "Name", with: 'Abuba'
-            select '2', from: 'dog_breed_id', match: :first
-            select '2', from: 'dog_city_id', match: :first
+            select 'Labrador', from: 'dog_breed_id', match: :first
+            select 'Lviv', from: 'dog_city_id', match: :first
             select '3', from: 'dog_age_id', match: :first
             click_on 'Submit'
             visit dogs_path
@@ -23,8 +23,8 @@ RSpec.describe 'Creating a dog', type: :feature do
 
         scenario 'invalid inputs' do
             fill_in "Name", with: 'AASD'
-            select '2', from: 'dog_breed_id', match: :first
-            select '2', from: 'dog_city_id', match: :first
+            select 'Poodle', from: 'dog_breed_id', match: :first
+            select 'Kyiv', from: 'dog_city_id', match: :first
             click_on 'Submit'
             expect(page).to have_content("Age must exist")
         end
@@ -41,8 +41,8 @@ RSpec.describe 'Creating a dog', type: :feature do
 
         scenario 'valid inputs' do
             fill_in "Name", with: 'QWERTY'
-            select '2', from: 'dog_breed_id', match: :first
-            select '2', from: 'dog_city_id', match: :first
+            select 'Bulldog', from: 'dog_breed_id', match: :first
+            select 'Lviv', from: 'dog_city_id', match: :first
             select '3', from: 'dog_age_id', match: :first
             click_on 'Submit'
             visit dogs_path
@@ -51,8 +51,8 @@ RSpec.describe 'Creating a dog', type: :feature do
 
         scenario 'invalid inputs' do
             fill_in "Name", with: 'QWERTY'
-            select '2', from: 'dog_breed_id', match: :first
-            select '2', from: 'dog_city_id', match: :first
+            select 'Bulldog', from: 'dog_breed_id', match: :first
+            select 'Kyiv', from: 'dog_city_id', match: :first
             click_on 'Submit'
             expect(page).to have_content("Age must exist")
         end

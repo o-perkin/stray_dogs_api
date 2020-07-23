@@ -11,8 +11,8 @@ RSpec.describe 'Updating a subscribe', type: :feature do
   end
    
   scenario 'valid inputs' do    
-    select '2', from: 'subscribe[subscriptions_attributes][0][breed_id]', match: :first
-    select '2', from: 'subscribe[subscriptions_attributes][0][city_id]', match: :first
+    select 'Labrador', from: 'subscribe[subscriptions_attributes][0][breed_id]', match: :first
+    select 'Kyiv', from: 'subscribe[subscriptions_attributes][0][city_id]', match: :first
     select '2', from: 'subscribe[subscriptions_attributes][0][age_from]', match: :first
     select '4', from: 'subscribe[subscriptions_attributes][0][age_to]', match: :first
     click_on 'Subscribe'
@@ -21,7 +21,7 @@ RSpec.describe 'Updating a subscribe', type: :feature do
 
   scenario 'invalid inputs' do
     select '', from: 'subscribe[subscriptions_attributes][0][breed_id]', match: :first
-    select '2', from: 'subscribe[subscriptions_attributes][0][city_id]', match: :first
+    select 'Lviv', from: 'subscribe[subscriptions_attributes][0][city_id]', match: :first
     select '2', from: 'subscribe[subscriptions_attributes][0][age_from]', match: :first
     select '', from: 'subscribe[subscriptions_attributes][0][age_to]', match: :first
     click_on 'Subscribe'

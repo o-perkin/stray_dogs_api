@@ -1,0 +1,10 @@
+FactoryBot.define do
+
+  factory :dog do
+    name {"Rex"}
+    breed
+    city
+    age
+    user
+  end  
+end

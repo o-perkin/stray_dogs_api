@@ -33,9 +33,9 @@ RSpec.describe 'Removing from favorites', type: :feature, js: true do
     dog = create(:dog, name: "Qwerqwer", user_id: user.id)
     visit dog_path(id: dog.id)
     expect(page).to have_content('Qwerqwer')
-    click_on 'Add to favorites', match: :first
+    click_on 'Add to favorites'
     wait_for_ajax
-    click_on 'Remove from favorites', match: :first
+    click_on 'Remove from favorites'
     wait_for_ajax
     visit my_favorites_path
     expect(page).to have_no_content('Qwerqwer')    
