@@ -12,7 +12,7 @@ class UserMailer < ApplicationMailer
   def available_subscription_email(user, subscriptions)
     @user = user
     @subscriptions = subscriptions
-    mail(to: @user.email, subject: 'Ви додали собаку!')  do |format|
+    mail(to: @user.email, subject: 'На сайті вже шукають вашу собаку!')  do |format|
       format.html(content_transfer_encoding: "quoted-printable")
     end
   end

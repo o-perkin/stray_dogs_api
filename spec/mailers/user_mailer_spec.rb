@@ -24,7 +24,7 @@ RSpec.describe UserMailer, type: :mailer do
     let!(:mail) { UserMailer.available_subscription_email(user, [subscription]) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("Ви додали собаку!")
+      expect(mail.subject).to eq("На сайті вже шукають вашу собаку!")
       expect(mail.to).to eq(["email2@gmail.com"])
       expect(mail.from).to eq(["work.perkin@gmail.com"])
     end

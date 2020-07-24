@@ -28,6 +28,27 @@ RSpec.describe DogsHelper, type: :helper do
         expect(call).to eq(result)
       end
     end
+
+    describe ".send_letters" do
+      it "calls new_dog_email_method" do
+        user = create(:user)
+        dog = create(:dog)
+        mail = helper.send_letters_after_dog_creation(user, dog, [])
+        expect(mail.subject).to eq("Ви додали собаку!")
+        expect(mail.to).to eq([user.email])
+        expect(mail.from).to eq(["work.perkin@gmail.com"])
+      end
+
+      it "calls available_subscription_email and send_notification_to_subscriber methods" do
+        user = create(:user)
+        dog = create(:dog)
+        subscription = create(:subscription)
+        mail = helper.send_letters_after_dog_creation(user, dog, [subscription])
+        expect(mail.subject).to eq("На сайті з'явилась потрібна вам собака!")
+        expect(mail.to).to eq([subscription.subscribe.user.email])
+        expect(mail.from).to eq(["work.perkin@gmail.com"])
+      end
+    end
   end
 
   context "Private methods" do 

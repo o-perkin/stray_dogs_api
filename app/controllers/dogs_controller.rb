@@ -44,7 +44,7 @@ class DogsController < ApplicationController
 
     respond_to do |format|
       if @dog.save
-        send_letters(current_user, @dog, @subscriptions)
+        send_letters_after_dog_creation(current_user, @dog, @subscriptions)
         format.html { redirect_to @dog, notice: 'Dog was successfully created.' }
         format.json { render :show, status: :created, location: @dog }
       else
