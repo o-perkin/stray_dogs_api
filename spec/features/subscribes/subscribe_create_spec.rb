@@ -9,7 +9,8 @@ RSpec.describe 'Creating a subscribe', type: :feature do
     visit new_subscribe_path
   end
    
-  scenario 'valid inputs' do    
+  scenario 'valid inputs' do   
+
     select 'Bulldog', from: 'subscribe[subscriptions_attributes][0][breed_id]', match: :first
     select 'Lviv', from: 'subscribe[subscriptions_attributes][0][city_id]', match: :first
     select '2', from: 'subscribe[subscriptions_attributes][0][age_from]', match: :first
