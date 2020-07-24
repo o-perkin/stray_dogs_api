@@ -95,10 +95,8 @@ RSpec.describe "Dogs", type: :request do
     describe "Post #create" do
       it "should redirect to new dog show path and render show template with notice and send email" do
         sign_in user
-        expect do
-          post dogs_path, params: { dog: { name: "Fred", breed_id: "1", city_id: "1", age_id: "1", description: "asdasd" } }
-        end.to change { ActionMailer::Base.deliveries.count }.by(1) 
-
+        post dogs_path, params: { dog: { name: "Fred", breed_id: "1", city_id: "1", age_id: "1", description: "asdasd" } }       
+        
         expect(response).to redirect_to(assigns(:dog))
         follow_redirect!
 

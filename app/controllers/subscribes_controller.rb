@@ -1,4 +1,5 @@
 class SubscribesController < ApplicationController
+  include SubscribesHelper
   before_action :set_subscribe, only: [:index, :edit, :update, :destroy]
   before_action :age_validation, only: [:create, :update]
   before_action :get_parameters_of_dogs, only: [:create, :update]
@@ -27,10 +28,10 @@ class SubscribesController < ApplicationController
   def create
     @subscribe = Subscribe.new(subscribe_params)
     @subscribe.user_id = current_user.id
-    if @age == false
+    if @age == false 
       redirect_to new_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
     elsif @subscribe.save
-      UserMailer.subscription_email(current_user, @parameters_of_dogs, @needed_dogs).deliver
+      send_letters(current_user, @parameters_of_dogs, @needed_dogs)
       redirect_to subscribes_path, notice: 'Subscribe was successfully created.'
     else
       render :new
@@ -42,7 +43,7 @@ class SubscribesController < ApplicationController
     if @age == false 
       redirect_to edit_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
     elsif @subscribe.update(subscribe_params)
-      UserMailer.subscription_email(current_user, @parameters_of_dogs, @needed_dogs).deliver         
+      send_letters(current_user, @parameters_of_dogs, @needed_dogs)    
       redirect_to subscribes_path, notice: 'Subscribe was successfully updated.'
     else
       render :edit

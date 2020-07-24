@@ -64,9 +64,7 @@ RSpec.describe "Subscribes", type: :request do
     describe "Post #create" do
       it "should redirect to subscribes page and render index template with notice" do
         sign_in user
-        expect do 
-          post subscribes_path, params: { subscribe: { subscriptions_attributes: {"0" => {breed_id: "1", city_id: "1", age_from: "1", age_to: "2", _destroy: "false"}} } }
-        end.to change { ActionMailer::Base.deliveries.count }.by(1) 
+        post subscribes_path, params: { subscribe: { subscriptions_attributes: {"0" => {breed_id: "1", city_id: "1", age_from: "1", age_to: "2", _destroy: "false"}} } }
         
         expect(response).to redirect_to(subscribes_path)
         follow_redirect!
