@@ -2,9 +2,9 @@ class UserMailer < ApplicationMailer
 
   default from: ENV['gmail_username']
  
-  def subscription_email(user, parameters_of_dogs, needed_dogs)
+  def subscription_email(user, params_of_subscribed_dogs, needed_dogs)
     @user = user
-    @parameters_of_dogs = parameters_of_dogs
+    @params_of_subscribed_dogs = params_of_subscribed_dogs
     @needed_dogs = needed_dogs
     mail(to: @user.email, subject: 'Ви підписались!')
   end

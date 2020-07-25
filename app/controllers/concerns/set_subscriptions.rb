@@ -1,4 +1,4 @@
-module SettingInstanceVariables
+module SetSubscriptions
   extend ActiveSupport::Concern
 
   included do 

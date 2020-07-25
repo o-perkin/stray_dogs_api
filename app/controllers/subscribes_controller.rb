@@ -1,9 +1,9 @@
 class SubscribesController < ApplicationController
   include SubscribesHelper
+  include NeededDogs
+  include GetParamsOfSubscribedDogs
+  include CheckingAge
   before_action :set_subscribe, only: [:index, :edit, :update, :destroy]
-  before_action :age_validation, only: [:create, :update]
-  before_action :get_parameters_of_dogs, only: [:create, :update]
-  before_action :identify_needed_dogs, only: [:create, :update]
   access [:user, :site_admin] => :all
 
   # GET /subscribes
@@ -12,11 +12,11 @@ class SubscribesController < ApplicationController
 
   # GET /subscribes/new
   def new
-    unless current_user.subscribe
+    if current_user.subscribe
+      redirect_to subscribes_path, notice: 'You have alerady subscribed'      
+    else
       @subscribe = Subscribe.new
       @subscribe.subscriptions.build
-    else
-      redirect_to subscribes_path, notice: 'You have alerady subscribed'
     end
   end
 
@@ -26,13 +26,15 @@ class SubscribesController < ApplicationController
 
   # POST /subscribes
   def create
+
     @subscribe = Subscribe.new(subscribe_params)
     @subscribe.user_id = current_user.id
-    if @age == false 
-      redirect_to new_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
-    elsif @subscribe.save
-      send_email_after_subscribing(current_user, @parameters_of_dogs, @needed_dogs)
+
+    if @subscribe.save && @age
+      send_email_after_subscribing(current_user, @params_of_subscribed_dogs, @needed_dogs)
       redirect_to subscribes_path, notice: 'Subscribe was successfully created.'
+    elsif @age == false 
+      redirect_to new_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
     else
       render :new
     end
@@ -40,15 +42,15 @@ class SubscribesController < ApplicationController
 
   # PATCH/PUT /subscribes/1
   def update
-    if @age == false 
-      redirect_to edit_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
-    elsif @subscribe.update(subscribe_params)
-      send_email_after_subscribing(current_user, @parameters_of_dogs, @needed_dogs)    
+
+    if @subscribe.update(subscribe_params) && @age
+      send_email_after_subscribing(current_user, @params_of_subscribed_dogs, @needed_dogs)    
       redirect_to subscribes_path, notice: 'Subscribe was successfully updated.'
+    elsif @age == false 
+      redirect_to edit_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
     else
       render :edit
-    end
-    
+    end    
   end
 
   # DELETE /subscribes/1
@@ -66,39 +68,5 @@ class SubscribesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def subscribe_params
       params.require(:subscribe).permit(:user_id, subscriptions_attributes: [:id, :breed_id, :city_id, :age_from, :age_to, :_destroy])
-    end
-
-    def age_validation
-      params[:subscribe][:subscriptions_attributes].each do |k, v| 
-        if v[:age_from].to_i > v[:age_to].to_i
-          @age = false
-        else
-          @age = true
-        end
-      end
-    end
-
-    def get_parameters_of_dogs
-      breed = Hash.new
-      city = Hash.new
-      age = Hash.new
-      params[:subscribe][:subscriptions_attributes].each do |k, v|
-        if v[:_destroy] == 'false'         
-          breed[k] = v[:breed_id] 
-          city[k] = v[:city_id] 
-          age[k] = ((v[:age_from].to_i)..(v[:age_to].to_i))
-        end       
-      end 
-      @parameters_of_dogs = { breed: breed, city: city, age: age }
-    end 
-
-    def identify_needed_dogs
-      @needed_dogs = []
-      params[:subscribe][:subscriptions_attributes].each do |k, v|
-        if v[:_destroy] == 'false'  
-          @needed_dogs << Dog.where(breed_id: v[:breed_id], city_id: v[:city_id], age_id: ((v[:age_from].to_i)..(v[:age_to].to_i)))
-        end
-      end
-      @needed_dogs
-    end
+    end     
 end

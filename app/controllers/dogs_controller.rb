@@ -1,6 +1,6 @@
 class DogsController < ApplicationController
   include DogsHelper
-  include SettingInstanceVariables
+  include SetSubscriptions
   helper_method :sort_column, :sort_direction
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
   before_action :set_favorites, only: [:show]
@@ -77,14 +77,6 @@ class DogsController < ApplicationController
       @dog = Dog.find(params[:id])
     end
 
-    def dog_params
-      params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id)
-    end
-
-    def filter_params
-      {breed: params[:breed_id], city: params[:city_id], age_from: params[:age_from], age_to: params[:age_to]}
-    end    
-
     def set_favorites     
       @favorite_exists = Favorite.where(dog: @dog, user: current_user) == [] ? false : true
     end
@@ -92,4 +84,12 @@ class DogsController < ApplicationController
     def set_list_of_dog
       Dog.filters(filter_params).order(sort_column + " " + sort_direction).page(params[:page])
     end
+
+    def dog_params
+      params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id)
+    end
+
+    def filter_params
+      {breed: params[:breed_id], city: params[:city_id], age_from: params[:age_from], age_to: params[:age_to]}
+    end  
 end

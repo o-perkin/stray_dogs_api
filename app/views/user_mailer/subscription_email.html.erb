@@ -17,53 +17,53 @@
         </tr>
       </thead>
       <tbody id="subscription-table-body">
-        <% if Breed.where(id: @parameters_of_dogs[:breed].values[0]).first %>
+        <% if Breed.where(id: @params_of_subscribed_dogs[:breed].values[0]).first %>
           <tr>
             <th scope="row" class="subscription-number"><b>Dog 1 </b></th>
-            <td><%= Breed.where(id: @parameters_of_dogs[:breed].values[0]).first.name %></td>
-            <td><%= City.where(id: @parameters_of_dogs[:city].values[0]).first.name %></td>
-            <td><%= @parameters_of_dogs[:age].values[0] %></td>
+            <td><%= Breed.where(id: @params_of_subscribed_dogs[:breed].values[0]).first.name %></td>
+            <td><%= City.where(id: @params_of_subscribed_dogs[:city].values[0]).first.name %></td>
+            <td><%= @params_of_subscribed_dogs[:age].values[0] %></td>
           </tr>
         <% end %>
 
-        <% if Breed.where(id: @parameters_of_dogs[:breed].values[1]).first %>
+        <% if Breed.where(id: @params_of_subscribed_dogs[:breed].values[1]).first %>
           
           <tr>
             <th scope="row" class="subscription-number"><b>Dog 2 </b></th>
-            <td><%= Breed.where(id: @parameters_of_dogs[:breed].values[1]).first.name %></td>
-            <td><%= City.where(id: @parameters_of_dogs[:city].values[1]).first.name %></td>
-            <td><%= @parameters_of_dogs[:age].values[1] %></td>
+            <td><%= Breed.where(id: @params_of_subscribed_dogs[:breed].values[1]).first.name %></td>
+            <td><%= City.where(id: @params_of_subscribed_dogs[:city].values[1]).first.name %></td>
+            <td><%= @params_of_subscribed_dogs[:age].values[1] %></td>
           </tr>
 
         <% end %>
 
-        <% if Breed.where(id: @parameters_of_dogs[:breed].values[2]).first %>
+        <% if Breed.where(id: @params_of_subscribed_dogs[:breed].values[2]).first %>
 
           <tr>
             <th scope="row" class="subscription-number"><b>Dog 3 </b></th>
-            <td><%= Breed.where(id: @parameters_of_dogs[:breed].values[2]).first.name %></td>
-            <td><%= City.where(id: @parameters_of_dogs[:city].values[2]).first.name %></td>
-            <td><%= @parameters_of_dogs[:age].values[2] %></td>
+            <td><%= Breed.where(id: @params_of_subscribed_dogs[:breed].values[2]).first.name %></td>
+            <td><%= City.where(id: @params_of_subscribed_dogs[:city].values[2]).first.name %></td>
+            <td><%= @params_of_subscribed_dogs[:age].values[2] %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
 
     <div>
-      <% @needed_dogs.each do |dog| %>
-        <% if dog.first != nil %>
-        <p>Звертаю вашу увагу на те, що на сайті вже є потрібна вам собака: </p>
-          <div>
-            Ім'я собаки: <%= dog.first.name %> <br>
-            Порода: <%= dog.first.breed.name %> <br>
-            Місто: <%= dog.first.city.name %> <br>
-            Вік: <%= dog.first.age.years %> <br>
-            Власник собаки: <%= dog.first.user.last_name %> <%= dog.first.user.first_name %><br>
-            Email власника собаки: <%= dog.first.user.email %> <br>
-          </div>
-          <hr>
-        <% end %>
-      <% end %> 
+      <% if @needed_dogs != [] %>
+        <% @needed_dogs.first.each do |dog| %>
+          <p>Звертаю вашу увагу на те, що на сайті вже є потрібна вам собака: </p>
+            <div>
+              Ім'я собаки: <%= dog.name %> <br>
+              Порода: <%= dog.breed.name %> <br>
+              Місто: <%= dog.city.name %> <br>
+              Вік: <%= dog.age.years %> <br>
+              Власник собаки: <%= dog.user.last_name %> <%= dog.user.first_name %><br>
+              Email власника собаки: <%= dog.user.email %> <br>
+            </div>
+            <hr>
+        <% end %> 
+      <% end %>
     </div>
 
     <p>To unsubscribe, just follow this link: http://stray-dogs.herokuapp.com/subscribes</p>

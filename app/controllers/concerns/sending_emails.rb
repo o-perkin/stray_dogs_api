@@ -10,7 +10,7 @@ module SendingEmails
     end
   end
 
-  def send_email_after_subscribing(user, parameters_of_dogs, needed_dogs)
-    UserMailer.subscription_email(user, parameters_of_dogs, needed_dogs).deliver
+  def send_email_after_subscribing(user, params_of_subscribed_dogs, needed_dogs)
+    UserMailer.subscription_email(user, params_of_subscribed_dogs, needed_dogs).deliver
   end
 end
