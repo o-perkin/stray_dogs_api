@@ -2,7 +2,7 @@ class DogsController < ApplicationController
   include DogsHelper
   helper_method :sort_column, :sort_direction
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
-  before_action :find_subscription, only: [:create]
+  before_action :set_subscriptions, only: [:create]
   access all: [:show, :index, :home], user: :all, site_admin: :all
  
   # GET /dogs
@@ -93,10 +93,7 @@ class DogsController < ApplicationController
       {breed: params[:breed_id], city: params[:city_id], age_from: params[:age_from], age_to: params[:age_to]}
     end
 
-    def find_subscription
-      dog_params = params[:dog]
-      subscription_without_age = Subscription.where(breed_id: dog_params[:breed_id], city_id: dog_params[:city_id])
-      subscription_without_age_to = subscription_without_age.where("age_from <= ?", dog_params[:age_id])
-      @subscriptions = subscription_without_age_to.where("age_to >= ?", dog_params[:age_id])
+    def set_subscriptions      
+      @subscriptions = Subscription.find(params[:dog])
     end
 end
