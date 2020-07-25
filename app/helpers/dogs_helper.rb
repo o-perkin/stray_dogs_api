@@ -8,15 +8,6 @@ module DogsHelper
                                                                       }
   end  
 
-  def send_letters_after_dog_creation(user, dog, subscriptions)
-    if subscriptions == []
-      UserMailer.new_dog_email(user).deliver      
-    else
-      (UserMailer.available_subscription_email(user, subscriptions).deliver &&
-      UserMailer.send_notification_to_subscriber(subscriptions, dog).deliver)
-    end
-  end
-
   private 
 
     def define_path_for_sortable(column, direction, page)
