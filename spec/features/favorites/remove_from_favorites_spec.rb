@@ -23,7 +23,9 @@ RSpec.describe 'Removing from favorites', type: :feature, js: true do
     expect(page).to have_content('Mikie')
     click_on 'Add to favorites', match: :first
     wait_for_ajax
+    wait_for_ajax
     click_on 'Remove from favorites', match: :first
+    wait_for_ajax
     wait_for_ajax
     visit my_favorites_path
     expect(page).to have_no_content('Mikie')    

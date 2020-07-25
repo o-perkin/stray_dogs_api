@@ -5,14 +5,5 @@ FactoryBot.define do
     password { "asdasd" }
     first_name { "Name" }
     last_name { "LastName" }
-  end
-
-  factory :admin do
-    sequence(:email) { |n| "test-#{n}@example.com" }
-    password { "asdasd" }
-    first_name { "Name" }
-    last_name { "LastName" }
-    roles { "site_admin" }
-  end
-  
+  end  
 end

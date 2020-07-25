@@ -49,7 +49,9 @@ RSpec.describe UserMailer, type: :mailer do
 
     it "renders the body" do
       expect(mail.body.encoded).to match(user.first_name)
-      expect(mail.body.encoded).to match(dog.name)
+      expect(mail.body.encoded).to match(dog.breed.name)
+      expect(mail.body.encoded).to match(dog.city.name)
+      expect(mail.body.encoded).to match(dog.age.years)
     end
   end
 

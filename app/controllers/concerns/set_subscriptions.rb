@@ -6,6 +6,6 @@ module SetSubscriptions
   end
 
   def set_subscriptions      
-    @subscriptions = Subscription.find(params[:dog])
+    @subscriptions = Subscription.find_by_dog_params(params[:dog])
   end
 end
