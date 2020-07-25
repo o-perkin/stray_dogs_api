@@ -1,30 +1,31 @@
 class DogsController < ApplicationController
   include DogsHelper
+  include SettingInstanceVariables
   helper_method :sort_column, :sort_direction
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
-  before_action :set_subscriptions, only: [:create]
+  before_action :set_favorites, only: [:show]
   access all: [:show, :index, :home], user: :all, site_admin: :all
- 
-  # GET /dogs
-  # GET /dogs.json
-  def index 
-    @dogs = Dog.filters(filter_params).order(sort_column + " " + sort_direction).page(params[:page]).per(5).search(params[:search])
-  end
 
+  # GET /
   def home
   end
-
-  def favorites
+ 
+  # GET /dogs
+  def index 
+    @dogs = set_list_of_dog.per(5).search(params[:search])
   end
 
+  # GET /my_list
   def my_list
-    @dogs = Dog.filters(filter_params).order(sort_column + " " + sort_direction).page(params[:page]).per(2).current_user(current_user.id)
+    @dogs = set_list_of_dog.per(2).current_user(current_user.id)
   end
+
+  # GET /my_favorites
+  def favorites
+  end  
 
   # GET /dogs/1
-  # GET /dogs/1.json
-  def show
-    @favorite_exists = Favorite.where(dog: @dog, user: current_user) == [] ? false : true
+  def show    
   end
 
   # GET /dogs/new
@@ -37,7 +38,6 @@ class DogsController < ApplicationController
   end
 
   # POST /dogs
-  # POST /dogs.json
   def create
     @dog = Dog.new(dog_params)
     @dog.user_id = current_user.id
@@ -46,54 +46,50 @@ class DogsController < ApplicationController
       if @dog.save
         send_email_after_adding_dog(current_user, @dog, @subscriptions)
         format.html { redirect_to @dog, notice: 'Dog was successfully created.' }
-        format.json { render :show, status: :created, location: @dog }
       else
         format.html { render :new }
-        format.json { render json: @dog.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /dogs/1
-  # PATCH/PUT /dogs/1.json
   def update
     respond_to do |format|
       if @dog.update(dog_params)
         format.html { redirect_to @dog, notice: 'Dog was successfully updated.' }
-        format.json { render :show, status: :ok, location: @dog }
       else
         format.html { render :edit }
-        format.json { render json: @dog.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /dogs/1
-  # DELETE /dogs/1.json
   def destroy
     @dog.destroy
     respond_to do |format|
       format.html { redirect_to dogs_url, notice: 'Dog was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+ 
     def set_dog
       @dog = Dog.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def dog_params
-      params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id, :sort, :direction, :search, :age_from, :age_to)
+      params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id)
     end
 
     def filter_params
       {breed: params[:breed_id], city: params[:city_id], age_from: params[:age_from], age_to: params[:age_to]}
+    end    
+
+    def set_favorites     
+      @favorite_exists = Favorite.where(dog: @dog, user: current_user) == [] ? false : true
     end
 
-    def set_subscriptions      
-      @subscriptions = Subscription.find(params[:dog])
+    def set_list_of_dog
+      Dog.filters(filter_params).order(sort_column + " " + sort_direction).page(params[:page])
     end
 end
