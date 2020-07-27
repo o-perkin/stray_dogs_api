@@ -1,41 +1,28 @@
 module DogsHelper
   
   def sortable(column, title, page)
-    direction = define_sorting_direction(column)
-    link_to title, define_path_for_sortable(column, direction, page), {
-                                                                        class: define_css_class(column),
-                                                                        remote: true
-                                                                      }
+    link_to title, set_path_for_sorting(column, page), {
+                                                         class: set_css_class(column),
+                                                         remote: true
+                                                        }
   end  
 
   private 
 
-    def define_path_for_sortable(column, direction, page)
-      merged_params = request.parameters.merge({sort: column, direction: direction})
-      if page == "index"
-        dogs_path(merged_params)
-      else
-        my_list_path(merged_params)
-      end
-    end    
+    def set_path_for_sorting(column, page)
+      merged_params = request.parameters.merge({sort: column, direction: set_sorting_direction(column)})
+      page == "index" ? dogs_path(merged_params) : my_list_path(merged_params)
+    end  
 
-    def define_css_class(column)
-      if column == sort_column
-        "flex-sm-fill text-sm-center nav-link dropdown-toggle active"
-      else
-        "flex-sm-fill text-sm-center nav-link"
-      end
+    def set_sorting_direction(column)
+      ((column == sort_column) && (sort_direction == "asc")) ? "desc" : "asc"
+    end  
+
+    def set_css_class(column)
+      "flex-sm-fill text-sm-center nav-link#{" dropdown-toggle active" if column == sort_column}"
     end
 
-    def define_sorting_direction(column)
-      if column == sort_column && sort_direction == "asc"
-        "desc"
-      else 
-        "asc"
-      end
-    end
-
-    def define_dropup_css_class
+    def set_dropup_css_class
       sort_direction == "desc" ? "dropup" : ""
     end
 

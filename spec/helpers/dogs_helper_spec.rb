@@ -31,77 +31,77 @@ RSpec.describe DogsHelper, type: :helper do
   end
 
   context "Private methods" do 
-    describe ".define_path_for_sortable" do
+    describe ".set_path_for_sorting" do
       it "returns dogs path with direction asc and sort created_at" do
-        call = helper.send(:define_path_for_sortable, "created_at", "asc", "index")
+        call = helper.send(:set_path_for_sorting, "created_at", "index")
         result = "/dogs?direction=asc&sort=created_at"
         expect(call).to eq(result)
       end
       it "returns my_list path with direction asc and sort created_at" do
-        call = helper.send(:define_path_for_sortable, "created_at", "asc", "my_list")
+        call = helper.send(:set_path_for_sorting, "created_at", "my_list")
         result = "/my_list?direction=asc&sort=created_at"
         expect(call).to eq(result)
       end
       it "returns dogs path with direction desc and sort created_at" do
-        call = helper.send(:define_path_for_sortable, "created_at", "desc", "index")
-        result = "/dogs?direction=desc&sort=created_at"
+        call = helper.send(:set_path_for_sorting, "created_at", "index")
+        result = "/dogs?direction=asc&sort=created_at"
         expect(call).to eq(result)
       end
       it "returns dogs path with direction desc and sort breed_id" do
-        call = helper.send(:define_path_for_sortable, "breed_id", "desc", "index")
-        result = "/dogs?direction=desc&sort=breed_id"
+        call = helper.send(:set_path_for_sorting, "breed_id", "index")
+        result = "/dogs?direction=asc&sort=breed_id"
         expect(call).to eq(result)
       end
       it "returns my_list path with direction desc and sort created_at" do
-        call = helper.send(:define_path_for_sortable, "created_at", "desc", "my_list")
-        result = "/my_list?direction=desc&sort=created_at"
+        call = helper.send(:set_path_for_sorting, "created_at", "my_list")
+        result = "/my_list?direction=asc&sort=created_at"
         expect(call).to eq(result)
       end
       it "returns my_list path with direction desc and sort breed_id" do
-        call = helper.send(:define_path_for_sortable, "breed_id", "desc", "my_list")
-        result = "/my_list?direction=desc&sort=breed_id"
+        call = helper.send(:set_path_for_sorting, "breed_id", "my_list")
+        result = "/my_list?direction=asc&sort=breed_id"
         expect(call).to eq(result)
       end
     end
-    describe ".define_css_class" do
+    describe ".set_css_class" do
       it "returns flex-sm-fill regular css class if column != sort_column" do
-        call = helper.send(:define_css_class, "breed_id")
+        call = helper.send(:set_css_class, "breed_id")
         result = "flex-sm-fill text-sm-center nav-link"
         expect(call).to eq(result)
       end
       it "returns active class if column == sort_column" do
-        call = helper.send(:define_css_class, "created_at")
+        call = helper.send(:set_css_class, "created_at")
         result = "flex-sm-fill text-sm-center nav-link dropdown-toggle active"
         expect(call).to eq(result)
       end
     end
-    describe ".define_sorting_direction" do
+    describe ".set_sorting_direction" do
       it "returns asc if column == sort_column && sort_direction == desc" do
-        call = helper.send(:define_sorting_direction, "created_at")
+        call = helper.send(:set_sorting_direction, "created_at")
         result = "asc"
         expect(call).to eq(result)
       end
       it "returns asc if column != sort_column && sort_direction == desc" do
-        call = helper.send(:define_sorting_direction, "breed_id")
+        call = helper.send(:set_sorting_direction, "breed_id")
         result = "asc"
         expect(call).to eq(result)
       end
       it "returns desc if column == sort_column && sort_direction == asc" do
         allow(helper).to receive(:sort_direction) {"asc"}
-        call = helper.send(:define_sorting_direction, "created_at")
+        call = helper.send(:set_sorting_direction, "created_at")
         result = "desc"
         expect(call).to eq(result)
       end
     end
-    describe ".define_dropup_css_class" do
+    describe ".set_dropup_css_class" do
       it "returns dropup if sort_direction == desc" do
-        call = helper.send(:define_dropup_css_class)
+        call = helper.send(:set_dropup_css_class)
         result = "dropup"
         expect(call).to eq(result)
       end
       it "returns empty string if sort_direction == asc" do
         allow(helper).to receive(:sort_direction).and_return("asc")
-        call = helper.send(:define_dropup_css_class)
+        call = helper.send(:set_dropup_css_class)
         result = ""
         expect(call).to eq(result)
       end
