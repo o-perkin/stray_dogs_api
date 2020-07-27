@@ -95,6 +95,6 @@ class DogsController < ApplicationController
     end
 
     def filter_params
-      {breed: params[:breed_id], city: params[:city_id], age_from: params[:age_from], age_to: params[:age_to]}
+      {breed: params[:breed_id], city: params[:city_id], age_from: params[:age_from], age_to: params[:age_to]}.transform_values {|v| v == "" ? v = nil : v}   
     end  
 end
