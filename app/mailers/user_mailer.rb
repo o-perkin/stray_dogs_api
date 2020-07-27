@@ -1,4 +1,5 @@
 class UserMailer < ApplicationMailer
+  helper :mailer
 
   default from: ENV['gmail_username']
  

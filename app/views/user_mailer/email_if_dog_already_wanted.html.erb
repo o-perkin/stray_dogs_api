@@ -1,26 +1,18 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  </head>
-  <body>
-    <h1><%= @user.first_name %>, ви додали собаку!</h1>
+<h1><%= @user.first_name %>, ви додали собаку!</h1>
 
-    <div>
-      <p>Звертаю вашу увагу на те, що на сайті вже шукають вашу собаку: </p>
-      <% @subscriptions.each do |subscription| %>
-        <% if subscription != nil %>
-          <div>
-            Зацікавлений користувач: <%= subscription.subscribe.user.last_name %> <%= subscription.subscribe.user.first_name %><br>
-            Email зацікавленого користувача: <%= subscription.subscribe.user.email %> <br>
-          </div>
-          <hr>
-        <% end %>
-      <% end %> 
-    </div>
+<div>
+  <p>Звертаю вашу увагу на те, що на сайті вже шукають вашу собаку: </p>
+  <% if @subscriptions.first != [] %>
+    <% @subscriptions.each do |subscription| %>
+        <div>
+          Зацікавлений користувач: <%= subscription.subscribe.user.last_name %> <%= subscription.subscribe.user.first_name %><br>
+          Email зацікавленого користувача: <%= subscription.subscribe.user.email %> <br>
+        </div>
+        <hr>
+    <% end %> 
+  <% end %>
+</div>
 
-    <p> Have a great day!</p>
-  </body>
-</html>
+<p> Have a great day!</p>
+
      

@@ -1,73 +1,48 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  </head>
-  <body>
-    <h1><%= @user.first_name %>, thanks for your subscription!</h1>
-    
-    <table class="table">
-      <thead class="thead-dark">
+<h1><%= @user.first_name %>, Дякуємо за вашу підписку!</h1>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Breed</th>
+      <th scope="col">City</th>
+      <th scope="col">Age</th>
+    </tr>
+  </thead>
+  <tbody id="subscription-table-body">
+
+    <% (0..2).each do |num| %>
+      <% if check_subscription_exist(num, @params_of_subscribed_dogs) %>
         <tr>
-          <th scope="col"></th>
-          <th scope="col">Breed</th>
-          <th scope="col">City</th>
-          <th scope="col">Age</th>
+          <th scope="row" class="subscription-number"><b>Dog 1 </b></th>
+          <td><%= Breed.where(id: @params_of_subscribed_dogs[:breed].values[num]).first.name %></td>
+          <td><%= City.where(id: @params_of_subscribed_dogs[:city].values[num]).first.name %></td>
+          <td><%= @params_of_subscribed_dogs[:age].values[num] %></td>
         </tr>
-      </thead>
-      <tbody id="subscription-table-body">
-        <% if Breed.where(id: @params_of_subscribed_dogs[:breed].values[0]).first %>
-          <tr>
-            <th scope="row" class="subscription-number"><b>Dog 1 </b></th>
-            <td><%= Breed.where(id: @params_of_subscribed_dogs[:breed].values[0]).first.name %></td>
-            <td><%= City.where(id: @params_of_subscribed_dogs[:city].values[0]).first.name %></td>
-            <td><%= @params_of_subscribed_dogs[:age].values[0] %></td>
-          </tr>
-        <% end %>
-
-        <% if Breed.where(id: @params_of_subscribed_dogs[:breed].values[1]).first %>
-          
-          <tr>
-            <th scope="row" class="subscription-number"><b>Dog 2 </b></th>
-            <td><%= Breed.where(id: @params_of_subscribed_dogs[:breed].values[1]).first.name %></td>
-            <td><%= City.where(id: @params_of_subscribed_dogs[:city].values[1]).first.name %></td>
-            <td><%= @params_of_subscribed_dogs[:age].values[1] %></td>
-          </tr>
-
-        <% end %>
-
-        <% if Breed.where(id: @params_of_subscribed_dogs[:breed].values[2]).first %>
-
-          <tr>
-            <th scope="row" class="subscription-number"><b>Dog 3 </b></th>
-            <td><%= Breed.where(id: @params_of_subscribed_dogs[:breed].values[2]).first.name %></td>
-            <td><%= City.where(id: @params_of_subscribed_dogs[:city].values[2]).first.name %></td>
-            <td><%= @params_of_subscribed_dogs[:age].values[2] %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-    <div>
-      <% if @needed_dogs != [] %>
-        <% @needed_dogs.first.each do |dog| %>
-          <p>Звертаю вашу увагу на те, що на сайті вже є потрібна вам собака: </p>
-            <div>
-              Ім'я собаки: <%= dog.name %> <br>
-              Порода: <%= dog.breed.name %> <br>
-              Місто: <%= dog.city.name %> <br>
-              Вік: <%= dog.age.years %> <br>
-              Власник собаки: <%= dog.user.last_name %> <%= dog.user.first_name %><br>
-              Email власника собаки: <%= dog.user.email %> <br>
-            </div>
-            <hr>
-        <% end %> 
       <% end %>
-    </div>
+    <% end %>
 
-    <p>To unsubscribe, just follow this link: http://stray-dogs.herokuapp.com/subscribes</p>
-    <p> Have a great day!</p>
-  </body>
-</html>
+  </tbody>
+</table>
+
+<div>
+  <% if @needed_dogs != [] %>
+    <% @needed_dogs.first.each do |dog| %>
+      <p>Звертаю вашу увагу на те, що на сайті вже є потрібна вам собака: </p>
+        <div>
+          Ім'я собаки: <%= dog.name %> <br>
+          Порода: <%= dog.breed.name %> <br>
+          Місто: <%= dog.city.name %> <br>
+          Вік: <%= dog.age.years %> <br>
+          Власник собаки: <%= dog.user.last_name %> <%= dog.user.first_name %><br>
+          Email власника собаки: <%= dog.user.email %> <br>
+        </div>
+        <hr>
+    <% end %> 
+  <% end %>
+</div>
+
+<p>To unsubscribe, just follow this link: http://stray-dogs.herokuapp.com/subscribes</p>
+<p> Have a great day!</p>
+
      
