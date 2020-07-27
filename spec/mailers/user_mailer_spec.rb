@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe UserMailer, type: :mailer do
 
-  describe "new_dog_email" do
+  describe "email_after_creating_dog" do 
     let!(:user) { create(:user, email: "email@gmail.com") }
-    let!(:mail) { UserMailer.new_dog_email(user) }
+    let!(:mail) { UserMailer.email_after_creating_dog(user) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Ви додали собаку!")
@@ -18,10 +18,10 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  describe "available_subscription_email" do
+  describe "email_if_dog_already_wanted" do
     let!(:user) { create(:user, email: "email2@gmail.com") }
     let!(:subscription) { create(:subscription) }
-    let!(:mail) { UserMailer.available_subscription_email(user, [subscription]) }
+    let!(:mail) { UserMailer.email_if_dog_already_wanted(user, [subscription]) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("На сайті вже шукають вашу собаку!")
@@ -36,10 +36,10 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  describe "subscription_email" do
+  describe "email_after_subscribing" do
     let!(:user) { create(:user, email: "email3@gmail.com") }
     let!(:dog) { create(:dog) }
-    let!(:mail) { UserMailer.subscription_email(user, {breed: {}, city: {}, age: {}}, [[dog]]) }
+    let!(:mail) { UserMailer.email_after_subscribing(user, {breed: {}, city: {}, age: {}}, [[dog]]) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Ви підписались!")
@@ -55,10 +55,10 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  describe "send_notification_to_subscriber" do
+  describe "email_if_dog_appeared" do
     let!(:subscription) { create(:subscription) }
     let!(:dog) { create(:dog) }
-    let!(:mail) { UserMailer.send_notification_to_subscriber([subscription], dog) }
+    let!(:mail) { UserMailer.email_if_dog_appeared([subscription], dog) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("На сайті з'явилась потрібна вам собака!")

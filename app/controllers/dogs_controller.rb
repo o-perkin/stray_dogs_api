@@ -44,7 +44,7 @@ class DogsController < ApplicationController
 
     respond_to do |format|
       if @dog.save
-        if subscriptions == []
+        if @subscriptions == []
           UserMailer.email_after_creating_dog(current_user).deliver      
         else
           UserMailer.email_if_dog_already_wanted(current_user, @subscriptions).deliver
