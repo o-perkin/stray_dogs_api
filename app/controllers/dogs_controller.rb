@@ -44,7 +44,12 @@ class DogsController < ApplicationController
 
     respond_to do |format|
       if @dog.save
-        send_email_after_adding_dog(current_user, @dog, @subscriptions)
+        if subscriptions == []
+          UserMailer.email_after_creating_dog(current_user).deliver      
+        else
+          UserMailer.email_if_dog_already_wanted(current_user, @subscriptions).deliver
+          UserMailer.email_if_dog_appeared(@subscriptions, @dog).deliver
+        end
         format.html { redirect_to @dog, notice: 'Dog was successfully created.' }
       else
         format.html { render :new }

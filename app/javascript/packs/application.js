@@ -61,6 +61,5 @@ document.addEventListener("turbolinks:load", () => {
       $(this).html('Dog ' + (index + 1));
     })
   })
-
 })
 

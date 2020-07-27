@@ -31,7 +31,7 @@ class SubscribesController < ApplicationController
     @subscribe.user_id = current_user.id
 
     if @subscribe.save && @age
-      send_email_after_subscribing(current_user, @params_of_subscribed_dogs, @needed_dogs)
+      UserMailer.email_after_subscribing(current_user, @params_of_subscribed_dogs, @needed_dogs).deliver
       redirect_to subscribes_path, notice: 'Subscribe was successfully created.'
     elsif @age == false 
       redirect_to new_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
@@ -44,7 +44,7 @@ class SubscribesController < ApplicationController
   def update
 
     if @subscribe.update(subscribe_params) && @age
-      send_email_after_subscribing(current_user, @params_of_subscribed_dogs, @needed_dogs)    
+      UserMailer.email_after_subscribing(current_user, @params_of_subscribed_dogs, @needed_dogs).deliver 
       redirect_to subscribes_path, notice: 'Subscribe was successfully updated.'
     elsif @age == false 
       redirect_to edit_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
