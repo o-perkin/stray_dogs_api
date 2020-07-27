@@ -6,7 +6,7 @@ class Dog < ApplicationRecord
   belongs_to :user
   validates :name, presence: true
 
-  def self.search(search)
+  def self.search search
     if search && search != ""
       where(name: search)
     else 
@@ -14,7 +14,7 @@ class Dog < ApplicationRecord
     end
   end
 
-  def self.filters(params)
+  def self.filters params
 
     modified_params = params.transform_values {|v| v == "" ? v = nil : v}    
     breed_city = modified_params.select { |k, v| v != nil && (k.to_s == "breed" || k.to_s == "city")}
@@ -26,7 +26,7 @@ class Dog < ApplicationRecord
 
   private 
 
-  def self.set_age(age_from, age_to)
+  def self.set_age age_from, age_to
     
     if age_from || age_to
       age_from = 1 if age_from.nil?

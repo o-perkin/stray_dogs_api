@@ -5,7 +5,7 @@ class Subscription < ApplicationRecord
   validates :age_from, presence: true
   validates :age_to, presence: true
 
-  def self.find_by_dog_params(params)
+  def self.find_by_dog_params params
     where(breed_id: params[:breed_id], city_id: params[:city_id]).set_age(params[:age_id])
   end
 

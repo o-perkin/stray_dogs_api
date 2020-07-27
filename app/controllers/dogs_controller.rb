@@ -83,7 +83,7 @@ class DogsController < ApplicationController
     end
 
     def set_favorites     
-      @favorite_exists = Favorite.where(dog: @dog, user: current_user) == [] ? false : true
+      @favorite_exists = favorite_exists?(@dog, current_user)
     end
 
     def set_list_of_dog
