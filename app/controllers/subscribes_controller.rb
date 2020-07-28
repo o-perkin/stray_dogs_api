@@ -1,9 +1,6 @@
 class SubscribesController < ApplicationController
-  include SubscribesHelper
-  include NeededDogs
-  include GetParamsOfSubscribedDogs
-  include CheckingAge
   before_action :set_subscribe, only: [:index, :edit, :update, :destroy]
+  before_action :set_subscribe_new, only: [:create]
   access [:user, :site_admin] => :all
 
   # GET /subscribes
@@ -26,15 +23,9 @@ class SubscribesController < ApplicationController
 
   # POST /subscribes
   def create
-
-    @subscribe = Subscribe.new(subscribe_params)
-    @subscribe.user_id = current_user.id
-
-    if @subscribe.save && @age
-      UserMailer.email_after_subscribing(current_user, @params_of_subscribed_dogs, @needed_dogs).deliver
+    if @subscribe.save
+      UserMailer.email_after_subscribing(current_user, @subscribe.subscriptions).deliver
       redirect_to subscribes_path, notice: 'Subscribe was successfully created.'
-    elsif @age == false 
-      redirect_to new_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
     else
       render :new
     end
@@ -43,11 +34,9 @@ class SubscribesController < ApplicationController
   # PATCH/PUT /subscribes/1
   def update
 
-    if @subscribe.update(subscribe_params) && @age
-      UserMailer.email_after_subscribing(current_user, @params_of_subscribed_dogs, @needed_dogs).deliver 
+    if @subscribe.update(subscribe_params)
+      UserMailer.email_after_subscribing(current_user, @subscribe.subscriptions).deliver 
       redirect_to subscribes_path, notice: 'Subscribe was successfully updated.'
-    elsif @age == false 
-      redirect_to edit_subscribe_path, notice: "'Age from' can not be larger then 'Age to'. Please, try again"
     else
       render :edit
     end    
@@ -65,8 +54,13 @@ class SubscribesController < ApplicationController
       @subscribe = current_user.subscribe if current_user
     end
 
+    def set_subscribe_new
+      @subscribe = Subscribe.new(subscribe_params)
+      @subscribe.user_id = current_user.id
+    end  
+
     # Only allow a trusted parameter "white list" through.
     def subscribe_params
       params.require(:subscribe).permit(:user_id, subscriptions_attributes: [:id, :breed_id, :city_id, :age_from, :age_to, :_destroy])
-    end     
+    end   
 end

@@ -1,5 +1,9 @@
 module MailerHelper
-  def check_subscription_exist(num, params_of_subscribed_dogs)
-    Breed.where(id: params_of_subscribed_dogs[:breed].values[num]).first ? true : false
+  def set_needed_dogs(subscriptions)
+    dogs = []
+    subscriptions.each do |subscription|
+      dogs << Dog.where(breed_id: subscription[:breed_id], city_id: subscription[:city_id], age_id: subscription[:age_from]..subscription[:age_to])
+    end
+    dogs
   end
-end
+end 

@@ -18,7 +18,7 @@ class Dog < ApplicationRecord
 
   private 
 
-    def self.set_age params    
+    def self.set_age params
       if params[:age_from] || params[:age_to]
         where(age_id: set_age_from(params[:age_from])..set_age_to(params[:age_to]))
       else
@@ -31,10 +31,10 @@ class Dog < ApplicationRecord
     end
 
     def self.set_age_from age_from
-      age_from.nil? ? 1 : age_from
+      age_from.nil? ? 1 : age_from.to_i
     end
 
     def self.set_age_to age_to
-      age_to.nil? ? Age.last.id : age_to
+      age_to.nil? ? Age.last.id : age_to.to_i
     end
 end

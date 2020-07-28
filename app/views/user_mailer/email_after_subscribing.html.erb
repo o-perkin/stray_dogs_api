@@ -12,12 +12,14 @@
   <tbody id="subscription-table-body">
 
     <% (0..2).each do |num| %>
-      <% if check_subscription_exist(num, @params_of_subscribed_dogs) %>
+      <% if @subscriptions[num] %>
         <tr>
           <th scope="row" class="subscription-number"><b>Dog 1 </b></th>
-          <td><%= Breed.where(id: @params_of_subscribed_dogs[:breed].values[num]).first.name %></td>
-          <td><%= City.where(id: @params_of_subscribed_dogs[:city].values[num]).first.name %></td>
-          <td><%= @params_of_subscribed_dogs[:age].values[num] %></td>
+          <td><%= @subscriptions[num].breed.name %></td>
+          <td><%= @subscriptions[num].city.name %></td>
+          <td><%= @subscriptions[num].age_from %>..
+            <%= @subscriptions[num].age_to %>
+          </td>
         </tr>
       <% end %>
     <% end %>
@@ -26,23 +28,23 @@
 </table>
 
 <div>
-  <% if @needed_dogs != [] %>
-    <% @needed_dogs.first.each do |dog| %>
-      <p>Звертаю вашу увагу на те, що на сайті вже є потрібна вам собака: </p>
-        <div>
-          Ім'я собаки: <%= dog.name %> <br>
-          Порода: <%= dog.breed.name %> <br>
-          Місто: <%= dog.city.name %> <br>
-          Вік: <%= dog.age.years %> <br>
-          Власник собаки: <%= dog.user.last_name %> <%= dog.user.first_name %><br>
-          Email власника собаки: <%= dog.user.email %> <br>
-        </div>
-        <hr>
+  <% if set_needed_dogs(@subscriptions) != [] %>
+    <% set_needed_dogs(@subscriptions).each do |dogs| %>
+      <% dogs.each do |dog| %>
+        <p>Звертаю вашу увагу на те, що на сайті вже є потрібна вам собака: </p>
+          <div>
+            Ім'я собаки: <%= dog.name %> <br>
+            Порода: <%= dog.breed.name %> <br>
+            Місто: <%= dog.city.name %> <br>
+            Вік: <%= dog.age.years %> <br>
+            Власник собаки: <%= dog.user.last_name %> <%= dog.user.first_name %><br>
+            Email власника собаки: <%= dog.user.email %> <br>
+          </div>
+          <hr>
+      <% end %> 
     <% end %> 
   <% end %>
 </div>
 
 <p>To unsubscribe, just follow this link: http://stray-dogs.herokuapp.com/subscribes</p>
 <p> Have a great day!</p>
-
-     

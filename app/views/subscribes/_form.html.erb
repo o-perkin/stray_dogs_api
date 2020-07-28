@@ -2,8 +2,6 @@
   <%= form_with(model: subscribe, local: true, id: "forma", class: 'form-inline') do |form| %>
     <% if subscribe.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(subscribe.errors.count, "error") %> prohibited this subscribe from being saved:</h2>
-
         <ul>
           <% subscribe.errors.full_messages.each do |message| %>
             <li><%= message %></li>
@@ -11,7 +9,6 @@
         </ul>
       </div>
     <% end %>
-
 
     <div id="submited-fields">
       <%= form.fields_for :subscriptions do |subscription| %>

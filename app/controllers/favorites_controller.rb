@@ -3,8 +3,7 @@ class FavoritesController < ApplicationController
   before_action :set_favorites, only: [:destroy]
   before_action :find_favorites_by_dog, only: [:update]
 
-  def update 
-    
+  def update     
     if @favorites == []
       Favorite.create(dog: Dog.find(params[:dog]), user: current_user)
       @favorite_exists = true

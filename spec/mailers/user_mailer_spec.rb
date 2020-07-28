@@ -39,7 +39,8 @@ RSpec.describe UserMailer, type: :mailer do
   describe "email_after_subscribing" do
     let!(:user) { create(:user, email: "email3@gmail.com") }
     let!(:dog) { create(:dog) }
-    let!(:mail) { UserMailer.email_after_subscribing(user, {breed: {}, city: {}, age: {}}, [[dog]]) }
+    let!(:subscription) { create (:subscription) }
+    let!(:mail) { UserMailer.email_after_subscribing(user, [subscription]) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Ви підписались!")

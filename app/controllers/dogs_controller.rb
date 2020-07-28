@@ -1,9 +1,10 @@
 class DogsController < ApplicationController
   include DogsHelper
-  include SetSubscriptions
-  helper_method :sort_column, :sort_direction
+  include SendEmails
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
-  before_action :set_favorites, only: [:show]
+  before_action :set_favorites_exists, only: [:show]
+  before_action :set_subscriptions, only: [:create]
+  before_action :set_new_dog, only: [:create]
   access all: [:show, :index, :home], user: :all, site_admin: :all
 
   # GET /
@@ -38,18 +39,10 @@ class DogsController < ApplicationController
   end
 
   # POST /dogs
-  def create
-    @dog = Dog.new(dog_params)
-    @dog.user_id = current_user.id
-
+  def create  
     respond_to do |format|
       if @dog.save
-        if @subscriptions == []
-          UserMailer.email_after_creating_dog(current_user).deliver      
-        else
-          UserMailer.email_if_dog_already_wanted(current_user, @subscriptions).deliver
-          UserMailer.email_if_dog_appeared(@subscriptions, @dog).deliver
-        end
+        send_emails(current_user, @subscriptions, @dog)
         format.html { redirect_to @dog, notice: 'Dog was successfully created.' }
       else
         format.html { render :new }
@@ -82,8 +75,17 @@ class DogsController < ApplicationController
       @dog = Dog.find(params[:id])
     end
 
-    def set_favorites     
-      @favorite_exists = favorite_exists?(@dog, current_user)
+    def set_new_dog
+      @dog = Dog.new(dog_params)
+      @dog.user_id = current_user.id
+    end
+
+    def set_favorites_exists     
+      @favorite_exists = Favorite.favorite_exists?(@dog, current_user)
+    end
+
+    def set_subscriptions      
+      @subscriptions = Subscription.find_by_dog_params(params[:dog])
     end
 
     def set_list_of_dog
@@ -96,5 +98,5 @@ class DogsController < ApplicationController
 
     def filter_params
       {breed: params[:breed_id], city: params[:city_id], age_from: params[:age_from], age_to: params[:age_to]}.transform_values {|v| v == "" ? v = nil : v}   
-    end  
+    end
 end

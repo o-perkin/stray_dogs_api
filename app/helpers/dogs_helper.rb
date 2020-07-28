@@ -7,6 +7,14 @@ module DogsHelper
                                                         }
   end  
 
+  def sort_column
+    Dog.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+  end
+
   private 
 
     def set_path_for_sorting(column, page)
@@ -24,13 +32,5 @@ module DogsHelper
 
     def set_dropup_css_class
       sort_direction == "desc" ? "dropup" : ""
-    end
-
-    def sort_column
-      Dog.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
-    end
+    end    
 end
