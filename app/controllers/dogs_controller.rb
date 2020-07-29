@@ -2,8 +2,6 @@ class DogsController < ApplicationController
   include DogsHelper
   include SendEmails
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
-  before_action :set_favorites_exists, only: [:show]
-  before_action :set_subscriptions, only: [:create]
   before_action :set_new_dog, only: [:create]
   access all: [:show, :index, :home], user: :all, site_admin: :all
 
@@ -13,12 +11,12 @@ class DogsController < ApplicationController
  
   # GET /dogs
   def index 
-    @dogs = set_list_of_dog.per(5).search(params[:search])
+    @dogs = set_list_of_dogs.per(5).search(params[:search])
   end
 
   # GET /my_list
   def my_list
-    @dogs = set_list_of_dog.per(2).current_user(current_user.id)
+    @dogs = set_list_of_dogs.per(2).current_user(current_user.id)
   end
 
   # GET /my_favorites
@@ -26,7 +24,8 @@ class DogsController < ApplicationController
   end  
 
   # GET /dogs/1
-  def show    
+  def show   
+    @favorite_exists = Favorite.favorite_exists?(@dog, current_user) 
   end
 
   # GET /dogs/new
@@ -42,7 +41,7 @@ class DogsController < ApplicationController
   def create  
     respond_to do |format|
       if @dog.save
-        send_emails(current_user, @subscriptions, @dog)
+        send_emails(current_user, set_subscriptions)
         format.html { redirect_to @dog, notice: 'Dog was successfully created.' }
       else
         format.html { render :new }
@@ -80,23 +79,19 @@ class DogsController < ApplicationController
       @dog.user_id = current_user.id
     end
 
-    def set_favorites_exists     
-      @favorite_exists = Favorite.favorite_exists?(@dog, current_user)
-    end
-
     def set_subscriptions      
-      @subscriptions = Subscription.find_by_dog_params(params[:dog])
+      Subscription.find_by_dog_params(params[:dog])
     end
 
-    def set_list_of_dog
-      Dog.filters(filter_params).order(sort_column + " " + sort_direction).page(params[:page])
+    def set_list_of_dogs
+      Dog.filters(set_filter_params).order(sort_column + " " + sort_direction).page(params[:page])
     end
 
     def dog_params
       params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id)
     end
 
-    def filter_params
+    def set_filter_params
       {breed: params[:breed_id], city: params[:city_id], age_from: params[:age_from], age_to: params[:age_to]}.transform_values {|v| v == "" ? v = nil : v}   
     end
 end

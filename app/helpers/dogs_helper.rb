@@ -15,12 +15,19 @@ module DogsHelper
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
+  def set_dropup_css_class
+    sort_direction == "desc" ? "dropup" : ""
+  end 
+
   private 
 
     def set_path_for_sorting(column, page)
-      merged_params = request.parameters.merge({sort: column, direction: set_sorting_direction(column)})
-      page == "index" ? dogs_path(merged_params) : my_list_path(merged_params)
-    end  
+      page == "index" ? dogs_path(set_merged_params(column)) : my_list_path(set_merged_params(column))
+    end 
+
+    def set_merged_params column
+      request.parameters.merge({sort: column, direction: set_sorting_direction(column)})
+    end 
 
     def set_sorting_direction(column)
       ((column == sort_column) && (sort_direction == "asc")) ? "desc" : "asc"
@@ -28,9 +35,5 @@ module DogsHelper
 
     def set_css_class(column)
       "flex-sm-fill text-sm-center nav-link#{" dropdown-toggle active" if column == sort_column}"
-    end
-
-    def set_dropup_css_class
-      sort_direction == "desc" ? "dropup" : ""
-    end    
+    end   
 end

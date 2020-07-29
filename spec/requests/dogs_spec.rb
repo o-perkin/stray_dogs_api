@@ -110,7 +110,7 @@ RSpec.describe "Dogs", type: :request do
         post dogs_path, params: { dog: { name: "", breed_id: "1", city_id: "1", age_id: "1", description: "asdasd" } }
 
         expect(response).to render_template(:new)      
-        expect(response.body).to include("error prohibited this dog from being saved")        
+        expect(response.body).to include("Name can&#39;t be blank")        
       end
     end
 

@@ -24,8 +24,7 @@ class SubscribesController < ApplicationController
   # POST /subscribes
   def create
     if @subscribe.save
-      UserMailer.email_after_subscribing(current_user, @subscribe.subscriptions).deliver
-      redirect_to subscribes_path, notice: 'Subscribe was successfully created.'
+      send_email(current_user, @subscribe.subscriptions, 'created')
     else
       render :new
     end
@@ -33,10 +32,8 @@ class SubscribesController < ApplicationController
 
   # PATCH/PUT /subscribes/1
   def update
-
     if @subscribe.update(subscribe_params)
-      UserMailer.email_after_subscribing(current_user, @subscribe.subscriptions).deliver 
-      redirect_to subscribes_path, notice: 'Subscribe was successfully updated.'
+      send_email(current_user, @subscribe.subscriptions, 'updated')
     else
       render :edit
     end    
@@ -49,7 +46,7 @@ class SubscribesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_subscribe
       @subscribe = current_user.subscribe if current_user
     end
@@ -59,7 +56,11 @@ class SubscribesController < ApplicationController
       @subscribe.user_id = current_user.id
     end  
 
-    # Only allow a trusted parameter "white list" through.
+    def send_email(user, subscriptions, action)
+      UserMailer.email_after_subscribing(user, subscriptions).deliver
+      redirect_to subscribes_path, notice: "Subscribe was successfully #{action}."
+    end
+
     def subscribe_params
       params.require(:subscribe).permit(:user_id, subscriptions_attributes: [:id, :breed_id, :city_id, :age_from, :age_to, :_destroy])
     end   

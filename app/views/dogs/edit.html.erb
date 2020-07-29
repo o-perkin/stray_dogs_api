@@ -1,13 +1,13 @@
 <% if current_user.dogs.where(id: params[:id]) != [] || logged_in?(:site_admin) %>
 
-<div class="col-sm-8 blog-main">
+  <div class="col-sm-8 blog-main">
 
-  <h1>Editing Dog</h1>  
+    <h1>Editing Dog</h1>  
 
-  <%= render 'form', dog: @dog %>   
+    <%= render 'form', dog: @dog %>   
 
-</div>
+  </div>
 
 <% else %>
-    <p>Not enough permissions to view page</p>
+  <p>Not enough permissions to view page</p>
 <% end %>

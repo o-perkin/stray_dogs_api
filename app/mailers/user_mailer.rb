@@ -22,11 +22,11 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Ви додали собаку!')
   end
 
-  def email_if_dog_appeared(subscriptions, dog)
+  def email_if_dog_appeared(user, subscriptions)
     subscriptions.each do |subscription|
       @user = subscription.subscribe.user
-      @dog = dog
+      @dog = user.dogs.last
       mail(to: @user.email, subject: "На сайті з'явилась потрібна вам собака!")  
     end 
   end 
-end 
+end

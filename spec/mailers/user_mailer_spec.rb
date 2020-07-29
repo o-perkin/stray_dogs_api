@@ -58,8 +58,9 @@ RSpec.describe UserMailer, type: :mailer do
 
   describe "email_if_dog_appeared" do
     let!(:subscription) { create(:subscription) }
-    let!(:dog) { create(:dog) }
-    let!(:mail) { UserMailer.email_if_dog_appeared([subscription], dog) }
+    let!(:user) { create(:user) }
+    let!(:dog) { create(:dog, user_id: user.id) }
+    let!(:mail) { UserMailer.email_if_dog_appeared( user, [subscription]) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("На сайті з'явилась потрібна вам собака!")
