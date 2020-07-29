@@ -6,4 +6,4 @@ module MailerHelper
     end
     dogs
   end
-end 
+end

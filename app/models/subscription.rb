@@ -2,7 +2,6 @@ class Subscription < ApplicationRecord
   belongs_to :subscribe
   belongs_to :breed
   belongs_to :city
-  validates :subscribe_id, presence: true
   validates :breed_id, presence: true
   validates :city_id, presence: true
   validates :age_from, presence: true
