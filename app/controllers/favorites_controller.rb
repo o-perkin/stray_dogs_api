@@ -1,5 +1,4 @@
-module Api
-  module V1
+
     class FavoritesController < ApplicationController
       protect_from_forgery except: :update
       before_action :set_favorites, only: [:destroy]
@@ -37,5 +36,3 @@ module Api
           Favorite.create(dog: Dog.find(params[:dog]), user: current_user)
         end
     end 
-  end
-end

@@ -74,4 +74,5 @@ Rails.application.configure do
   }
 
   config.debug_exception_response_format = :default
+  config.i18n.fallbacks = true
 end

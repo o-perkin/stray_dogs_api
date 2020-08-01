@@ -1,9 +1,7 @@
-module Api
-  module V1
+
     class SubscribesController < ApplicationController
       before_action :set_subscribe, only: [:index, :edit, :update, :destroy]
       before_action :set_subscribe_new, only: [:create]
-      access [:user, :site_admin] => :all
 
       # GET /subscribes
       def index
@@ -67,5 +65,3 @@ module Api
           params.require(:subscribe).permit(:user_id, subscriptions_attributes: [:id, :breed_id, :city_id, :age_from, :age_to, :_destroy])
         end   
     end
-  end
-end

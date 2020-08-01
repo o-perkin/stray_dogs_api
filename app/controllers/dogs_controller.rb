@@ -1,11 +1,8 @@
-module Api
-  module V1
+
     class DogsController < ApplicationController
-      include DogsHelper
       include SendEmails
       before_action :set_dog, only: [:show, :edit, :update, :destroy]
       before_action :set_new_dog, only: [:create]
-      access all: [:show, :index, :home], user: :all, site_admin: :all
 
       # GET /
       def home
@@ -30,7 +27,10 @@ module Api
       # GET /dogs/1
       def show   
         @favorite_exists = Favorite.favorite_exists?(@dog, current_user) 
-        render json: @favorite_exists
+        render json: {
+          dog: @dog,
+          favorite_exists: @favorite_exists
+        }
       end
 
       # GET /dogs/new
@@ -101,6 +101,12 @@ module Api
         def set_filter_params
           {breed: params[:breed_id], city: params[:city_id], age_from: params[:age_from], age_to: params[:age_to]}.transform_values {|v| v == "" ? v = nil : v}   
         end
+
+        def sort_column
+          Dog.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+        end
+
+        def sort_direction
+          %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+        end
     end
-  end
-end
