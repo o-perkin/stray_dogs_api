@@ -1,11 +1,10 @@
- module API
+ module Api
   module V1
 
      class DogsController < ApplicationController
-      include SendEmails
+
       before_action :set_dog, only: [:show, :edit, :update, :destroy]
       before_action :set_new_dog, only: [:create]
-      access all: [:show, :index, :home], user: :all, site_admin: :all
 
       # GET /
       def home
@@ -14,6 +13,7 @@
       # GET /dogs
       def index 
         @dogs = set_list_of_dogs.per(5).search(params[:search])
+        render json: {status: "Success",  messsage: "Loaded dogs", data: @dogs}, status: :ok
       end
 
       # GET /my_list

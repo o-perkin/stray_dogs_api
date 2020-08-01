@@ -10,6 +10,3 @@ module SendEmails
     end
   end
 end
-
- 
- 
