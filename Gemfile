@@ -11,6 +11,9 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
+
+gem 'rack-cors', '~> 1.1', '>= 1.1.1'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -50,5 +53,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'devise', '~> 4.7', '>= 4.7.1'
-gem 'petergate', '~> 2.0', '>= 2.0.1'
+gem 'devise-jwt', '~> 0.8.0'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
