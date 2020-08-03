@@ -1,7 +1,8 @@
-class Api::V1::DogsController < ApplicationController
+class DogsController < ApplicationController
   include SendEmails
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
   before_action :set_new_dog, only: [:create]
+  before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy]
 
   # GET /
   def home
@@ -15,7 +16,7 @@ class Api::V1::DogsController < ApplicationController
 
   # GET /my_list
   def my_list
-    @dogs = set_list_of_dogs.per(2).current_api_v1_user(current_api_v1_user.id)
+    @dogs = set_list_of_dogs.per(2).current_user(current_user.id)
     render json: {status: "Success",  messsage: "Loaded dogs", data: @dogs}, status: :ok
   end
 
@@ -25,7 +26,7 @@ class Api::V1::DogsController < ApplicationController
 
   # GET /dogs/1
   def show   
-    @favorite_exists = Favorite.favorite_exists?(@dog, current_api_v1_user)
+    @favorite_exists = Favorite.favorite_exists?(@dog, current_user)
     render json: {status: "Success",  messsage: "Loaded dog", data: {dogs: @dog, favorite_exists: @favorite_exists}}, status: :ok 
   end
 
@@ -42,7 +43,7 @@ class Api::V1::DogsController < ApplicationController
   # POST /dogs
   def create  
     if @dog.save
-      send_emails(current_api_v1_user, set_subscriptions)
+      send_emails(current_user, set_subscriptions)
       render json: {status: "Success",  messsage: "Created a dog", data: @dog}, status: :ok 
     else
       render json: {status: "Error",  messsage: "Dog not saved", data: @dog.errors}, status: :unprocessable_entity 
@@ -72,7 +73,7 @@ class Api::V1::DogsController < ApplicationController
 
     def set_new_dog
       @dog = Dog.new(dog_params)
-      @dog.user_id = current_api_v1_user.id
+      @dog.user_id = current_user.id
     end
 
     def set_subscriptions      

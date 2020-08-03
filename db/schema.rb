@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_25_102934) do
+ActiveRecord::Schema.define(version: 2020_08_03_100726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,14 @@ ActiveRecord::Schema.define(version: 2020_06_25_102934) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["dog_id"], name: "index_favorites_on_dog_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "jwt_denylists", force: :cascade do |t|
+    t.string "jti"
+    t.datetime "exp"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["jti"], name: "index_jwt_denylists_on_jti"
   end
 
   create_table "subscribes", force: :cascade do |t|

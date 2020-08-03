@@ -34,4 +34,3 @@ class FavoritesController < ApplicationController
       Favorite.create(dog: Dog.find(params[:dog]), user: current_user)
     end
 end
-
