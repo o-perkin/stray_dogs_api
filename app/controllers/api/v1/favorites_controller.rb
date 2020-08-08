@@ -1,6 +1,7 @@
 module Api
   module V1
     class FavoritesController < ApplicationController
+      before_action :authenticate_user!, only: [:update, :destroy]
       before_action :set_favorites, only: [:destroy]
       before_action :find_favorites_by_dog, only: [:update]
 
@@ -12,13 +13,15 @@ module Api
           @favorites.destroy_all
           @favorite_exists = false
         end
-        respond_to :js
+        render json: {message: "Favorite Updated", data: @favorite_exists}, status: :ok
       end
 
-      def destroy    
-        @favorites.destroy
-        respond_to do |format|
-          format.html { redirect_to my_favorites_path, notice: 'Dog was successfully destroyed.' }
+      def destroy   
+        if @favorites.user_id == current_user.id
+          @favorites.destroy
+          render json: {message: "Favorite Destroyed"}, status: :ok
+        else
+          render json: {message: "Access denied"}, status: :forbidden
         end
       end
 
@@ -33,7 +36,7 @@ module Api
         end
 
         def create_favorite
-          Favorite.create(dog: Dog.find(params[:dog]), user: current_user)
+          Favorite.create(dog: Dog.find(params[:dog]), user_id: current_user.id)
         end
     end
   end

@@ -1,11 +1,13 @@
 module Api
   module V1
     class SubscribesController < ApplicationController
+      before_action :authenticate_user!
       before_action :set_subscribe, only: [:index, :edit, :update, :destroy]
       before_action :set_subscribe_new, only: [:create]
 
       # GET /subscribes
       def index
+        render json: {status: "Success",  messsage: "Loaded subscribe", data: @subscribe}, status: :ok
       end
 
       # GET /subscribes/new
@@ -27,23 +29,31 @@ module Api
         if @subscribe.save
           send_email(current_user, @subscribe.subscriptions, 'created')
         else
-          render :new
+          render json: {status: "Error",  messsage: "Subscribe not saved", data: @subscribe.errors}, status: :unprocessable_entity 
         end
       end
 
       # PATCH/PUT /subscribes/1
       def update
-        if @subscribe.update(subscribe_params)
-          send_email(current_user, @subscribe.subscriptions, 'updated')
+        if @subscribe.user_id == current_user.id
+          if @subscribe.update(subscribe_params)
+            send_email(current_user, @subscribe.subscriptions, 'updated')
+          else
+            render json: {status: "Error",  messsage: "Subscribe not updated", data: @subscribe.errors}, status: :unprocessable_entity 
+          end 
         else
-          render :edit
-        end    
+          render json: {status: "Failed",  messsage: "Access denied"}, status: :forbidden
+        end   
       end
 
       # DELETE /subscribes/1
       def destroy
-        @subscribe.destroy
-        redirect_to subscribes_url, notice: 'Subscribe was successfully destroyed.'
+        if @subscribe.user_id == current_user.id
+          @subscribe.destroy
+          render json: {status: "Success",  messsage: "Subscribe deleted"}, status: :ok
+        else
+          render json: {status: "Failed",  messsage: "Access denied"}, status: :forbidden
+        end
       end
 
       private
@@ -59,7 +69,7 @@ module Api
 
         def send_email(user, subscriptions, action)
           UserMailer.email_after_subscribing(user, subscriptions).deliver
-          redirect_to subscribes_path, notice: "Subscribe was successfully #{action}."
+          render json: {status: "Success",  messsage: "Subscribe #{action}", data: subscriptions}, status: :ok 
         end
 
         def subscribe_params

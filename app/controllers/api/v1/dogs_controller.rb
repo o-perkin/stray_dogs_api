@@ -2,9 +2,10 @@ module Api
   module V1
     class DogsController < ApplicationController
       include SendEmails
+      before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy]
       before_action :set_dog, only: [:show, :edit, :update, :destroy]
       before_action :set_new_dog, only: [:create]
-      before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy]
+      
 
       # GET /
       def home
@@ -54,17 +55,25 @@ module Api
 
       # PATCH/PUT /dogs/1
       def update      
-        if @dog.update(dog_params)
-          render json: {status: "Success",  messsage: "Updated a dog", data: @dog}, status: :ok 
+        if current_user.id == @dog.user_id
+          if @dog.update(dog_params)
+            render json: {status: "Success",  messsage: "Updated a dog", data: @dog}, status: :ok 
+          else
+            render json: {status: "Error",  messsage: "Dog not updated", data: @dog.errors}, status: :unprocessable_entity 
+          end
         else
-          render json: {status: "Error",  messsage: "Dog not updated", data: @dog.errors}, status: :unprocessable_entity 
+          render json: {status: "Failed",  messsage: "Access denied"}, status: :forbidden
         end      
       end
 
       # DELETE /dogs/1
       def destroy
-        @dog.destroy
-        render json: {status: "Success",  messsage: "Deleted a dog"}, status: :ok
+        if current_user.id == @dog.user_id
+          @dog.destroy
+          render json: {status: "Success",  messsage: "Deleted a dog"}, status: :ok
+        else
+          render json: {status: "Failed",  messsage: "Access denied"}, status: :forbidden
+        end
       end
 
       private
