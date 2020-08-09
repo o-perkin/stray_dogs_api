@@ -72,4 +72,5 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include WaitForAjax, type: :feature
+  config.include Requests::JsonHelpers, type: :request
 end
