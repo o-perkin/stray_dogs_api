@@ -49,9 +49,9 @@ group :test do
   gem 'shoulda-matchers', '~> 4.0'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'devise-jwt', '~> 0.8.0'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
+gem 'faker', '~> 2.13'

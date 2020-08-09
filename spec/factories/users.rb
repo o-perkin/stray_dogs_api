@@ -1,9 +1,11 @@
+require 'faker'
+
 FactoryBot.define do
 
   factory :user do
-    sequence(:email) { |n| "test-#{n}@example.com" }
+    email { Faker::Internet.unique.email }
     password { "asdasd" }
-    first_name { "Name" }
-    last_name { "LastName" }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
   end  
 end
