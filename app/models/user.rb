@@ -9,5 +9,5 @@ class User < ApplicationRecord
 
   has_many :favorites
   has_many :dogs
-  has_one :subscribe
+  has_many :subscribes, dependent: :destroy
 end

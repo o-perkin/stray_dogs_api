@@ -25,6 +25,14 @@ RSpec.describe "Users", type: :request do
         expect(response).to have_http_status(201)
         expect(json["email"]).to include("ab@cd.as")  
       end
+
+      it "sends error when email is already taken or password confirmation is wrong" do 
+        create(:user, email: "asdasd@gmail.com")
+        post "/", params: { user: {email: "asdasd@gmail.com", password: "asdasd", password_confirmation: "asdasdd", first_name: "aaa", last_name: "bbb"}, format: :json}
+        expect(response).to have_http_status(422)
+        expect(json["errors"]["email"]).to include("has already been taken")  
+        expect(json["errors"]["password_confirmation"]).to include("doesn't match Password")  
+      end
     end
   end
 
@@ -35,32 +43,48 @@ RSpec.describe "Users", type: :request do
         put user_registration_path, params: { user: {email: "abc@cd.as", current_password: "asdasd", first_name: "aaab", last_name: "bbba"}, format: :json}
         expect(response).to have_http_status(204)
       end
+
+      it "sends notice that you need login" do
+        put user_registration_path, params: { user: {email: "abc@cd.as", current_password: "asdasd", first_name: "aaab", last_name: "bbba"}, format: :json}
+        expect(response).to have_http_status(401)
+        expect(response.body).to include("You need to sign in or sign up before continuing.")
+      end
+
+      it "sends error when email is already taken or password confirmation is wrong" do 
+        create(:user, email: "asdasd@gmail.com")
+        post "/", params: { user: {email: "asdasd@gmail.com", password: "asdasd", password_confirmation: "asdasdd", current_password: "asdasd", first_name: "aaa", last_name: "bbb"}, format: :json}
+        expect(response).to have_http_status(422)
+        expect(json["errors"]["email"]).to include("has already been taken")  
+        expect(json["errors"]["password_confirmation"]).to include("doesn't match Password")  
+      end
     end
   end
-=begin
+
   context "DELETE #actions" do
-    
-    before(:each) {sign_in user}
 
     describe "DELETE /logout" do
-      it "should redirect to home page with notice that user Signed out" do
-        delete destroy_user_session_path
-        expect(response).to redirect_to(root_path)
-        follow_redirect!
-        expect(response).to render_template(:home)
-        expect(response.body).to include("Signed out successfully.")  
+
+      it "sends status ok" do
+        sign_in user
+        delete '/logout'
+        expect(response).to have_http_status(200)    
       end
     end
 
     describe "DELETE /" do
-      it "should redirect to home page with notice that account has been cancelled" do
-        delete user_registration_path
-        expect(response).to redirect_to(root_path)
-        follow_redirect!
-        expect(response).to render_template(:home)
-        expect(response.body).to include("Bye! Your account has been successfully cancelled. We hope to see you again soon.")  
+      it "sends 401 status if user not logged in" do
+        delete '/'
+        expect(response).to have_http_status(401)   
+        expect(response.body).to include("You need to sign in or sign up before continuing.")   
+      end
+
+      it "sends status 204" do
+        sign_in user
+        delete '/'
+        expect(response).to have_http_status(200)   
+        expect(json["message"]).to include("User deleted")   
       end
     end
   end
-=end
+
 end
