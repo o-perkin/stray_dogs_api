@@ -4,7 +4,7 @@ RSpec.describe Subscribe, :type => :model do
 
   context "Associations" do
     it { should belong_to(:user) }
-    it { should have_many(:subscriptions).dependent(:delete_all) }
+    it { should have_many(:subscriptions).dependent(:destroy) }
     it { should accept_nested_attributes_for(:subscriptions).allow_destroy(true)}
   end
 

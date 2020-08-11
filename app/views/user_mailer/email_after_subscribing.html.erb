@@ -37,6 +37,7 @@
             Порода: <%= dog.breed.name %> <br>
             Місто: <%= dog.city.name %> <br>
             Вік: <%= dog.age.years %> <br>
+            <% puts dog.inspect %>
             Власник собаки: <%= dog.user.last_name %> <%= dog.user.first_name %><br>
             Email власника собаки: <%= dog.user.email %> <br>
           </div>

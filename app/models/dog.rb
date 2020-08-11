@@ -5,6 +5,10 @@ class Dog < ApplicationRecord
   belongs_to :age
   belongs_to :user
   validates :name, presence: true
+  validates :breed_id, presence: true
+  validates :city_id, presence: true
+  validates :age_id, presence: true
+  validates :user_id, presence: true
 
   scope :current_user, ->(id) { where(user_id: id) }
 

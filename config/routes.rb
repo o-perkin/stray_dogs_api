@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     namespace :v1 do 
       root to: "dogs#home"
       resources :dogs      
-      resources :favorites, only: [:destroy]
       resources :subscribes
       get 'favorites/update', defaults: { format: 'js' }
       get '/my_list', to: 'dogs#my_list'  

@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Favorite, :type => :model do
+RSpec.describe Favorite, :type => :model do  
 
-  let!(:favorite) { build(:favorite)}
+
+  let!(:favorite) { create(:favorite) }
 
   it "is valid with valid attributes" do    
     expect(favorite).to be_valid

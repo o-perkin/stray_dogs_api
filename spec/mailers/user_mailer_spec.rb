@@ -39,7 +39,7 @@ RSpec.describe UserMailer, type: :mailer do
   describe "email_after_subscribing" do
     let!(:user) { create(:user, email: "email3@gmail.com") }
     let!(:dog) { create(:dog) }
-    let!(:subscription) { create (:subscription) }
+    let!(:subscription) { create(:subscription, breed_id: dog.breed_id, city_id: dog.city_id) }
     let!(:mail) { UserMailer.email_after_subscribing(user, [subscription]) }
 
     it "renders the headers" do
@@ -52,7 +52,6 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.body.encoded).to match(user.first_name)
       expect(mail.body.encoded).to match(dog.breed.name)
       expect(mail.body.encoded).to match(dog.city.name)
-      expect(mail.body.encoded).to match(dog.age.years)
     end
   end
 
