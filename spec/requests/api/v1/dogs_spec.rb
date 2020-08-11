@@ -82,30 +82,30 @@ RSpec.describe "Dogs", type: :request do
   end
 
   describe "POST/api/v1/dogs" do 
+
+    before(:each) do
+      @user = create(:user)
+      @breed = create(:breed)
+      @city = create(:city)
+      @age = create(:age)      
+    end
+
     it 'sends error that you need to login first' do 
-      post "/api/v1/dogs", params: {dog: {name: "Fred", breed_id: "1", city_id: "2", age_id: "3"}}
+      post "/api/v1/dogs", params: {dog: {name: "Fred", breed_id: @breed.id, city_id: @city.id, age_id: @age.id}}
       expect(response).to have_http_status(401)
       expect(response.body).to eq("You need to sign in or sign up before continuing.")
     end
 
-    it 'sends created dog info if all params exist' do 
-      user = create(:user)
-      breed = create(:breed)
-      city = create(:city)
-      age = create(:age)
-      sign_in user
-      post "/api/v1/dogs", params: {dog: {name: "Fred", breed_id: breed.id, city_id: city.id, age_id: age.id}}
-      expect(response).to have_http_status(200)
+    it 'sends created dog info if all params exist' do   
+      sign_in @user    
+      post "/api/v1/dogs", params: {dog: {name: "Fred", breed_id: @breed.id, city_id: @city.id, age_id: @age.id}}
+      expect(response).to have_http_status(201)
       expect(json["data"]["name"]).to eq("Fred")
     end
 
     it 'sends error if not all parameters exist' do 
-      user = create(:user)
-      breed = create(:breed)
-      city = create(:city)
-      age = create(:age)
-      sign_in user
-      post "/api/v1/dogs", params: {dog: {name: "", breed_id: breed.id, city_id: city.id, age_id: age.id}}
+      sign_in @user
+      post "/api/v1/dogs", params: {dog: {name: "", breed_id: @breed.id, city_id: @city.id, age_id: @age.id}}
       expect(response).to have_http_status(422)
       expect(json["data"]["name"]).to eq(["can't be blank"])
     end

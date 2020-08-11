@@ -13,23 +13,23 @@ module Api
         render json: {status: "Success",  message: "Loaded dogs", data: @dogs}, status: :ok
       end
 
-      # GET /my_list
-      def my_list
-        @dogs = set_list_of_dogs.per(2).current_user(current_user.id)
-        render json: {status: "Success",  message: "Loaded dogs", data: @dogs}, status: :ok
-      end
-
       # GET /dogs/1
       def show   
         @favorite_exists = Favorite.favorite_exists?(@dog, current_user)
         render json: {status: "Success",  message: "Loaded dog", data: {dog: @dog, favorite_exists: @favorite_exists}}, status: :ok 
       end
 
+      # GET /my_list
+      def my_list
+        @dogs = set_list_of_dogs.per(2).current_user(current_user.id)
+        render json: {status: "Success",  message: "Loaded dogs", data: @dogs}, status: :ok
+      end
+
       # POST /dogs
       def create  
         if @dog.save
           send_emails(current_user, set_subscriptions)
-          render json: {status: "Success",  message: "Created a dog", data: @dog}, status: :ok 
+          render json: {status: "Success",  message: "Created a dog", data: @dog}, status: :created 
         else
           render json: {status: "Error",  message: "Dog not saved", data: @dog.errors}, status: :unprocessable_entity 
         end

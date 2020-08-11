@@ -1,8 +1,8 @@
 module Api
   module V1
     class FavoritesController < ApplicationController
-      before_action :authenticate_user!, only: [:update]
-      before_action :find_favorites_by_dog, only: [:update]
+      before_action :authenticate_user!
+      before_action :find_favorites_by_dog
 
       def update     
         if @favorites == []
@@ -12,7 +12,7 @@ module Api
           @favorites.destroy_all
           @favorite_exists = false
         end
-        render json: {message: "Favorite Updated", data: @favorite_exists}, status: :ok
+        render json: {status: "Success", message: "Favorite Updated", data: @favorite_exists}, status: :ok
       end
 
       private

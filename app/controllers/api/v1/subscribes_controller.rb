@@ -21,25 +21,17 @@ module Api
 
       # PATCH/PUT /subscribes/1
       def update
-        if @subscribe.user_id == current_user.id
-          if @subscribe.update(subscribe_params)
-            send_email(current_user, @subscribe.subscriptions, 'updated')
-          else
-            render json: {status: "Error",  message: "Subscribe not updated", data: @subscribe.errors}, status: :unprocessable_entity 
-          end 
+        if @subscribe.update(subscribe_params)
+          send_email(current_user, @subscribe.subscriptions, 'updated')
         else
-          render json: {status: "Failed",  message: "Access denied"}, status: :forbidden
+          render json: {status: "Error",  message: "Subscribe not updated", data: @subscribe.errors}, status: :unprocessable_entity 
         end   
       end
 
       # DELETE /subscribes/1
       def destroy
-        if @subscribe.user_id == current_user.id
-          @subscribe.destroy
-          render json: {status: "Success",  message: "Subscribe deleted"}, status: :ok
-        else
-          render json: {status: "Failed",  message: "Access denied"}, status: :forbidden
-        end
+        @subscribe.destroy
+        render json: {status: "Success",  message: "Subscribe deleted"}, status: :ok
       end
 
       private
