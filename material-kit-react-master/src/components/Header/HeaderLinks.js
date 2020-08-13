@@ -35,7 +35,7 @@ export default function HeaderLinks(props) {
           Головна
         </Button>
         <Button
-          href="/landing-page"
+          href="/dogs"
           color="transparent"
           className={classes.navLink}
         >
@@ -63,7 +63,7 @@ export default function HeaderLinks(props) {
           Підписки
         </Button>
         <Button
-          href="#"
+          href="/login"
           color="transparent"
           className={classes.navLink}
         >
@@ -77,7 +77,7 @@ export default function HeaderLinks(props) {
           Вийти
         </Button>
         <Button
-          href="#"
+          href="/registration"
           color="transparent"
           className={classes.navLink}
         >
