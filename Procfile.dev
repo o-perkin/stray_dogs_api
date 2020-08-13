@@ -1,2 +1,2 @@
-web: PORT=3001 yarn --cwd frontend start
+web: PORT=3001 yarn --cwd material-kit-react-master start
 api: PORT=3000 bundle exec rails server

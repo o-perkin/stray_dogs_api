@@ -9,8 +9,8 @@ module Api
 
       # GET /dogs
       def index 
-        @dogs = set_list_of_dogs.per(5).search(params[:search])
-        render json: {status: "Success",  message: "Loaded dogs", data: @dogs}, status: :ok
+        @dogs = set_list_of_dogs.per(5).search(params[:search])        
+        render json: {status: "Success",  message: "Loaded dogs", data: dogs_to_json(@dogs)}, status: :ok
       end
 
       # GET /dogs/1
@@ -91,6 +91,25 @@ module Api
 
         def sort_direction
           %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+        end
+
+        def dogs_to_json dogs
+          dogs_json = []    
+          
+          dogs.each do |dog|
+            new_dog = {
+              id: dog.id,
+              name: dog.name,
+              breed: dog.breed.name,
+              city: dog.city.name,
+              age: dog.age.years,
+              description: dog.description,
+              user: dog.user,
+              created_at: dog.created_at
+            }            
+            dogs_json << new_dog
+          end
+          dogs_json
         end
     end
   end
