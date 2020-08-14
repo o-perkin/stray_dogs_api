@@ -20,8 +20,6 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 // Sections for this page
 import SortingSection from "./Sections/SortingSection.js";
 import DogsListSection from "./Sections/DogsListSection.js";
-import TeamSection from "./Sections/TeamSection.js";
-import WorkSection from "./Sections/WorkSection.js";
 
 const dashboardRoutes = [];
 
@@ -36,7 +34,7 @@ export default function LandingPage(props) {
         color="transparent"
         routes={dashboardRoutes}
         brand="Material Kit React"
-        rightLinks={<HeaderLinks />}
+        rightLinks={<HeaderLinks loggedInStatus={props.loggedInStatus} />}
         fixed
         changeColorOnScroll={{
           height: 400,

@@ -38,7 +38,7 @@ export default function LoginPage(props) {
         absolute
         color="transparent"
         brand="Material Kit React"
-        rightLinks={<HeaderLinks />}
+        rightLinks={<HeaderLinks loggedInStatus={props.loggedInStatus} />}
         {...rest}
       />
       <div

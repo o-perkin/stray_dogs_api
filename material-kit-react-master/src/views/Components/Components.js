@@ -39,7 +39,7 @@ export default function Components(props) {
     <div>
       <Header
         brand="Stray Dogs"
-        rightLinks={<HeaderLinks />}
+        rightLinks={<HeaderLinks loggedInStatus={props.loggedInStatus} />}
         fixed
         color="transparent"
         changeColorOnScroll={{
@@ -64,6 +64,7 @@ export default function Components(props) {
       </Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
+        Status: {props.loggedInStatus}
         <SectionBasics />
         <SectionNavbars />
         <SectionTabs />

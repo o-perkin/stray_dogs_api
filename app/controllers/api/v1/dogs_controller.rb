@@ -4,8 +4,7 @@ module Api
       include SendEmails
       before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy]
       before_action :set_dog, only: [:show, :edit, :update, :destroy]
-      before_action :set_new_dog, only: [:create]
-      
+      before_action :set_new_dog, only: [:create]      
 
       # GET /dogs
       def index 

@@ -24,119 +24,201 @@ const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
-  return (
-    <List className={classes.list}>
-      <ListItem className={classes.listItem}>
-        <Button
-          href="/"
-          color="transparent"
-          className={classes.navLink}
-        >
-          Головна
-        </Button>
-        <Button
-          href="/dogs"
-          color="transparent"
-          className={classes.navLink}
-        >
-          Пошук собаки
-        </Button>
-        <Button
-          href="#"
-          color="transparent"
-          className={classes.navLink}
-        >
-          Мої собаки
-        </Button>
-        <Button
-          href="#"
-          color="transparent"
-          className={classes.navLink}
-        >
-          Улюблені
-        </Button>
-        <Button
-          href="#"
-          color="transparent"
-          className={classes.navLink}
-        >
-          Підписки
-        </Button>
-        <Button
-          href="/login"
-          color="transparent"
-          className={classes.navLink}
-        >
-          Увійти
-        </Button>
-        <Button
-          href="#"
-          color="transparent"
-          className={classes.navLink}
-        >
-          Вийти
-        </Button>
-        <Button
-          href="/registration"
-          color="transparent"
-          className={classes.navLink}
-        >
-          Реєстрація
-        </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        {/*<Tooltip title="Delete">
-          <IconButton aria-label="Delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>*/}
-        <Tooltip
-          id="instagram-twitter"
-          title="Follow us on twitter"
-          placement={window.innerWidth > 959 ? "top" : "left"}
-          classes={{ tooltip: classes.tooltip }}
-        >
+  if (props.loggedInStatus == "LOGGED_IN") {
+    return (
+      <List className={classes.list}>
+        <ListItem className={classes.listItem}>
+          <Button
+            href="/"
+            color="transparent"
+            className={classes.navLink}
+          >
+            Головна
+          </Button>
+          <Button
+            href="/dogs"
+            color="transparent"
+            className={classes.navLink}
+          >
+            Пошук собаки
+          </Button>
           <Button
             href="#"
             color="transparent"
             className={classes.navLink}
           >
-            <i className={classes.socialIcons + " fab fa-twitter"} />
+            Мої собаки
           </Button>
-        </Tooltip>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-facebook"
-          title="Follow us on facebook"
-          placement={window.innerWidth > 959 ? "top" : "left"}
-          classes={{ tooltip: classes.tooltip }}
-        >
           <Button
-            color="transparent"
             href="#"
+            color="transparent"
             className={classes.navLink}
           >
-            <i className={classes.socialIcons + " fab fa-facebook"} />
+            Улюблені
           </Button>
-        </Tooltip>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-tooltip"
-          title="Follow us on instagram"
-          placement={window.innerWidth > 959 ? "top" : "left"}
-          classes={{ tooltip: classes.tooltip }}
-        >
           <Button
-            color="transparent"
             href="#"
+            color="transparent"
             className={classes.navLink}
           >
-            <i className={classes.socialIcons + " fab fa-instagram"} />
+            Підписки
           </Button>
-        </Tooltip>
-      </ListItem>
-    </List>
-  );
+          
+          <Button
+            href="#"
+            color="transparent"
+            className={classes.navLink}
+          >
+            Вийти
+          </Button>
+          
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          {/*<Tooltip title="Delete">
+            <IconButton aria-label="Delete">
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>*/}
+          <Tooltip
+            id="instagram-twitter"
+            title="Follow us on twitter"
+            placement={window.innerWidth > 959 ? "top" : "left"}
+            classes={{ tooltip: classes.tooltip }}
+          >
+            <Button
+              href="#"
+              color="transparent"
+              className={classes.navLink}
+            >
+              <i className={classes.socialIcons + " fab fa-twitter"} />
+            </Button>
+          </Tooltip>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <Tooltip
+            id="instagram-facebook"
+            title="Follow us on facebook"
+            placement={window.innerWidth > 959 ? "top" : "left"}
+            classes={{ tooltip: classes.tooltip }}
+          >
+            <Button
+              color="transparent"
+              href="#"
+              className={classes.navLink}
+            >
+              <i className={classes.socialIcons + " fab fa-facebook"} />
+            </Button>
+          </Tooltip>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <Tooltip
+            id="instagram-tooltip"
+            title="Follow us on instagram"
+            placement={window.innerWidth > 959 ? "top" : "left"}
+            classes={{ tooltip: classes.tooltip }}
+          >
+            <Button
+              color="transparent"
+              href="#"
+              className={classes.navLink}
+            >
+              <i className={classes.socialIcons + " fab fa-instagram"} />
+            </Button>
+          </Tooltip>
+        </ListItem>
+      </List>
+    );
+  } else {
+    return (
+      <List className={classes.list}>
+        <ListItem className={classes.listItem}>
+          <Button
+            href="/"
+            color="transparent"
+            className={classes.navLink}
+          >
+            Головна
+          </Button>
+          <Button
+            href="/dogs"
+            color="transparent"
+            className={classes.navLink}
+          >
+            Пошук собаки
+          </Button>
+          
+          <Button
+            href="/login"
+            color="transparent"
+            className={classes.navLink}
+          >
+            Увійти
+          </Button>
+          
+          <Button
+            href="/registration"
+            color="transparent"
+            className={classes.navLink}
+          >
+            Реєстрація
+          </Button>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          {/*<Tooltip title="Delete">
+            <IconButton aria-label="Delete">
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>*/}
+          <Tooltip
+            id="instagram-twitter"
+            title="Follow us on twitter"
+            placement={window.innerWidth > 959 ? "top" : "left"}
+            classes={{ tooltip: classes.tooltip }}
+          >
+            <Button
+              href="#"
+              color="transparent"
+              className={classes.navLink}
+            >
+              <i className={classes.socialIcons + " fab fa-twitter"} />
+            </Button>
+          </Tooltip>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <Tooltip
+            id="instagram-facebook"
+            title="Follow us on facebook"
+            placement={window.innerWidth > 959 ? "top" : "left"}
+            classes={{ tooltip: classes.tooltip }}
+          >
+            <Button
+              color="transparent"
+              href="#"
+              className={classes.navLink}
+            >
+              <i className={classes.socialIcons + " fab fa-facebook"} />
+            </Button>
+          </Tooltip>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <Tooltip
+            id="instagram-tooltip"
+            title="Follow us on instagram"
+            placement={window.innerWidth > 959 ? "top" : "left"}
+            classes={{ tooltip: classes.tooltip }}
+          >
+            <Button
+              color="transparent"
+              href="#"
+              className={classes.navLink}
+            >
+              <i className={classes.socialIcons + " fab fa-instagram"} />
+            </Button>
+          </Tooltip>
+        </ListItem>
+      </List>
+
+    )
+  }
+  
 }
