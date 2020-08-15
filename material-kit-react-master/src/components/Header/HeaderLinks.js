@@ -2,9 +2,10 @@
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
+import { useHistory } from "react-router-dom";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
-
+import axios from 'axios';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -24,12 +25,31 @@ const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleLogout = () => {
+    axios.delete("http://localhost:3000/logout", {}, {
+      headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
+      withCredentials: true
+    }).then(     
+      localStorage.removeItem('token'),
+      props.handleLogout(),
+      history.push('/home')
+    ).catch(error => {
+      console.log("logout error", error)
+    })
+  }
+
+  const handlelogoutClick = () =>{ 
+    handleLogout();
+  }
+
   if (props.loggedInStatus == "LOGGED_IN") {
     return (
       <List className={classes.list}>
         <ListItem className={classes.listItem}>
           <Button
-            href="/"
+            href="/home"
             color="transparent"
             className={classes.navLink}
           >
@@ -50,6 +70,13 @@ export default function HeaderLinks(props) {
             Мої собаки
           </Button>
           <Button
+            href="/profile"
+            color="transparent"
+            className={classes.navLink}
+          >
+            Профіль
+          </Button>
+          <Button
             href="#"
             color="transparent"
             className={classes.navLink}
@@ -65,9 +92,9 @@ export default function HeaderLinks(props) {
           </Button>
           
           <Button
-            href="#"
             color="transparent"
             className={classes.navLink}
+            onClick={() => handlelogoutClick()}
           >
             Вийти
           </Button>

@@ -39,7 +39,7 @@ export default function Components(props) {
     <div>
       <Header
         brand="Stray Dogs"
-        rightLinks={<HeaderLinks loggedInStatus={props.loggedInStatus} />}
+        rightLinks={<HeaderLinks {...props} handleLogout={props.handleLogout} loggedInStatus={props.loggedInStatus} />}
         fixed
         color="transparent"
         changeColorOnScroll={{

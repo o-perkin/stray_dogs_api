@@ -14,7 +14,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
+import CardBody from "components/Card/CardBody.js"; 
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
@@ -31,7 +31,7 @@ export default function LoginPage(props) {
 
   function handleSuccessfulAuth(data) {
     props.handleLogin(data);
-    props.history.push("/")
+    props.history.push("/home")
   } 
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
@@ -46,7 +46,7 @@ export default function LoginPage(props) {
         absolute
         color="transparent"
         brand="Material Kit React"
-        rightLinks={<HeaderLinks loggedInStatus={props.loggedInStatus} />}
+        rightLinks={<HeaderLinks {...props} handleLogout={props.handleLogout} loggedInStatus={props.loggedInStatus} />}
         {...rest}
       />
       <div
@@ -62,7 +62,6 @@ export default function LoginPage(props) {
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <Registration classes={classes} handleSuccessfulAuth={handleSuccessfulAuth} />
-                <Login handleSuccessfulAuth={handleSuccessfulAuth} />
               </Card>
             </GridItem>
           </GridContainer>

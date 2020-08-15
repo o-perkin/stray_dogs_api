@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon"; 
 
@@ -20,16 +21,19 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
-export default class Registration extends Component {
+import * as jwtDecode from 'jwt-decode';
+
+export default class EditAccount extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: "",
-      first_name: "",
-      last_name: "",
+      email: localStorage.getItem('user_email'),
+      first_name: localStorage.getItem('first_name'),
+      last_name: localStorage.getItem('last_name'),
       password: "",
       password_confirmation: "",
+      current_password: "",
       registrationErrors: ""
     }
 
@@ -44,22 +48,25 @@ export default class Registration extends Component {
   }
 
   handleSubmit(event) {
-    axios.post("http://localhost:3000/", {
+    axios.put("http://localhost:3000/", {
       user: {
         email: this.state.email,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         password: this.state.password,
-        password_confirmation: this.state.password_confirmation
+        password_confirmation: this.state.password_confirmation,
+        current_password: this.state.current_password
       }
     }, 
     {
-      headers: {'Accept': '*/*'},
+      headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
       withCredentials: true
     }).then(response => {
-      if(response.status === 201) {
-        localStorage.setItem('token', response.headers.authorization);
-        this.props.handleSuccessfulAuth(response);
+      if(response.status === 204) {
+        localStorage.setItem('user_email', this.state.email);
+        localStorage.setItem('first_name', this.state.first_name);
+        localStorage.setItem('last_name', this.state.last_name);
+        this.props.history.go(0)
       }
       console.log("response", response);
       
@@ -73,38 +80,9 @@ export default class Registration extends Component {
     return (
       <form className={this.props.classes.form} onSubmit={this.handleSubmit} >
         <CardHeader color="primary" className={this.props.classes.cardHeader} >
-          <h4>Registration</h4>
-          <div className={this.props.classes.socialLine}>
-            <Button
-              justIcon
-              href="#pablo"
-              target="_blank"
-              color="transparent"
-              onClick={e => e.preventDefault()}
-            >
-              <i className={"fab fa-twitter"} />
-            </Button>
-            <Button
-              justIcon
-              href="#pablo"
-              target="_blank"
-              color="transparent"
-              onClick={e => e.preventDefault()}
-            >
-              <i className={"fab fa-facebook"} />
-            </Button>
-            <Button
-              justIcon
-              href="#pablo"
-              target="_blank"
-              color="transparent"
-              onClick={e => e.preventDefault()}
-            >
-              <i className={"fab fa-google-plus-g"} />
-            </Button>
-          </div>
+          <h4>Edit Profile</h4>
         </CardHeader>
-        <p className={this.props.classes.divider}>Or Be Classical</p>
+
         <CardBody>
           <CustomInput
             labelText="Email"
@@ -203,12 +181,34 @@ export default class Registration extends Component {
               autoComplete: "off"
             }}
           />
+
+          <CustomInput
+            labelText="Current Password..."
+            id="current_pass"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              type: "current_password",
+              name: "current_password",
+              value: this.state.current_password,
+              onChange: this.handleChange,
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Icon className={this.props.classes.inputIconsColor}>
+                    lock_outline
+                  </Icon>
+                </InputAdornment>
+              ),
+              autoComplete: "off"
+            }}
+          />
         
         </CardBody>
           
         <CardFooter className={this.props.classes.cardFooter}>
           <Button type="submit" simple color="primary" size="lg">
-            Register
+            Update Profile
           </Button>
         </CardFooter>    
       </form> 

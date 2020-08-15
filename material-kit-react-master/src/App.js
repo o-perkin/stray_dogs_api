@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 
 // pages for this product
 import Components from "views/Components/Components.js";
@@ -7,6 +7,7 @@ import LandingPage from "views/LandingPage/LandingPage.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import RegisterPage from "views/RegisterPage/RegisterPage.js";
+import axios from 'axios';
 import * as jwtDecode from 'jwt-decode';
 
 export default class App extends Component {
@@ -14,78 +15,79 @@ export default class App extends Component {
     super();
 
     this.state = {
-      loggedInStatus: "NOT_LOGGED_IN",
-      user: {}
+      loggedInStatus: this.checkLoginStatus()
     }
+    
+    console.log('state', this.state)
 
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+    this.checkLoginStatus = this.checkLoginStatus.bind(this);
   }
 
-  handleLogin(data) {
-    this.setState({
-      loggedInStatus: "LOGGED_IN",
-      user: data.data
-    })
-  }
-
-  checkIfLoggedIn() {    
-    var token = localStorage.getItem('token').replace('Bearer','');  
-    if (token != null) {
+  checkLoginStatus() {
+    if (localStorage.getItem('token') != null) {
+      var token = localStorage.getItem('token').replace('Bearer',''); 
       var decoded = jwtDecode(token);
       var current_time = Date.now() / 1000;
       if ( decoded.exp < current_time) {
-        this.setState({
-          loggedInStatus: "NOT_LOGGED_IN",
-          user: {}       
-        })       
-      } else {
-        this.setState({
-          loggedInStatus: "LOGGED_IN"
-        })
-      }
+        return 'NOT_LOGGED_IN';
+      } else return 'LOGGED_IN'
     } else {
-        this.setState({
-          loggedInStatus: "NOT_LOGGED_IN",
-          user: {}
-        })
-      }    
+      return 'NOT_LOGGED_IN';
+    }
   }
 
-  componentDidMount() {
-    this.checkIfLoggedIn();
+  handleLogin() {
+    
+    this.setState({
+      loggedInStatus: "LOGGED_IN"
+    })
+
+  }
+
+  handleLogout() {
+    this.setState({
+      loggedInStatus: "NOT_LOGGED_IN"
+    })
   }
 
   render() {
     return (
       <Switch>
-        <Route 
+        <Route
+          exact 
           path="/dogs" 
           render={props => (
-            <LandingPage {...props} loggedInStatus={this.state.loggedInStatus} />
+            <LandingPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
-        <Route 
-          path="/profile-page" 
+        <Route
+          exact 
+          path="/profile" 
           render={props => (
-            <ProfilePage {...props} loggedInStatus={this.state.loggedInStatus} />
+            <ProfilePage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} state={this.state} />
           )}
         />
-        <Route 
+        <Route
+          exact 
           path="/registration" 
           render={props => (
-            <RegisterPage {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
+            <RegisterPage {...props} handleLogout={this.handleLogout} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
-        <Route 
+        <Route
+          exact 
           path="/login"
           render={props => (
-            <LoginPage {...props} loggedInStatus={this.state.loggedInStatus} />
+            <LoginPage {...props} handleLogout={this.handleLogout} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
-        <Route 
-          path="/" 
+        <Route
+          exact 
+          path="/home" 
           render={props => (
-            <Components {...props} loggedInStatus={this.state.loggedInStatus} />
+            <Components {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
       </Switch>
