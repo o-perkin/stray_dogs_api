@@ -1,4 +1,5 @@
 import React from "react";
+import {NotificationContainer} from 'react-notifications';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -43,6 +44,7 @@ export default function LoginPage(props) {
   const { ...rest } = props;
   return (
     <div>
+    <NotificationContainer/>
       <Header
         absolute
         color="transparent"
@@ -62,7 +64,7 @@ export default function LoginPage(props) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
-                <Login classes={classes} handleSuccessfulAuth={handleSuccessfulAuth} />
+                <Login createNotification={props.createNotification} classes={classes} handleSuccessfulAuth={handleSuccessfulAuth} />
               </Card>
             </GridItem>
           </GridContainer>

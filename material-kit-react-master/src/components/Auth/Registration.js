@@ -59,12 +59,29 @@ export default class Registration extends Component {
     }).then(response => {
       if(response.status === 201) {
         localStorage.setItem('token', response.headers.authorization);
+        localStorage.setItem('user_email', response.data.email);
+        localStorage.setItem('first_name', response.data.first_name);
+        localStorage.setItem('last_name', response.data.last_name);
         this.props.handleSuccessfulAuth(response);
       }
       console.log("response", response);
       
     }).catch(error => {
-      console.log("registration error", error);
+      console.log("registration error", error.response);
+      if ('email' in error.response.data.errors) {
+        this.setState({
+          registrationErrors: "Email has already been taken"
+        })
+      } else if ('password' in error.response.data.errors) {
+        this.setState({
+          registrationErrors: "password should have minimum 6 characters"
+        })
+      } else if ('password_confirmation' in error.response.data.errors) {
+        this.setState({
+          registrationErrors: "passwords don't match"
+        })
+      }
+
     })
     event.preventDefault();
   }    
@@ -104,7 +121,7 @@ export default class Registration extends Component {
             </Button>
           </div>
         </CardHeader>
-        <p className={this.props.classes.divider}>Or Be Classical</p>
+        <p className={this.props.classes.divider}>{this.state.registrationErrors}</p>
         <CardBody>
           <CustomInput
             labelText="Email"
@@ -121,7 +138,8 @@ export default class Registration extends Component {
                 <InputAdornment position="end">
                   <Email className={this.props.classes.inputIconsColor} />
                 </InputAdornment>
-              )
+              ),
+              required: true
             }}
           />
           <CustomInput
@@ -139,7 +157,8 @@ export default class Registration extends Component {
                 <InputAdornment position="end">
                   <People className={this.props.classes.inputIconsColor} />
                 </InputAdornment>
-              )
+              ),
+              required: true
             }}
           />
 
@@ -158,7 +177,8 @@ export default class Registration extends Component {
                 <InputAdornment position="end">
                   <People className={this.props.classes.inputIconsColor} />
                 </InputAdornment>
-              )
+              ),
+              required: true
             }}
           />
           <CustomInput
@@ -179,6 +199,7 @@ export default class Registration extends Component {
                   </Icon>
                 </InputAdornment>
               ),
+              required: true,
               autoComplete: "off"
             }}
           />
@@ -200,6 +221,7 @@ export default class Registration extends Component {
                   </Icon>
                 </InputAdornment>
               ),
+              required: true,
               autoComplete: "off"
             }}
           />

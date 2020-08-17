@@ -34,7 +34,7 @@ export default class EditAccount extends Component {
       password: "",
       password_confirmation: "",
       current_password: "",
-      registrationErrors: ""
+      editErrors: ""
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -71,7 +71,21 @@ export default class EditAccount extends Component {
       console.log("response", response);
       
     }).catch(error => {
-      console.log("registration error", error);
+      console.log("registration error", error.response);
+
+      if ('email' in error.response.data.errors) {
+        this.setState({
+          editErrors: "Email has already been taken"
+        })
+      } else if ('password' in error.response.data.errors) {
+        this.setState({
+          editErrors: "password should have minimum 6 characters"
+        })
+      } else if ('password_confirmation' in error.response.data.errors) {
+        this.setState({
+          editErrors: "passwords don't match"
+        })
+      }
     })
     event.preventDefault();
   }    
@@ -84,6 +98,7 @@ export default class EditAccount extends Component {
         </CardHeader>
 
         <CardBody>
+        <p className={this.props.classes.divider}>{this.state.editErrors}</p>
           <CustomInput
             labelText="Email"
             id="first"
@@ -99,7 +114,8 @@ export default class EditAccount extends Component {
                 <InputAdornment position="end">
                   <Email className={this.props.classes.inputIconsColor} />
                 </InputAdornment>
-              )
+              ),
+              required: true
             }}
           />
           <CustomInput
@@ -117,7 +133,8 @@ export default class EditAccount extends Component {
                 <InputAdornment position="end">
                   <People className={this.props.classes.inputIconsColor} />
                 </InputAdornment>
-              )
+              ),
+              required: true
             }}
           />
 
@@ -136,7 +153,8 @@ export default class EditAccount extends Component {
                 <InputAdornment position="end">
                   <People className={this.props.classes.inputIconsColor} />
                 </InputAdornment>
-              )
+              ),
+              required: true
             }}
           />
           <CustomInput
@@ -200,6 +218,7 @@ export default class EditAccount extends Component {
                   </Icon>
                 </InputAdornment>
               ),
+              required: true,
               autoComplete: "off"
             }}
           />

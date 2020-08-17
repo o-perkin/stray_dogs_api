@@ -120,7 +120,7 @@ export default function ProfilePage(props) {
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={6} className={classes.navWrapper}>
                   <Card className={classes[cardAnimaton]}>
-                    <EditAccount history={history} state={props.state} classes={classes} />
+                    <EditAccount notifications={props.notifications} history={history} state={props.state} classes={classes} />
                     <Button onClick={asd} simple color="primary" size="lg">
                       Delete Profile
                     </Button>

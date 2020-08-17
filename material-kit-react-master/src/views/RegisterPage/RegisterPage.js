@@ -61,7 +61,7 @@ export default function LoginPage(props) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
-                <Registration classes={classes} handleSuccessfulAuth={handleSuccessfulAuth} />
+                <Registration notifications={props.notifications} classes={classes} handleSuccessfulAuth={handleSuccessfulAuth} />
               </Card>
             </GridItem>
           </GridContainer>

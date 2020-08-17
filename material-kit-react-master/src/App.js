@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom";
-
 // pages for this product
 import Components from "views/Components/Components.js";
 import LandingPage from "views/LandingPage/LandingPage.js";
@@ -69,21 +68,21 @@ export default class App extends Component {
           exact 
           path="/profile" 
           render={props => (
-            <ProfilePage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} state={this.state} />
+            <ProfilePage {...props} notifications={this.createNotification} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} state={this.state} />
           )}
         />
         <Route
           exact 
           path="/registration" 
           render={props => (
-            <RegisterPage {...props} handleLogout={this.handleLogout} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
+            <RegisterPage {...props} notifications={this.createNotification} handleLogout={this.handleLogout} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
         <Route
           exact 
           path="/login"
           render={props => (
-            <LoginPage {...props} handleLogout={this.handleLogout} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
+            <LoginPage {...props} createNotification={this.createNotification} handleLogout={this.handleLogout} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
         <Route

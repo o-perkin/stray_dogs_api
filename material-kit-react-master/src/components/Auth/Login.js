@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {NotificationManager} from 'react-notifications';
 
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
@@ -26,12 +27,16 @@ export default class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      loginErrors: ""
+      loginErrors: "",
+      notifications: {
+        type: "",
+        title: '',
+        message: ''
+      }
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
   }
 
   handleChange(event) {
@@ -39,6 +44,27 @@ export default class Login extends Component {
       [event.target.name]: event.target.value
     })
   }
+
+  createNotification = (type) => {
+    return () => {
+      switch (type) {
+        case 'info':
+          NotificationManager.info('info');
+          break;
+        case 'success':
+          NotificationManager.success('Success message', 'Title here');
+          break;
+        case 'warning':
+          NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+          break;
+        case 'error':
+          NotificationManager.error('Error message', 'Click me!', 5000, () => {
+            alert('callback');
+          });
+          break;
+      }
+    };
+  };
 
   handleSubmit(event) {
     axios.post("http://localhost:3000/login", {
@@ -58,10 +84,14 @@ export default class Login extends Component {
         localStorage.setItem('first_name', response.data.first_name);
         localStorage.setItem('last_name', response.data.last_name);
         this.props.handleSuccessfulAuth(response);
-      }
-      
+      }      
     }).catch(error => {
-      console.log("login error", error);
+      console.log("login error", error.message);
+      if (error.message == 'Request failed with status code 401') {
+        this.setState({
+          loginErrors: "Envalid Email or Password"
+        })
+      }
     })
     event.preventDefault();
   }
@@ -75,9 +105,7 @@ export default class Login extends Component {
             <Button
               justIcon
               href="#pablo"
-              target="_blank"
               color="transparent"
-              onClick={e => e.preventDefault()}
             >
               <i className={"fab fa-twitter"} />
             </Button>
@@ -101,7 +129,7 @@ export default class Login extends Component {
             </Button>
           </div>
         </CardHeader>
-        <p className={this.props.classes.divider}>Or Be Classical</p>
+        <p className={this.props.classes.divider}>{this.state.loginErrors}</p>
         <CardBody>
           <CustomInput
             labelText="Email..."
@@ -118,7 +146,8 @@ export default class Login extends Component {
                 <InputAdornment position="end">
                   <Email className={this.props.classes.inputIconsColor} />
                 </InputAdornment>
-              )
+              ),
+              required: true
             }}
           />
           <CustomInput
@@ -139,6 +168,7 @@ export default class Login extends Component {
                   </Icon>
                 </InputAdornment>
               ),
+              required: true,
               autoComplete: "off"
             }}
           />
