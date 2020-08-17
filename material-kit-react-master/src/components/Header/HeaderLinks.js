@@ -34,7 +34,7 @@ export default function HeaderLinks(props) {
     }).then(     
       localStorage.removeItem('token'),
       props.handleLogout(),
-      history.push('/home')
+      history.push('/')
     ).catch(error => {
       console.log("logout error", error)
     })

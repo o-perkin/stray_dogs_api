@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 // pages for this product
 import Components from "views/Components/Components.js";

@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import axios from 'axios';
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -86,49 +87,53 @@ export default function ProfilePage(props) {
     event.preventDefault();
   }
 
-  return (
-    <div>
-      <Header
-        color="transparent"
-        brand="Material Kit React"
-        rightLinks={<HeaderLinks {...props} handleLogout={props.handleLogout} loggedInStatus={props.loggedInStatus} />}
-        fixed
-        changeColorOnScroll={{
-          height: 200,
-          color: "white"
-        }}
-        {...rest}
-      />
-      <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <div>
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={6}>
-                <div className={classes.profile}>
-                  <div>
-                    <img src={profile} alt="..." className={imageClasses} />
+  if (props.loggedInStatus == 'LOGGED_IN') {
+    return (
+      <div>
+        <Header
+          color="transparent"
+          brand="Material Kit React"
+          rightLinks={<HeaderLinks {...props} handleLogout={props.handleLogout} loggedInStatus={props.loggedInStatus} />}
+          fixed
+          changeColorOnScroll={{
+            height: 200,
+            color: "white"
+          }}
+          {...rest}
+        />
+        <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
+        <div className={classNames(classes.main, classes.mainRaised)}>
+          <div>
+            <div className={classes.container}>
+              <GridContainer justify="center">
+                <GridItem xs={12} sm={12} md={6}>
+                  <div className={classes.profile}>
+                    <div>
+                      <img src={profile} alt="..." className={imageClasses} />
+                    </div>
+                    <div className={classes.name}>
+                      <h3 className={classes.title}>Christian Louboutin</h3>
+                    </div>
                   </div>
-                  <div className={classes.name}>
-                    <h3 className={classes.title}>Christian Louboutin</h3>
-                  </div>
-                </div>
-              </GridItem>
-            </GridContainer>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={6} className={classes.navWrapper}>
-                <Card className={classes[cardAnimaton]}>
-                  <EditAccount history={history} state={props.state} classes={classes} />
-                  <Button onClick={asd} simple color="primary" size="lg">
-                    Delete Profile
-                  </Button>
-                </Card>
-              </GridItem>
-            </GridContainer>
+                </GridItem>
+              </GridContainer>
+              <GridContainer justify="center">
+                <GridItem xs={12} sm={12} md={6} className={classes.navWrapper}>
+                  <Card className={classes[cardAnimaton]}>
+                    <EditAccount history={history} state={props.state} classes={classes} />
+                    <Button onClick={asd} simple color="primary" size="lg">
+                      Delete Profile
+                    </Button>
+                  </Card>
+                </GridItem>
+              </GridContainer>
+            </div>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-  );
+    );
+  } else {
+    return <Redirect to='/login' />
+  }  
 }
