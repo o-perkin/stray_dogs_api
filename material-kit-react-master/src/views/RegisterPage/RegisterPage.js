@@ -31,7 +31,7 @@ export default function LoginPage(props) {
 
   function handleSuccessfulAuth(data) {
     props.handleLogin(data);
-    props.history.push("/home")
+    props.history.push("/")
   } 
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");

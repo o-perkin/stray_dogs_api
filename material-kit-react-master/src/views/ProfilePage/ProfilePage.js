@@ -75,7 +75,7 @@ export default function ProfilePage(props) {
     }).then(response => {
       if(response.status === 200) {
         props.handleLogout();
-        history.push('/home');
+        history.push('/');
       }
       console.log("response", response);
       

@@ -7,6 +7,9 @@ import LandingPage from "views/LandingPage/LandingPage.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import RegisterPage from "views/RegisterPage/RegisterPage.js";
+import MyListPage from "views/MyListPage/MyListPage.js";
+import FavoritesPage from "views/FavoritesPage/FavoritesPage.js";
+import SubscriptionsPage from "views/SubscriptionsPage/SubscriptionsPage.js";
 import axios from 'axios';
 import * as jwtDecode from 'jwt-decode';
 
@@ -85,9 +88,30 @@ export default class App extends Component {
         />
         <Route
           exact 
-          path="/home" 
+          path="/" 
           render={props => (
             <Components {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+          )}
+        />
+        <Route
+          exact 
+          path="/my_list" 
+          render={props => (
+            <MyListPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+          )}
+        />
+        <Route
+          exact 
+          path="/favorites" 
+          render={props => (
+            <FavoritesPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+          )}
+        />
+        <Route
+          exact 
+          path="/subscriptions" 
+          render={props => (
+            <SubscriptionsPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
       </Switch>

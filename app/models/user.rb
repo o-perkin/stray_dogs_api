@@ -8,6 +8,6 @@ class User < ApplicationRecord
   validates_presence_of :first_name, :last_name
 
   has_many :favorites, dependent: :destroy
-  has_many :dogs
+  has_many :dogs, dependent: :delete_all
   has_one :subscribe, dependent: :destroy
 end

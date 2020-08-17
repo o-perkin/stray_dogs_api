@@ -49,7 +49,7 @@ export default function HeaderLinks(props) {
       <List className={classes.list}>
         <ListItem className={classes.listItem}>
           <Button
-            href="/home"
+            href="/"
             color="transparent"
             className={classes.navLink}
           >
@@ -63,7 +63,7 @@ export default function HeaderLinks(props) {
             Пошук собаки
           </Button>
           <Button
-            href="#"
+            href="/my_list"
             color="transparent"
             className={classes.navLink}
           >
@@ -77,14 +77,14 @@ export default function HeaderLinks(props) {
             Профіль
           </Button>
           <Button
-            href="#"
+            href="/favorites"
             color="transparent"
             className={classes.navLink}
           >
             Улюблені
           </Button>
           <Button
-            href="#"
+            href="/subscriptions"
             color="transparent"
             className={classes.navLink}
           >
