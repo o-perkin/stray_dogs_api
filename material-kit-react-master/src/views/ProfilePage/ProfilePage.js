@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import axios from 'axios';
+import {NotificationContainer} from 'react-notifications';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -68,7 +69,7 @@ export default function ProfilePage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
-  const asd = function deleteAccount(event)  {
+  const deleteAccount = (event) => {
     axios.delete("http://localhost:3000/", 
     {
       headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
@@ -101,6 +102,7 @@ export default function ProfilePage(props) {
           }}
           {...rest}
         />
+        <NotificationContainer/>
         <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div>
@@ -120,8 +122,8 @@ export default function ProfilePage(props) {
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={6} className={classes.navWrapper}>
                   <Card className={classes[cardAnimaton]}>
-                    <EditAccount notifications={props.notifications} history={history} state={props.state} classes={classes} />
-                    <Button onClick={asd} simple color="primary" size="lg">
+                    <EditAccount createNotification={props.createNotification}  history={history} state={props.state} classes={classes} />
+                    <Button onClick={deleteAccount} simple color="primary" size="lg">
                       Delete Profile
                     </Button>
                   </Card>

@@ -1,4 +1,5 @@
 import React from "react";
+
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react components for routing our app without refresh
@@ -48,6 +49,7 @@ export default function Components(props) {
         }}
         {...rest}
       />
+      
       <Parallax image={require("assets/img/dogs.jpg")}>
         <div className={classes.container}>
           <GridContainer>

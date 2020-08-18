@@ -69,17 +69,11 @@ export default class Registration extends Component {
     }).catch(error => {
       console.log("registration error", error.response);
       if ('email' in error.response.data.errors) {
-        this.setState({
-          registrationErrors: "Email has already been taken"
-        })
+        this.props.createNotification('error', 'Error', 'Email has already been taken')
       } else if ('password' in error.response.data.errors) {
-        this.setState({
-          registrationErrors: "password should have minimum 6 characters"
-        })
+        this.props.createNotification('error', 'Error', 'password should have minimum 6 characters')
       } else if ('password_confirmation' in error.response.data.errors) {
-        this.setState({
-          registrationErrors: "passwords don't match"
-        })
+        this.props.createNotification('error', 'Error', "passwords don't match")
       }
 
     })
@@ -121,7 +115,6 @@ export default class Registration extends Component {
             </Button>
           </div>
         </CardHeader>
-        <p className={this.props.classes.divider}>{this.state.registrationErrors}</p>
         <CardBody>
           <CustomInput
             labelText="Email"

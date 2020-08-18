@@ -1,4 +1,5 @@
 import React from "react";
+import {NotificationContainer} from 'react-notifications';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -49,6 +50,7 @@ export default function LoginPage(props) {
         rightLinks={<HeaderLinks {...props} handleLogout={props.handleLogout} loggedInStatus={props.loggedInStatus} />}
         {...rest}
       />
+      <NotificationContainer/>
       <div
         className={classes.pageHeader}
         style={{
@@ -61,7 +63,7 @@ export default function LoginPage(props) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
-                <Registration notifications={props.notifications} classes={classes} handleSuccessfulAuth={handleSuccessfulAuth} />
+                <Registration createNotification={props.createNotification} classes={classes} handleSuccessfulAuth={handleSuccessfulAuth} />
               </Card>
             </GridItem>
           </GridContainer>

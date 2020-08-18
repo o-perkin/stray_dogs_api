@@ -33,8 +33,7 @@ export default class EditAccount extends Component {
       last_name: localStorage.getItem('last_name'),
       password: "",
       password_confirmation: "",
-      current_password: "",
-      editErrors: ""
+      current_password: ""
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -74,17 +73,13 @@ export default class EditAccount extends Component {
       console.log("registration error", error.response);
 
       if ('email' in error.response.data.errors) {
-        this.setState({
-          editErrors: "Email has already been taken"
-        })
+        this.props.createNotification('error', 'Error', 'Email has already been taken')
       } else if ('password' in error.response.data.errors) {
-        this.setState({
-          editErrors: "password should have minimum 6 characters"
-        })
+        this.props.createNotification('error', 'Error', 'Password should have minimum 6 characters')
       } else if ('password_confirmation' in error.response.data.errors) {
-        this.setState({
-          editErrors: "passwords don't match"
-        })
+        this.props.createNotification('error', 'Error', "Passwords don't match")
+      } else if ('current_password' in error.response.data.errors) {
+        this.props.createNotification('error', 'Error', "Wrong password")
       }
     })
     event.preventDefault();
@@ -98,7 +93,6 @@ export default class EditAccount extends Component {
         </CardHeader>
 
         <CardBody>
-        <p className={this.props.classes.divider}>{this.state.editErrors}</p>
           <CustomInput
             labelText="Email"
             id="first"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {NotificationManager} from 'react-notifications';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
@@ -26,13 +26,7 @@ export default class Login extends Component {
 
     this.state = {
       email: "",
-      password: "",
-      loginErrors: "",
-      notifications: {
-        type: "",
-        title: '',
-        message: ''
-      }
+      password: ""      
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,27 +38,6 @@ export default class Login extends Component {
       [event.target.name]: event.target.value
     })
   }
-
-  createNotification = (type) => {
-    return () => {
-      switch (type) {
-        case 'info':
-          NotificationManager.info('info');
-          break;
-        case 'success':
-          NotificationManager.success('Success message', 'Title here');
-          break;
-        case 'warning':
-          NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
-          break;
-        case 'error':
-          NotificationManager.error('Error message', 'Click me!', 5000, () => {
-            alert('callback');
-          });
-          break;
-      }
-    };
-  };
 
   handleSubmit(event) {
     axios.post("http://localhost:3000/login", {
@@ -88,9 +61,7 @@ export default class Login extends Component {
     }).catch(error => {
       console.log("login error", error.message);
       if (error.message == 'Request failed with status code 401') {
-        this.setState({
-          loginErrors: "Envalid Email or Password"
-        })
+        this.props.createNotification('error', 'Error', 'Envalid Email or Password')
       }
     })
     event.preventDefault();

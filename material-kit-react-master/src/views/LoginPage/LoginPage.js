@@ -32,9 +32,7 @@ export default function LoginPage(props) {
   function handleSuccessfulAuth(data) {
     props.handleLogin(data);
     props.history.push("/")
-  } 
-
-  
+  }   
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function() {
@@ -44,7 +42,6 @@ export default function LoginPage(props) {
   const { ...rest } = props;
   return (
     <div>
-    <NotificationContainer/>
       <Header
         absolute
         color="transparent"
@@ -52,6 +49,7 @@ export default function LoginPage(props) {
         rightLinks={<HeaderLinks {...props} handleLogout={props.handleLogout} loggedInStatus={props.loggedInStatus} />}
         {...rest}
       />
+      <NotificationContainer/>
       <div
         className={classes.pageHeader}
         style={{

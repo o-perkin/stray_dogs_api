@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom";
+import {NotificationManager} from 'react-notifications';
 // pages for this product
 import Components from "views/Components/Components.js";
 import LandingPage from "views/LandingPage/LandingPage.js";
@@ -54,6 +55,23 @@ export default class App extends Component {
     })
   }
 
+  createNotification(type, title, message) {
+    switch (type) {
+      case 'info':
+        NotificationManager.info(message, title, 3000);
+        break;
+      case 'success':
+        NotificationManager.success(message, title, 3000);
+        break;
+      case 'warning':
+        NotificationManager.warning(message, title, 3000);
+        break;
+      case 'error':
+        NotificationManager.error(message, title, 5000);
+        break;
+    }
+  }
+
   render() {
     return (
       <Switch>
@@ -68,14 +86,14 @@ export default class App extends Component {
           exact 
           path="/profile" 
           render={props => (
-            <ProfilePage {...props} notifications={this.createNotification} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} state={this.state} />
+            <ProfilePage {...props} createNotification={this.createNotification}  handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} state={this.state} />
           )}
         />
         <Route
           exact 
           path="/registration" 
           render={props => (
-            <RegisterPage {...props} notifications={this.createNotification} handleLogout={this.handleLogout} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
+            <RegisterPage {...props} createNotification={this.createNotification} handleLogout={this.handleLogout} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
         <Route
