@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { LoopCircleLoading } from 'react-loadingg';
 
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
@@ -26,7 +27,8 @@ export default class Login extends Component {
 
     this.state = {
       email: "",
-      password: ""      
+      password: "",
+      animate: false     
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,6 +42,9 @@ export default class Login extends Component {
   }
 
   handleSubmit(event) {
+    this.setState({
+      animate: true,
+    })
     axios.post("http://localhost:3000/login", {
       user: {
         email: this.state.email,
@@ -57,12 +62,18 @@ export default class Login extends Component {
         localStorage.setItem('first_name', response.data.first_name);
         localStorage.setItem('last_name', response.data.last_name);
         this.props.handleSuccessfulAuth(response);
+        this.setState({
+          animate: false,
+        })
       }      
     }).catch(error => {
       console.log("login error", error.message);
       if (error.message == 'Request failed with status code 401') {
         this.props.createNotification('error', 'Error', 'Envalid Email or Password')
       }
+      this.setState({
+        animate: false,
+      })
     })
     event.preventDefault();
   }
@@ -100,7 +111,6 @@ export default class Login extends Component {
             </Button>
           </div>
         </CardHeader>
-        <p className={this.props.classes.divider}>{this.state.loginErrors}</p>
         <CardBody>
           <CustomInput
             labelText="Email..."
@@ -145,9 +155,10 @@ export default class Login extends Component {
           />
         </CardBody>
         <CardFooter className={this.props.classes.cardFooter}>
-          <Button type="submit" simple color="primary" size="lg">
+          <Button type="submit" simple color="primary" size="lg" disabled={this.state.animate ? "disabled" : ""}>
             Login
           </Button>
+          <LoopCircleLoading color='purple' style={this.state.animate ? {} : {display: "none"}} />
         </CardFooter>
       </form>
     )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { LoopCircleLoading } from 'react-loadingg';
 
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon"; 
@@ -33,7 +33,8 @@ export default class EditAccount extends Component {
       last_name: localStorage.getItem('last_name'),
       password: "",
       password_confirmation: "",
-      current_password: ""
+      current_password: "",
+      animate: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,6 +48,9 @@ export default class EditAccount extends Component {
   }
 
   handleSubmit(event) {
+    this.setState({
+      animate: true,
+    })
     axios.put("http://localhost:3000/", {
       user: {
         email: this.state.email,
@@ -67,6 +71,9 @@ export default class EditAccount extends Component {
         localStorage.setItem('last_name', this.state.last_name);
         this.props.history.go(0)
       }
+      this.setState({
+        animate: false,
+      })
       console.log("response", response);
       
     }).catch(error => {
@@ -81,6 +88,9 @@ export default class EditAccount extends Component {
       } else if ('current_password' in error.response.data.errors) {
         this.props.createNotification('error', 'Error', "Wrong password")
       }
+      this.setState({
+        animate: false,
+      })
     })
     event.preventDefault();
   }    
@@ -220,9 +230,10 @@ export default class EditAccount extends Component {
         </CardBody>
           
         <CardFooter className={this.props.classes.cardFooter}>
-          <Button type="submit" simple color="primary" size="lg">
+          <Button type="submit" simple color="primary" size="lg" disabled={this.state.animate ? "disabled" : ""}>
             Update Profile
           </Button>
+          <LoopCircleLoading color='purple' style={this.state.animate ? {} : {display: "none"}} />
         </CardFooter>    
       </form> 
     )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { LoopCircleLoading } from 'react-loadingg';
 
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon"; 
@@ -30,7 +31,7 @@ export default class Registration extends Component {
       last_name: "",
       password: "",
       password_confirmation: "",
-      registrationErrors: ""
+      animate: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,6 +45,9 @@ export default class Registration extends Component {
   }
 
   handleSubmit(event) {
+    this.setState({
+      animate: true,
+    })
     axios.post("http://localhost:3000/", {
       user: {
         email: this.state.email,
@@ -64,6 +68,9 @@ export default class Registration extends Component {
         localStorage.setItem('last_name', response.data.last_name);
         this.props.handleSuccessfulAuth(response);
       }
+      this.setState({
+        animate: false,
+      })
       console.log("response", response);
       
     }).catch(error => {
@@ -75,7 +82,9 @@ export default class Registration extends Component {
       } else if ('password_confirmation' in error.response.data.errors) {
         this.props.createNotification('error', 'Error', "passwords don't match")
       }
-
+      this.setState({
+        animate: false,
+      })
     })
     event.preventDefault();
   }    
@@ -222,9 +231,10 @@ export default class Registration extends Component {
         </CardBody>
           
         <CardFooter className={this.props.classes.cardFooter}>
-          <Button type="submit" simple color="primary" size="lg">
+          <Button type="submit" simple color="primary" size="lg" disabled={this.state.animate ? "disabled" : ""}>
             Register
           </Button>
+          <LoopCircleLoading color='purple' style={this.state.animate ? {} : {display: "none"}} />
         </CardFooter>    
       </form> 
     )
