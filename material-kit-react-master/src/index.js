@@ -7,6 +7,7 @@ import App from './App';
 import "assets/scss/material-kit-react.scss?v=1.9.0";
 import 'react-notifications/lib/notifications.css';
 import "react-loadingmask/dist/react-loadingmask.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 var hist = createBrowserHistory();
 

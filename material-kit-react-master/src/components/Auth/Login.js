@@ -155,7 +155,7 @@ export default class Login extends Component {
           />
         </CardBody>
         <CardFooter className={this.props.classes.cardFooter}>
-          <Button type="submit" simple color="primary" size="lg" disabled={this.state.animate ? "disabled" : ""}>
+          <Button type="submit" simple color="primary" size="lg" disabled={this.state.animate ? true : false}>
             Login
           </Button>
           <LoopCircleLoading color='purple' style={this.state.animate ? {} : {display: "none"}} />

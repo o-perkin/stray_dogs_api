@@ -10,6 +10,7 @@ import RegisterPage from "views/RegisterPage/RegisterPage.js";
 import MyListPage from "views/MyListPage/MyListPage.js";
 import FavoritesPage from "views/FavoritesPage/FavoritesPage.js";
 import SubscriptionsPage from "views/SubscriptionsPage/SubscriptionsPage.js";
+import NewDogsPage from "views/NewDogsPage/NewDogsPage.js";
 import axios from 'axios';
 import * as jwtDecode from 'jwt-decode';
 
@@ -18,7 +19,7 @@ export default class App extends Component {
     super();
 
     this.state = {
-      loggedInStatus: this.checkLoginStatus()
+      loggedInStatus: this.checkLoginStatus() 
     }
     
     console.log('state', this.state)
@@ -80,6 +81,13 @@ export default class App extends Component {
           path="/dogs" 
           render={props => (
             <LandingPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+          )}
+        />
+        <Route
+          exact 
+          path="/dogs/new" 
+          render={props => (
+            <NewDogsPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
         <Route

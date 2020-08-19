@@ -2,7 +2,7 @@ module Api
   module V1
     class DogsController < ApplicationController
       include SendEmails
-      before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy]
+      before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy, :new_dog]
       before_action :set_dog, only: [:show, :edit, :update, :destroy]
       before_action :set_new_dog, only: [:create]      
 
@@ -22,6 +22,11 @@ module Api
       def my_list
         @dogs = set_list_of_dogs.per(2).current_user(current_user.id)
         render json: {status: "Success",  message: "Loaded dogs", data: @dogs}, status: :ok
+      end
+
+       # GET /dogs/new
+      def new_dog
+        render json: {status: "Success",  message: "Loaded dogs params", data: {breed: Breed.all, city: City.all, age: Age.all}}, status: :ok
       end
 
       # POST /dogs

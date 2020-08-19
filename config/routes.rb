@@ -6,7 +6,8 @@ Rails.application.routes.draw do
       resources :subscribes
       get 'favorites/update', defaults: { format: 'js' }
       get '/my_list', to: 'dogs#my_list'  
-      get 'my_favorites', to: 'dogs#favorites'    
+      get 'my_favorites', to: 'dogs#favorites'   
+      get '/new_dog', to: 'dogs#new_dog'
     end
   end   
  
