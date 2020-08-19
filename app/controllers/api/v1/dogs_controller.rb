@@ -13,7 +13,7 @@ module Api
       end
 
       # GET /dogs/1
-      def show   
+      def show        
         @favorite_exists = Favorite.favorite_exists?(@dog, current_user)
         render json: {status: "Success",  message: "Loaded dog", data: {dog: @dog, favorite_exists: @favorite_exists}}, status: :ok 
       end

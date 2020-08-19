@@ -11,6 +11,7 @@ import MyListPage from "views/MyListPage/MyListPage.js";
 import FavoritesPage from "views/FavoritesPage/FavoritesPage.js";
 import SubscriptionsPage from "views/SubscriptionsPage/SubscriptionsPage.js";
 import NewDogsPage from "views/NewDogsPage/NewDogsPage.js";
+import EditDogsPage from "views/EditDogsPage/EditDogsPage.js";
 import axios from 'axios';
 import * as jwtDecode from 'jwt-decode';
 
@@ -81,6 +82,12 @@ export default class App extends Component {
           path="/dogs" 
           render={props => (
             <LandingPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+          )}
+        />
+        <Route 
+          path="/dogs/edit/:dogId" 
+          render={props => (
+            <EditDogsPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
         <Route
