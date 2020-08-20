@@ -230,7 +230,7 @@ export default class EditAccount extends Component {
         </CardBody>
           
         <CardFooter className={this.props.classes.cardFooter}>
-          <Button type="submit" simple color="primary" size="lg" disabled={this.state.animate ? "disabled" : ""}>
+          <Button type="submit" simple color="primary" size="lg" disabled={this.state.animate ? true : false}>
             Update Profile
           </Button>
           <LoopCircleLoading color='purple' style={this.state.animate ? {} : {display: "none"}} />

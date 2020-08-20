@@ -13,9 +13,19 @@ module Api
       end
 
       # GET /dogs/1
-      def show        
+      def show     
+      new_dog = {
+              id: @dog.id,
+              name: @dog.name,
+              breed: @dog.breed.name,
+              city: @dog.city.name,
+              age: @dog.age.years,
+              description: @dog.description,
+              user: @dog.user,
+              created_at: @dog.created_at
+            }        
         @favorite_exists = Favorite.favorite_exists?(@dog, current_user)
-        render json: {status: "Success",  message: "Loaded dog", data: {dog: @dog, favorite_exists: @favorite_exists}}, status: :ok 
+        render json: {status: "Success",  message: "Loaded dog", data: {dog: new_dog, favorite_exists: @favorite_exists}}, status: :ok 
       end
 
       # GET /my_list

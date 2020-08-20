@@ -53,7 +53,7 @@ import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
-export default function NewDogsPage(props) {
+export default function EditDogsPage(props) {
   const history = useHistory();
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");

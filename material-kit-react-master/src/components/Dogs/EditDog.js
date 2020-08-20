@@ -28,7 +28,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import * as jwtDecode from 'jwt-decode';
 
-export default class NewDog extends Component {
+export default class EditDog extends Component {
   constructor(props) {
     super(props);
 
@@ -101,7 +101,6 @@ export default class NewDog extends Component {
       this.setState({
         animate: false,
       })
-      console.log("response", response);
       
     }).catch(error => {
       console.log('errors', error)
@@ -116,7 +115,7 @@ export default class NewDog extends Component {
     return (
       <Form className={this.props.classes.form} onSubmit={this.handleSubmit} >
       <CardHeader style={{marginBottom: 15 + 'px'}} color="primary" className={this.props.classes.cardHeader} >
-        <h4 style={{textAlign: 'center'}}>Додати собаку</h4>
+        <h4 style={{textAlign: 'center'}}>Редагувати собаку</h4>
       </CardHeader>
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>Ім'я</Form.Label>
@@ -140,7 +139,6 @@ export default class NewDog extends Component {
           <Form.Control as="select" required name="city" type="city" value={this.state.city} onChange={this.handleChange} >
             {this.state.params 
               ? this.state.params.city.map(el => {
-                console.log('aaaaaa', this.state)
                 return <option value={el.id} key={el.id}>{el.name}</option>
               })
 
