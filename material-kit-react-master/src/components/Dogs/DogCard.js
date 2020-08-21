@@ -15,10 +15,14 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 500,
   },
   media: {
     height: 0,
@@ -48,6 +52,22 @@ export default function DogCard(props) {
     setExpanded(!expanded);
   };
 
+  const deleteDog = (event) => {
+    axios.delete(`http://localhost:3000/api/v1/dogs/${props.dog.id}`, 
+    {
+      headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
+      withCredentials: true
+    }).then(response => {
+      if(response.status === 200) {
+        props.history.go(0);
+      }
+      console.log("response", response);
+    }).catch(error => {
+      props.createNotification('error', 'Error', 'Access denied')
+      console.log("delete dog errors", error);
+    })
+  }
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -55,11 +75,6 @@ export default function DogCard(props) {
           <Avatar aria-label="recipe" className={classes.avatar}>
             R
           </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
         }
         title={"Author " + props.dog.user.first_name + " " + props.dog.user.last_name}
         subheader={props.dog.created_at}
@@ -83,10 +98,21 @@ export default function DogCard(props) {
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+        <IconButton href={`/dogs/${props.dog.id}`} style={{marginLeft: 'auto'}} color="primary" aria-label="add to favorites">
+          <VisibilityIcon />
         </IconButton>
+        {props.current_user.roles == 'site_admin' && props.loggedInStatus == "LOGGED_IN" ? <div> 
+          <IconButton href={`/dogs/edit/${props.dog.id}`} style={{color: '#CAB40E'}} aria-label="edit">
+          <EditIcon />
+          </IconButton>
+          <IconButton onClick={deleteDog} style={{color: 'red'}} aria-label="delete">
+            <DeleteIcon />
+          </IconButton>
+          </div>
+          : null 
+        }
         <IconButton
+        style={{marginLeft: 0 + 'px'}}
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
           })}

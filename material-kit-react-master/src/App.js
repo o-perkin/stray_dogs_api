@@ -13,6 +13,7 @@ import SubscriptionsPage from "views/SubscriptionsPage/SubscriptionsPage.js";
 import NewDogsPage from "views/NewDogsPage/NewDogsPage.js";
 import EditDogsPage from "views/EditDogsPage/EditDogsPage.js";
 import DogsShowPage from "views/DogsShowPage/DogsShowPage.js";
+import { LoopCircleLoading } from 'react-loadingg';
 import axios from 'axios';
 import * as jwtDecode from 'jwt-decode';
 
@@ -21,7 +22,8 @@ export default class App extends Component {
     super();
 
     this.state = {
-      loggedInStatus: this.checkLoginStatus() 
+      loggedInStatus: this.checkLoginStatus(),
+      user: this.checkUser()
     }
     
     console.log('state', this.state)
@@ -29,6 +31,7 @@ export default class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.checkLoginStatus = this.checkLoginStatus.bind(this);
+    this.checkUser = this.checkUser.bind(this);
   }
 
   checkLoginStatus() {
@@ -58,6 +61,18 @@ export default class App extends Component {
     })
   }
 
+  checkUser() {
+    axios.get('http://localhost:3001/api/v1/my_list.json', {
+      headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
+      withCredentials: true
+    }).then(response => {
+      this.setState({
+        user: response.data.data.user
+      })
+      })
+      .catch(error => console.log(error))
+  }
+
   createNotification(type, title, message) {
     switch (type) {
       case 'info':
@@ -76,84 +91,88 @@ export default class App extends Component {
   }
 
   render() {
-    return (
-      <Switch>
-        <Route
-          exact 
-          path="/dogs" 
-          render={props => (
-            <LandingPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
-          )}
-        />
-        <Route 
-          path="/dogs/edit/:dogId" 
-          render={props => (
-            <EditDogsPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
-          )}
-        />
-        <Route
-          exact 
-          path="/dogs/new" 
-          render={props => (
-            <NewDogsPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
-          )}
-        />
-        <Route 
-          path="/dogs/:dogId" 
-          render={props => (
-            <DogsShowPage {...props} createNotification={this.createNotification}  handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
-          )}
-        />
-        <Route
-          exact 
-          path="/profile" 
-          render={props => (
-            <ProfilePage {...props} createNotification={this.createNotification}  handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} state={this.state} />
-          )}
-        />
-        <Route
-          exact 
-          path="/registration" 
-          render={props => (
-            <RegisterPage {...props} createNotification={this.createNotification} handleLogout={this.handleLogout} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
-          )}
-        />
-        <Route
-          exact 
-          path="/login"
-          render={props => (
-            <LoginPage {...props} createNotification={this.createNotification} handleLogout={this.handleLogout} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
-          )}
-        />
-        <Route
-          exact 
-          path="/" 
-          render={props => (
-            <Components {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
-          )}
-        />
-        <Route
-          exact 
-          path="/my_list" 
-          render={props => (
-            <MyListPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
-          )}
-        />
-        <Route
-          exact 
-          path="/favorites" 
-          render={props => (
-            <FavoritesPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
-          )}
-        />
-        <Route
-          exact 
-          path="/subscriptions" 
-          render={props => (
-            <SubscriptionsPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
-          )}
-        />
-      </Switch>
-    );
+    //if (this.state.user && this.state.user.roles) {
+      return (
+        <Switch>
+          <Route
+            exact 
+            path="/dogs" 
+            render={props => (
+              <LandingPage {...props} current_user={this.state.user ? this.state.user : {}} createNotification={this.createNotification}   handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            )}
+          />
+          <Route 
+            path="/dogs/edit/:dogId" 
+            render={props => (
+              <EditDogsPage {...props} createNotification={this.createNotification}  handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            )}
+          />
+          <Route
+            exact 
+            path="/dogs/new" 
+            render={props => (
+              <NewDogsPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            )}
+          />
+          <Route 
+            path="/dogs/:dogId" 
+            render={props => (
+              <DogsShowPage {...props} createNotification={this.createNotification}  handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            )}
+          />
+          <Route
+            exact 
+            path="/profile" 
+            render={props => (
+              <ProfilePage {...props} createNotification={this.createNotification}  handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} state={this.state} />
+            )}
+          />
+          <Route
+            exact 
+            path="/registration" 
+            render={props => (
+              <RegisterPage {...props} createNotification={this.createNotification} handleLogout={this.handleLogout} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
+            )}
+          />
+          <Route
+            exact 
+            path="/login"
+            render={props => (
+              <LoginPage {...props} createNotification={this.createNotification} handleLogout={this.handleLogout} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
+            )}
+          />
+          <Route
+            exact 
+            path="/" 
+            render={props => (
+              <Components {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            )}
+          />
+          <Route
+            exact 
+            path="/my_list" 
+            render={props => (
+              <MyListPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            )}
+          />
+          <Route
+            exact 
+            path="/favorites" 
+            render={props => (
+              <FavoritesPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            )}
+          />
+          <Route
+            exact 
+            path="/subscriptions" 
+            render={props => (
+              <SubscriptionsPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            )}
+          />
+        </Switch>
+      );
+    /// } else {
+    //  return <LoopCircleLoading color='purple' />
+    //}
   }
 }

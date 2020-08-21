@@ -3,6 +3,7 @@ import React from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles"; 
+import {NotificationContainer} from 'react-notifications';
 
 // @material-ui/icons
 
@@ -30,6 +31,7 @@ export default function LandingPage(props) {
   const { ...rest } = props;
   return (
     <div>
+      <NotificationContainer/>
       <Header
         color="transparent"
         routes={dashboardRoutes}
@@ -71,8 +73,9 @@ export default function LandingPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
           <br />
-          <SortingSection />
-          <DogsListSection />
+          
+          <SortingSection current_user={props.current_user} />
+          <DogsListSection current_user={props.current_user} {...props} createNotification={props.createNotification} />
           <br />
         </div>
       </div>

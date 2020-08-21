@@ -46,6 +46,9 @@ export default class EditDog extends Component {
   }
 
   componentDidMount() {
+    this.setState({
+      animate: true
+    })
     axios.get('http://localhost:3001/api/v1/new_dog.json', {
       headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
       withCredentials: true
@@ -53,11 +56,13 @@ export default class EditDog extends Component {
         this.setState({
           params: response.data.data,
         })
-        console.log('params', this.state.params)
       })
       .catch(error => console.log(error))
 
-    axios.get(`http://localhost:3001/api/v1/dogs/${this.props.match.params.dogId}`)
+    axios.get(`http://localhost:3001/api/v1/dogs/edit/${this.props.match.params.dogId}`, {
+      headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
+      withCredentials: true
+    })
       .then(response => {
           this.setState({
             dog: response.data.data.dog,
@@ -67,9 +72,24 @@ export default class EditDog extends Component {
             age: response.data.data.dog.age_id,
             description: response.data.data.dog.description
           })
-          console.log('dog', this.state.dog)
+          this.setState({
+            animate: false
+          })
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        if (error.response.status === 404) { 
+          this.setState({
+            notFoundError: true
+          })
+        } else if (error.response.status == 403) {
+          this.setState({
+            accessDeniedError: true
+          })
+        }
+        this.setState({
+          animate: false
+        })
+      })
   }
 
   handleChange(event) {
@@ -111,67 +131,76 @@ export default class EditDog extends Component {
     event.preventDefault();
   }    
 
-  render() {
-    return (
+  render() {    
+    if (this.state.animate) {
+      return <LoopCircleLoading color='purple' />
+    } else if (this.state.notFoundError) {
+      this.props.history.push('/dogs')
+      return <div></div>
+    } else if (this.state.accessDeniedError) {
+      return <h2>Access denied</h2>
+    } else {
+      return (
       <Form className={this.props.classes.form} onSubmit={this.handleSubmit} >
-      <CardHeader style={{marginBottom: 15 + 'px'}} color="primary" className={this.props.classes.cardHeader} >
-        <h4 style={{textAlign: 'center'}}>Редагувати собаку</h4>
-      </CardHeader>
-        <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>Ім'я</Form.Label>
-          <Form.Control required name="name" type="name" value={this.state.name} onChange={this.handleChange} />
-        </Form.Group>
-        <Form.Group controlId="exampleForm.ControlSelect1">
-          <Form.Label>Порода</Form.Label>
-          <Form.Control as="select" required name="breed" type="breed" value={this.state.breed} onChange={this.handleChange} >
-            {this.state.params 
-              ? this.state.params.breed.map(el => {
-                return <option value={el.id} key={el.id}>{el.name}</option>
-              })
+        <CardHeader style={{marginBottom: 15 + 'px'}} color="primary" className={this.props.classes.cardHeader} >
+          <h4 style={{textAlign: 'center'}}>Редагувати собаку</h4>
+        </CardHeader>
+          <Form.Group controlId="exampleForm.ControlInput1">
+            <Form.Label>Ім'я</Form.Label>
+            <Form.Control required name="name" type="name" value={this.state.name} onChange={this.handleChange} />
+          </Form.Group>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Порода</Form.Label>
+            <Form.Control as="select" required name="breed" type="breed" value={this.state.breed} onChange={this.handleChange} >
+              {this.state.params 
+                ? this.state.params.breed.map(el => {
+                  return <option value={el.id} key={el.id}>{el.name}</option>
+                })
 
-              : null
+                : null
 
-            }
-          </Form.Control>
-        </Form.Group>
-        <Form.Group controlId="exampleForm.ControlSelect1">
-          <Form.Label>Місто</Form.Label>
-          <Form.Control as="select" required name="city" type="city" value={this.state.city} onChange={this.handleChange} >
-            {this.state.params 
-              ? this.state.params.city.map(el => {
-                return <option value={el.id} key={el.id}>{el.name}</option>
-              })
+              }
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Місто</Form.Label>
+            <Form.Control as="select" required name="city" type="city" value={this.state.city} onChange={this.handleChange} >
+              {this.state.params 
+                ? this.state.params.city.map(el => {
+                  return <option value={el.id} key={el.id}>{el.name}</option>
+                })
 
-              : null
+                : null
 
-            }
-          </Form.Control>
-        </Form.Group>
-        <Form.Group controlId="exampleForm.ControlSelect1">
-          <Form.Label>Вік</Form.Label>
-          <Form.Control as="select" required name="age" type="age" value={this.state.age} onChange={this.handleChange}>
-            {this.state.params 
-              ? this.state.params.age.map(el => {
-                return <option value={el.id} key={el.id}>{el.years}</option>
-              })
+              }
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Вік</Form.Label>
+            <Form.Control as="select" required name="age" type="age" value={this.state.age} onChange={this.handleChange}>
+              {this.state.params 
+                ? this.state.params.age.map(el => {
+                  return <option value={el.id} key={el.id}>{el.years}</option>
+                })
 
-              : null
+                : null
 
-            }
-          </Form.Control>
-        </Form.Group>
-        
-        <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Опис</Form.Label>
-          <Form.Control as="textarea" rows="3" name="description" type="description" value={this.state.description} onChange={this.handleChange} />
-        </Form.Group>
-        <CardFooter style={{display: 'flex', justifyContent: 'center'}} className={this.props.classes.cardFooter}>
-          <Button color="primary" type="submit" disabled={this.state.animate ? true : false}>
-            Підтвердити
-          </Button>
-          <LoopCircleLoading color='purple' style={this.state.animate ? {} : {display: "none"}} />
-        </CardFooter>    
-      </Form>
-    )
+              }
+            </Form.Control>
+          </Form.Group>
+          
+          <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Опис</Form.Label>
+            <Form.Control as="textarea" rows="3" name="description" type="description" value={this.state.description} onChange={this.handleChange} />
+          </Form.Group>
+          <CardFooter style={{display: 'flex', justifyContent: 'center'}} className={this.props.classes.cardFooter}>
+            <Button color="primary" type="submit" disabled={this.state.animate ? true : false}>
+              Підтвердити
+            </Button>
+            <LoopCircleLoading color='purple' style={this.state.animate ? {} : {display: "none"}} />
+          </CardFooter>    
+        </Form>
+      )   
+    }    
   }
 }

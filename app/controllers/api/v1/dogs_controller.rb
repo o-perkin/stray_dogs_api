@@ -2,7 +2,7 @@ module Api
   module V1
     class DogsController < ApplicationController
       include SendEmails
-      before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy, :new_dog]
+      before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy, :new_dog, :edit]
       before_action :set_dog, only: [:show, :edit, :update, :destroy]
       before_action :set_new_dog, only: [:create]      
 
@@ -14,24 +14,33 @@ module Api
 
       # GET /dogs/1
       def show     
-      new_dog = {
-              id: @dog.id,
-              name: @dog.name,
-              breed: @dog.breed.name,
-              city: @dog.city.name,
-              age: @dog.age.years,
-              description: @dog.description,
-              user: @dog.user,
-              created_at: @dog.created_at
-            }        
+        new_dog = {
+          id: @dog.id,
+          name: @dog.name,
+          breed: @dog.breed.name,
+          city: @dog.city.name,
+          age: @dog.age.years,
+          description: @dog.description,
+          user: @dog.user,
+          created_at: @dog.created_at
+        }  
         @favorite_exists = Favorite.favorite_exists?(@dog, current_user)
         render json: {status: "Success",  message: "Loaded dog", data: {dog: new_dog, favorite_exists: @favorite_exists}}, status: :ok 
+      end
+
+      # Get /dogs/edit/1
+      def edit
+        if current_user.id == @dog.user_id   
+          render json: {status: "Success",  message: "Loaded dog", data: {dog: @dog}}, status: :ok 
+        else 
+          render json: {status: "Failed",  message: "Access denied"}, status: :forbidden
+        end
       end
 
       # GET /my_list
       def my_list
         @dogs = set_list_of_dogs.per(2).current_user(current_user.id)
-        render json: {status: "Success",  message: "Loaded dogs", data: @dogs}, status: :ok
+        render json: {status: "Success",  message: "Loaded dogs", data: {dogs: @dogs, user: current_user}}, status: :ok
       end
 
        # GET /dogs/new

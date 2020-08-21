@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get '/my_list', to: 'dogs#my_list'  
       get 'my_favorites', to: 'dogs#favorites'   
       get '/new_dog', to: 'dogs#new_dog'
+      get '/dogs/edit/:id', to: 'dogs#edit'
     end
   end   
  

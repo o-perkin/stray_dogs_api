@@ -69,25 +69,6 @@ export default function EditDogsPage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
-  const deleteAccount = (event) => {
-    axios.delete("http://localhost:3000/", 
-    {
-      headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
-      withCredentials: true
-    }).then(response => {
-      if(response.status === 200) {
-        props.handleLogout();
-        history.push('/');
-      }
-      console.log("response", response);
-      
-    }).catch(error => {
-      console.log("delete account errors", error);
-    })
-
-    event.preventDefault();
-  }
-
   if (props.loggedInStatus == 'LOGGED_IN') {
     return (
       <div>

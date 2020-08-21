@@ -23,10 +23,10 @@ class DogsList extends Component {
             {this.state.dogs.map(el => { 
             console.log(el)            
               return (
-                <div>
+                <div>                
                   <br />
                   <br />
-                  <DogCard dog={el} /> 
+                  <DogCard current_user={this.props.current_user} loggedInStatus={this.props.loggedInStatus} {...this.props} createNotification={this.props.createNotification} dog={el} /> 
                   <br />   
                 </div>           
               )

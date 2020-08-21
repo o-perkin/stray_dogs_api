@@ -3,6 +3,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 
+
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -16,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SortingSection() {
+export default function SortingSection(props) {
   
   const classes = useStyles();
   const [value, setValue] = React.useState('recents');
@@ -27,8 +28,8 @@ export default function SortingSection() {
   return (
     <div className={classes.section}>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
-          <DogsList />
+        <GridItem xs={12} sm={12} md={8}>          
+          <DogsList current_user={props.current_user} loggedInStatus={props.loggedInStatus} {...props} createNotification={props.createNotification} />
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
          
