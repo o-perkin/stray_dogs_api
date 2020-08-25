@@ -15,6 +15,7 @@ import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
+import FavoritesList from "components/Favorites/FavoritesList.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 
@@ -69,7 +70,7 @@ export default function FavoritesPage(props) {
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
             <br />
-            
+              <FavoritesList current_user={props.current_user} loggedInStatus={props.loggedInStatus} />
             <br />
           </div>
         </div>

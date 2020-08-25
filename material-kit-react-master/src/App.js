@@ -159,7 +159,7 @@ export default class App extends Component {
             exact 
             path="/favorites" 
             render={props => (
-              <FavoritesPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+              <FavoritesPage {...props} current_user={this.state.user ? this.state.user : {}} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
             )}
           />
           <Route

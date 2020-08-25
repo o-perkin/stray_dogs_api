@@ -11,7 +11,7 @@ class DogsList extends Component {
       this.updateFavoriteState = this.updateFavoriteState.bind(this);
     }
     componentDidMount() {
-      axios.get('http://localhost:3001/api/v1/dogs.json', {
+      axios.get('http://localhost:3001/api/v1/favorites.json', {
         headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
         withCredentials: true
     })
@@ -25,12 +25,7 @@ class DogsList extends Component {
 
     updateFavoriteState(id) {
       this.setState({
-        dogs: this.state.dogs.map(dog => {
-          if (dog.id == id) {
-            dog.favorite == true ? dog.favorite = false : dog.favorite = true
-          } 
-          return dog
-        })
+        dogs: this.state.dogs.filter(dog => dog.id != id)
       })
     }
     render() {
@@ -38,7 +33,7 @@ class DogsList extends Component {
         <div>
             {this.state.dogs.map(el => { 
               return (
-                <div key={el.id}>                
+                <div key={el ? el.id : null}>                
                   <br />
                   <br />
                   <DogCard updateFavoriteState={this.updateFavoriteState} current_user={this.props.current_user} loggedInStatus={this.props.loggedInStatus} {...this.props} createNotification={this.props.createNotification} dog={el} /> 

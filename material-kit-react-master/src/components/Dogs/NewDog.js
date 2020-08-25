@@ -112,21 +112,21 @@ export default class NewDog extends Component {
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Порода</Form.Label>
           <Form.Control as="select" required name="breed" type="breed" value={this.state.breed} onChange={this.handleChange} >
-            <option value={this.state.breed} disabled>Оберіть породу</option>
+            <option value="" disabled>Оберіть породу</option>
             {this.state.params 
               ? this.state.params.breed.map(el => {
                 return <option value={el.id} key={el.id}>{el.name}</option>
               })
 
               : null
-
+ 
             }
           </Form.Control>
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Місто</Form.Label>
           <Form.Control as="select" required name="city" type="city" value={this.state.city} onChange={this.handleChange} >
-            <option value={this.state.city} disabled>Оберіть місто</option>
+            <option value="" disabled>Оберіть місто</option>
             {this.state.params 
               ? this.state.params.city.map(el => {
                 return <option value={el.id} key={el.id}>{el.name}</option>
@@ -140,7 +140,7 @@ export default class NewDog extends Component {
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Вік</Form.Label>
           <Form.Control as="select" required name="age" type="age" value={this.state.age} onChange={this.handleChange}>
-            <option value={this.state.age} disabled>Оберіть вік</option>
+            <option value="" disabled>Оберіть вік</option>
             {this.state.params 
               ? this.state.params.age.map(el => {
                 return <option value={el.id} key={el.id}>{el.years}</option>

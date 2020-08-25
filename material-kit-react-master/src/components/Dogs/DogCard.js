@@ -68,6 +68,22 @@ export default function DogCard(props) {
     })
   }
 
+  const favoriteUpdate = (event) => {
+    console.log('ПЕРВІЙ ДЕНЬ ВЕСНІ', props.dog.favorite)
+    axios.get(`http://localhost:3000/api/v1/favorites/update?dog=${props.dog.id}`, 
+    {
+      headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
+      withCredentials: true
+    }).then(response => {        
+      if(response.status === 200) {
+        props.updateFavoriteState(props.dog.id);
+      }
+    }).catch(error => {
+      console.log("delete dog errors", error);
+    })
+    console.log("НА КРАЮШКЕ ЗЕМЛИ", props.dog.favorite)
+  }
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -95,9 +111,12 @@ export default function DogCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+      {props.loggedInStatus == "LOGGED_IN" ?
+        <IconButton onClick={favoriteUpdate} aria-label="add to favorites">
+          <FavoriteIcon color={props.dog.favorite ? 'secondary' : 'disabled' } />
         </IconButton>
+        : null
+      }
         <IconButton href={`/dogs/${props.dog.id}`} style={{marginLeft: 'auto'}} color="primary" aria-label="add to favorites">
           <VisibilityIcon />
         </IconButton>
@@ -125,7 +144,7 @@ export default function DogCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Description:</Typography>
+          <Typography paragraph>Опис:</Typography>
           <Typography paragraph>
             {props.dog.description}
           </Typography>

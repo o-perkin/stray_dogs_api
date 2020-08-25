@@ -2,7 +2,7 @@ module Api
   module V1
     class DogsController < ApplicationController
       include SendEmails
-      before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy, :new_dog, :edit]
+      before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy, :new_dog, :edit, :favorites]
       before_action :set_dog, only: [:show, :edit, :update, :destroy]
       before_action :set_new_dog, only: [:create]      
 
@@ -46,6 +46,26 @@ module Api
        # GET /dogs/new
       def new_dog
         render json: {status: "Success",  message: "Loaded dogs params", data: {breed: Breed.all, city: City.all, age: Age.all}}, status: :ok
+      end
+
+      def favorites
+        @dogs = []     
+        current_user.favorites.each do |favorite| 
+          dog = {
+            id: favorite.dog.id,
+            name: favorite.dog.name,
+            breed: favorite.dog.breed.name,
+            city: favorite.dog.city.name,
+            age: favorite.dog.age.years,
+            description: favorite.dog.description,
+            user: favorite.dog.user,
+            favorite: true,
+            created_at: favorite.dog.created_at
+          }
+          
+          @dogs << dog
+        end
+        render json: {status: "Success", message: "Loaded Favorites", data: @dogs}, status: :ok        
       end
 
       # POST /dogs
@@ -127,6 +147,7 @@ module Api
               city: dog.city.name,
               age: dog.age.years,
               description: dog.description,
+              favorite: Favorite.favorite_exists?(dog, current_user) ? true : false,
               user: dog.user,
               created_at: dog.created_at
             }            
