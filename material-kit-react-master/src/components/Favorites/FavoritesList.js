@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import DogCard from 'components/Dogs/DogCard.js';
-class DogsList extends Component {
+class FavoritesList extends Component {
     constructor(props){
       super(props)
       this.state = {
@@ -45,5 +45,5 @@ class DogsList extends Component {
       )
     }
 }
-export default DogsList;
+export default FavoritesList;
 

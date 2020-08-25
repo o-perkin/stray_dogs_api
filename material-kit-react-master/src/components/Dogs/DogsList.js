@@ -11,7 +11,7 @@ class DogsList extends Component {
       this.updateFavoriteState = this.updateFavoriteState.bind(this);
     }
     componentDidMount() {
-      axios.get('http://localhost:3001/api/v1/dogs.json', {
+      axios.get(`http://localhost:3001/api/v1/dogs.json`, {
         headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
         withCredentials: true
     })

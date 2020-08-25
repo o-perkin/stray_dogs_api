@@ -2,7 +2,7 @@ module Api
   module V1
     class DogsController < ApplicationController
       include SendEmails
-      before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy, :new_dog, :edit, :favorites]
+      before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy, :edit, :favorites]
       before_action :set_dog, only: [:show, :edit, :update, :destroy]
       before_action :set_new_dog, only: [:create]      
 

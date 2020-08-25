@@ -71,7 +71,7 @@ export default function LandingPage(props) {
         </div>
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
+        <div className={classes.container} >
           <br />
           
           <SortingSection current_user={props.current_user} />
