@@ -21,11 +21,11 @@ module Api
           city: @dog.city.name,
           age: @dog.age.years,
           description: @dog.description,
+          favorite: Favorite.favorite_exists?(@dog, current_user),
           user: @dog.user,
           created_at: @dog.created_at
         }  
-        @favorite_exists = Favorite.favorite_exists?(@dog, current_user)
-        render json: {status: "Success",  message: "Loaded dog", data: {dog: new_dog, favorite_exists: @favorite_exists}}, status: :ok 
+        render json: {status: "Success",  message: "Loaded dog", data: {dog: new_dog}}, status: :ok 
       end
 
       # Get /dogs/edit/1

@@ -69,7 +69,6 @@ export default function DogCard(props) {
   }
 
   const favoriteUpdate = (event) => {
-    console.log('ПЕРВІЙ ДЕНЬ ВЕСНІ', props.dog.favorite)
     axios.get(`http://localhost:3000/api/v1/favorites/update?dog=${props.dog.id}`, 
     {
       headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
@@ -81,7 +80,6 @@ export default function DogCard(props) {
     }).catch(error => {
       console.log("delete dog errors", error);
     })
-    console.log("НА КРАЮШКЕ ЗЕМЛИ", props.dog.favorite)
   }
 
   return (

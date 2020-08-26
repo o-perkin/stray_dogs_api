@@ -33,11 +33,10 @@ export default class FiltersForm extends Component {
     super(props);
 
     this.state = {
-      name: "",
       breed: "",
       city: "",
-      age: "",
-      description: "",
+      age_from: "",
+      age_to: "",
       animate: false
     }
 
@@ -46,7 +45,6 @@ export default class FiltersForm extends Component {
   }
 
   componentDidMount() {
-    console.log('MARINAAA', this.props)
     axios.get('http://localhost:3001/api/v1/new_dog.json', {
       headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
       withCredentials: true
@@ -64,35 +62,7 @@ export default class FiltersForm extends Component {
   }
 
   handleSubmit(event) {
-    this.setState({
-      animate: true,
-    })
-    axios.patch(`http://localhost:3000/api/v1/dogs/${this.props.match.params.dogId}`, {
-      dog: {
-        name: this.state.name,
-        breed_id: this.state.breed,
-        city_id: this.state.city,
-        age_id: this.state.age,
-        description: this.state.description
-      }
-    }, 
-    {
-      headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
-      withCredentials: true
-    }).then(response => {
-      if(response.status === 200) {
-        this.props.history.go(0)
-      }
-      this.setState({
-        animate: false,
-      })
-      
-    }).catch(error => {
-      console.log('errors', error)
-      this.setState({
-        animate: false,
-      })
-    })
+    this.props.checkDogsSearchParams(this.state)
     event.preventDefault();
   }    
 
@@ -105,7 +75,7 @@ export default class FiltersForm extends Component {
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Порода</Form.Label>
           <Form.Control as="select" name="breed" type="breed" value={this.state.breed} onChange={this.handleChange} >
-            <option value="" disabled>Оберіть породу</option>
+            <option value="" >Оберіть породу</option>
             {this.state.params 
               ? this.state.params.breed.map(el => {
                 return <option value={el.id} key={el.id}>{el.name}</option>
@@ -119,7 +89,7 @@ export default class FiltersForm extends Component {
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Місто</Form.Label>
           <Form.Control as="select" name="city" type="city" value={this.state.city} onChange={this.handleChange} >
-            <option value="" disabled>Оберіть місто</option>
+            <option value="" >Оберіть місто</option>
             {this.state.params 
               ? this.state.params.city.map(el => {
                 return <option value={el.id} key={el.id}>{el.name}</option>
@@ -132,8 +102,8 @@ export default class FiltersForm extends Component {
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Вік від</Form.Label>
-          <Form.Control as="select" name="age" type="age" value={this.state.age} onChange={this.handleChange}>
-            <option value="" disabled>Оберіть вік</option>
+          <Form.Control as="select" name="age_from" type="age_from" value={this.state.age_from} onChange={this.handleChange}>
+            <option value="" >Оберіть вік</option>
             {this.state.params 
               ? this.state.params.age.map(el => {
                 return <option value={el.id} key={el.id}>{el.years}</option>
@@ -146,8 +116,8 @@ export default class FiltersForm extends Component {
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Вік до</Form.Label>
-          <Form.Control as="select" name="age" type="age" value={this.state.age} onChange={this.handleChange}>
-            <option value="" disabled>Оберіть вік</option>
+          <Form.Control as="select" name="age_to" type="age_to" value={this.state.age_to} onChange={this.handleChange}>
+            <option value="" >Оберіть вік</option>
             {this.state.params 
               ? this.state.params.age.map(el => {
                 return <option value={el.id} key={el.id}>{el.years}</option>
@@ -159,10 +129,10 @@ export default class FiltersForm extends Component {
           </Form.Control>
         </Form.Group>
         <CardFooter style={{display: 'flex', justifyContent: 'center'}} className={this.props.classes.cardFooter}>
-          <Button color="primary" type="submit" disabled={this.state.animate ? true : false}>
+          <Button color="primary" type="submit" disabled={this.props.animate ? true : false}>
             Шукати
           </Button>
-          <LoopCircleLoading color='purple' style={this.state.animate ? {} : {display: "none"}} />
+          <LoopCircleLoading color='purple' style={this.props.animate ? {} : {display: "none"}} />
         </CardFooter>    
       </Form>
     ); 

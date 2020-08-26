@@ -18,8 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function DogsListSection(props) {
-  
+export default function DogsListSection(props) {  
   const classes = useStyles();
   const [value, setValue] = React.useState('recents');
 
@@ -30,10 +29,10 @@ export default function DogsListSection(props) {
     <div className={classes.section}>
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>          
-          <DogsList current_user={props.current_user} loggedInStatus={props.loggedInStatus} {...props} createNotification={props.createNotification} />
+          <DogsList updateFavoriteState={props.updateFavoriteState} dogs={props.dogs} current_user={props.current_user} loggedInStatus={props.loggedInStatus} {...props} createNotification={props.createNotification} />
         </GridItem>
         <GridItem xs={12} sm={12} md={4} style={{marginTop: '90px'}} >
-          <FiltersForm {...props} classes={classes} />
+          <FiltersForm animate={props.animate} checkDogsSearchParams={props.checkDogsSearchParams} {...props} classes={classes} />
         </GridItem>
       </GridContainer>
     </div>

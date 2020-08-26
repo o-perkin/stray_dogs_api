@@ -75,7 +75,7 @@ export default function LandingPage(props) {
           <br />
           
           <SortingSection current_user={props.current_user} />
-          <DogsListSection current_user={props.current_user} {...props} createNotification={props.createNotification} />
+          <DogsListSection animate={props.animate} checkDogsSearchParams={props.checkDogsSearchParams} updateFavoriteState={props.updateFavoriteState} dogs={props.dogs} current_user={props.current_user} {...props} createNotification={props.createNotification} />
           <br />
         </div>
       </div>

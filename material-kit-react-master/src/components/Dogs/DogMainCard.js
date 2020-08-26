@@ -31,9 +31,15 @@ class DogMainCard extends Component {
     }
 
     this.deleteDog = this.deleteDog.bind(this);
+    this.favoriteUpdate = this.favoriteUpdate.bind(this);
+    this.updateFavoriteState = this.updateFavoriteState.bind(this);
   }
   componentDidMount() {
-    axios.get(`http://localhost:3001/api/v1/dogs/${this.props.match.params.dogId}.json`)
+    axios.get(`http://localhost:3001/api/v1/dogs/${this.props.match.params.dogId}.json`, 
+    {
+      headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
+      withCredentials: true
+    })
     .then(response => {
         this.setState({
           dog: response.data.data.dog,
@@ -80,11 +86,34 @@ class DogMainCard extends Component {
       })
     })
   }
+
+  favoriteUpdate(event) {
+    axios.get(`http://localhost:3000/api/v1/favorites/update?dog=${this.props.match.params.dogId}`, 
+    {
+      headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
+      withCredentials: true
+    }).then(response => {        
+      if(response.status === 200) {
+        this.updateFavoriteState(this.props.match.params.dogId);
+      }
+    }).catch(error => {
+      console.log("delete dog errors", error);
+    })
+  }
+
+  updateFavoriteState(id) {
+    let asd = this.state.dog
+        asd.favorite == true ? asd.favorite = false : asd.favorite = true 
+    this.setState({
+        dog: asd
+    })
+  }
   
   render() {
+    console.log('PUSSY', this.state.dog)
     if (this.state.dog == null) {
       this.props.history.push('/dogs');
-      return <div></div>
+      return <div></div> 
     } else {
 
       return (
@@ -109,8 +138,8 @@ class DogMainCard extends Component {
             <Typography color="textPrimary" paragraph>{this.state.dog.description}</Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
+            <IconButton onClick={this.favoriteUpdate} aria-label="add to favorites">
+              <FavoriteIcon color={this.state.dog.favorite ? 'secondary' : 'disabled' } />
             </IconButton>
             {this.props.loggedInStatus == 'LOGGED_IN'
               ? <>
