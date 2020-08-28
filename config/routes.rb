@@ -4,12 +4,11 @@ Rails.application.routes.draw do
     namespace :v1 do 
       resources :dogs      
       resources :subscribes
-      get 'favorites/update', defaults: { format: 'js' }
-      get '/my_list', to: 'dogs#my_list'  
-      get 'my_favorites', to: 'dogs#favorites'   
-      get '/new_dog', to: 'dogs#new_dog'
+      get 'new_dog', to: 'dogs#new'
       get '/dogs/edit/:id', to: 'dogs#edit'
-      get '/favorites', to: 'dogs#favorites'
+      get 'my_dogs', to: 'dogs#my_dogs'  
+      get 'favorite_dogs', to: 'dogs#favorite_dogs'  
+      get 'favorites/update', defaults: { format: 'js' }
     end
   end   
  
@@ -22,6 +21,5 @@ Rails.application.routes.draw do
                controllers: {
                  sessions: 'sessions',
                  registrations: 'registrations'
-               }
-  
+               }  
 end

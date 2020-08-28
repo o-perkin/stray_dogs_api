@@ -28,7 +28,7 @@ RSpec.describe "Dogs", type: :request do
       breed = create(:breed)
       city = create(:city)
       age = create(:age)
-      dog = create(:dog, name: "Albus", breed_id: breed.id, city_id: city.id, age_id: age.id)
+      dog = create(:dog, name: "Albus", breed: breed, city: city, age: age)
       get "/api/v1/dogs?breed_id=#{breed.id}&city_id=#{city.id}&age_from=#{age.id - 1}&age_to=#{age.id + 1}"
       expect(response).to have_http_status(200)
       expect(json['data'].length).to eq(1)
@@ -44,19 +44,19 @@ RSpec.describe "Dogs", type: :request do
     end
 
     it 'sends dog that fits the sort parameters' do
-      age = create(:age, id: "1")
-      dog = create(:dog, age_id: age.id)
+      age = create(:age, id: "1", years: '1')
+      dog = create(:dog, age: age)
       get "/api/v1/dogs?sort=age_id&direction=asc"
       expect(response).to have_http_status(200)
-      expect(json['data'][0]["age_id"]).to eq(1)
+      expect(json['data'][0]["age"]).to eq('1')
       get "/api/v1/dogs?sort=age_id&direction=desc"
-      expect(json['data'][0]["age_id"]).to_not eq(1)
+      expect(json['data'][0]["age"]).to_not eq('1')
     end
   end
 
-  describe "Get/api/v1/my_list" do 
+  describe "Get/api/v1/my_dogs" do 
     it 'sends error that you need to login first' do      
-      get '/api/v1/my_list'
+      get '/api/v1/my_dogs'
       expect(response).to have_http_status(401)
       expect(response.body).to eq("You need to sign in or sign up before continuing.")
     end
@@ -65,10 +65,10 @@ RSpec.describe "Dogs", type: :request do
       user = create(:user)
       sign_in user 
       dog = create(:dog, user_id: user.id)   
-      get '/api/v1/my_list'
+      get '/api/v1/my_dogs'
       expect(response).to have_http_status(200)
-      expect(json['data'].length).to eq(1)
-      expect(json['data'][0]["name"]).to eq(dog.name)
+      expect(json['data']['dogs'].length).to eq(1)
+      expect(json['data']['dogs'][0]["name"]).to eq(dog.name)
     end
   end
 
@@ -77,7 +77,7 @@ RSpec.describe "Dogs", type: :request do
       dog = create(:dog)   
       get "/api/v1/dogs/#{dog.id}"
       expect(response).to have_http_status(200)
-      expect(json['data']["dog"]["name"]).to eq(dog.name)
+      expect(json['data']["dog"][0]["name"]).to eq(dog.name)
     end
   end
 

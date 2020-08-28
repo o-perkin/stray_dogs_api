@@ -37,16 +37,16 @@ module Api
       private
 
         def set_subscribe
-          @subscribe = current_user.subscribe if current_user
+          @subscribe ||= current_user.subscribe if current_user
         end
 
         def set_subscribe_new
           @subscribe = Subscribe.new(subscribe_params)
-          @subscribe.user_id = current_user.id
+          @subscribe.user = current_user
         end  
 
         def send_email(user, subscriptions, action)
-          UserMailer.email_after_subscribing(user, subscriptions).deliver
+          UserMailer.email_subscription_confirmation(user, subscriptions).deliver
           render json: {status: "Success",  message: "Subscribe #{action}", data: subscriptions}, status: :ok 
         end
 

@@ -2,30 +2,24 @@ module Api
   module V1
     class DogsController < ApplicationController
       include SendEmails
-      before_action :authenticate_user!, only: [:my_list, :create, :update, :destroy, :edit, :favorites]
+      before_action :authenticate_user!, only: [:my_dogs, :new, :create, :update, :destroy, :edit, :favorite_dogs]
       before_action :set_dog, only: [:show, :edit, :update, :destroy]
       before_action :set_new_dog, only: [:create]      
 
       # GET /dogs
       def index 
-        @dogs = set_list_of_dogs.per(5).search(params[:search])        
+        @dogs = sort_dogs.per(5).search(params[:search])        
         render json: {status: "Success",  message: "Loaded dogs", data: dogs_to_json(@dogs)}, status: :ok
       end
 
       # GET /dogs/1
       def show     
-        new_dog = {
-          id: @dog.id,
-          name: @dog.name,
-          breed: @dog.breed.name,
-          city: @dog.city.name,
-          age: @dog.age.years,
-          description: @dog.description,
-          favorite: Favorite.favorite_exists?(@dog, current_user),
-          user: @dog.user,
-          created_at: @dog.created_at
-        }  
-        render json: {status: "Success",  message: "Loaded dog", data: {dog: new_dog}}, status: :ok 
+        render json: {status: "Success",  message: "Loaded dog", data: {dog: dogs_to_json([@dog])}}, status: :ok 
+      end
+
+      # GET /new_dog
+      def new
+        render json: {status: "Success",  message: "Loaded dogs params", data: {breed: Breed.all, city: City.all, age: Age.all}}, status: :ok
       end
 
       # Get /dogs/edit/1
@@ -37,41 +31,25 @@ module Api
         end
       end
 
-      # GET /my_list
-      def my_list
-        @dogs = set_list_of_dogs.per(2).current_user(current_user.id)
+      # GET /my_dogs
+      def my_dogs
+        @dogs = sort_dogs.per(4).current_user(current_user.id)
         render json: {status: "Success",  message: "Loaded dogs", data: {dogs: @dogs, user: current_user}}, status: :ok
       end
 
-       # GET /dogs/new
-      def new_dog
-        render json: {status: "Success",  message: "Loaded dogs params", data: {breed: Breed.all, city: City.all, age: Age.all}}, status: :ok
-      end
-
-      def favorites
-        @dogs = []     
-        current_user.favorites.each do |favorite| 
-          dog = {
-            id: favorite.dog.id,
-            name: favorite.dog.name,
-            breed: favorite.dog.breed.name,
-            city: favorite.dog.city.name,
-            age: favorite.dog.age.years,
-            description: favorite.dog.description,
-            user: favorite.dog.user,
-            favorite: true,
-            created_at: favorite.dog.created_at
-          }
-          
-          @dogs << dog
+      # GET /favorite_dogs
+      def favorite_dogs
+        dogs = []
+        current_user.favorites.each do |favorite|
+          dogs << favorite.dog
         end
-        render json: {status: "Success", message: "Loaded Favorites", data: @dogs}, status: :ok        
+        render json: {status: "Success", message: "Loaded Favorites", data: dogs_to_json(dogs)}, status: :ok      
       end
 
       # POST /dogs
       def create  
         if @dog.save
-          send_emails(current_user, set_subscriptions)
+          send_emails(current_user, Subscription.find_by_dog_params(params[:dog]))
           render json: {status: "Success",  message: "Created a dog", data: @dog}, status: :created 
         else
           render json: {status: "Error",  message: "Dog not saved", data: @dog.errors}, status: :unprocessable_entity 
@@ -104,28 +82,16 @@ module Api
       private
 
         def set_dog
-          @dog = Dog.find(params[:id])
+          @dog ||= Dog.find(params[:id])
         end
 
         def set_new_dog
           @dog = Dog.new(dog_params)
-          @dog.user_id = current_user.id
+          @dog.user = current_user
         end
 
-        def set_subscriptions      
-          Subscription.find_by_dog_params(params[:dog])
-        end
-
-        def set_list_of_dogs
-          Dog.filters(set_filter_params).order(sort_column + " " + sort_direction).page(params[:page])
-        end
-
-        def dog_params
-          params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id)
-        end
-
-        def set_filter_params
-          {breed: params[:breed_id], city: params[:city_id], age_from: params[:age_from], age_to: params[:age_to]}.transform_values {|v| v == "" ? v = nil : v}   
+        def sort_dogs
+          Dog.filters(params).order(sort_column + " " + sort_direction).page(params[:page])
         end
 
         def sort_column
@@ -136,9 +102,12 @@ module Api
           %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
         end
 
+        def dog_params
+          params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id)
+        end
+
         def dogs_to_json dogs
-          dogs_json = []    
-          
+          dogs_json = []
           dogs.each do |dog|
             new_dog = {
               id: dog.id,

@@ -3,10 +3,10 @@ module SendEmails
 
   def send_emails(user, subscriptions)
     if subscriptions == []
-      UserMailer.email_after_creating_dog(user).deliver      
+      UserMailer.email_confirmation_of_created_dog(user).deliver      
     else
-      UserMailer.email_if_dog_already_wanted(user, subscriptions).deliver
-      UserMailer.email_if_dog_appeared(user, subscriptions).deliver
+      UserMailer.email_that_dog_is_wanted(user, subscriptions).deliver
+      UserMailer.email_that_dog_appeared(user, subscriptions).deliver
     end
   end
 end

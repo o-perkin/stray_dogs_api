@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe UserMailer, type: :mailer do
 
-  describe "email_after_creating_dog" do 
+  describe "email_confirmation_of_created_dog" do 
     let!(:user) { create(:user, email: "email@gmail.com") }
-    let!(:mail) { UserMailer.email_after_creating_dog(user) }
+    let!(:mail) { UserMailer.email_confirmation_of_created_dog(user) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Ви додали собаку!")
@@ -18,10 +18,10 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  describe "email_if_dog_already_wanted" do
+  describe "email_that_dog_is_wanted" do
     let!(:user) { create(:user, email: "email2@gmail.com") }
     let!(:subscription) { create(:subscription) }
-    let!(:mail) { UserMailer.email_if_dog_already_wanted(user, [subscription]) }
+    let!(:mail) { UserMailer.email_that_dog_is_wanted(user, [subscription]) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("На сайті вже шукають вашу собаку!")
@@ -36,11 +36,11 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  describe "email_after_subscribing" do
+  describe "email_subscription_confirmation" do
     let!(:user) { create(:user, email: "email3@gmail.com") }
     let!(:dog) { create(:dog) }
     let!(:subscription) { create(:subscription, breed_id: dog.breed_id, city_id: dog.city_id) }
-    let!(:mail) { UserMailer.email_after_subscribing(user, [subscription]) }
+    let!(:mail) { UserMailer.email_subscription_confirmation(user, [subscription]) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Ви підписались!")
@@ -55,11 +55,11 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  describe "email_if_dog_appeared" do
+  describe "email_that_dog_appeared" do
     let!(:subscription) { create(:subscription) }
     let!(:user) { create(:user) }
     let!(:dog) { create(:dog, user_id: user.id) }
-    let!(:mail) { UserMailer.email_if_dog_appeared( user, [subscription]) }
+    let!(:mail) { UserMailer.email_that_dog_appeared( user, [subscription]) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("На сайті з'явилась потрібна вам собака!")

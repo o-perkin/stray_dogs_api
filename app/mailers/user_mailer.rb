@@ -1,15 +1,14 @@
 class UserMailer < ApplicationMailer
   helper :mailer
-
   default from: ENV['gmail_username']
  
-  def email_after_subscribing(user, subscriptions)
+  def email_subscription_confirmation(user, subscriptions)
     @user = user
     @subscriptions = subscriptions
     mail(to: @user.email, subject: 'Ви підписались!')
   end
 
-  def email_if_dog_already_wanted(user, subscriptions)
+  def email_that_dog_is_wanted(user, subscriptions)
     @user = user
     @subscriptions = subscriptions
     mail(to: @user.email, subject: 'На сайті вже шукають вашу собаку!')  do |format|
@@ -17,12 +16,12 @@ class UserMailer < ApplicationMailer
     end
   end
 
-  def email_after_creating_dog(user)
+  def email_confirmation_of_created_dog(user)
     @user = user
     mail(to: @user.email, subject: 'Ви додали собаку!')
   end
 
-  def email_if_dog_appeared(user, subscriptions)
+  def email_that_dog_appeared(user, subscriptions)
     subscriptions.each do |subscription|
       @user = subscription.subscribe.user
       @dog = user.dogs.last

@@ -10,3 +10,4 @@ class RegistrationsController < Devise::RegistrationsController
     render json: { message: "User deleted" }, status: :ok
   end
 end
+ 
