@@ -15,8 +15,8 @@
       <% if @subscriptions[num] %>
         <tr>
           <th scope="row" class="subscription-number"><b>Dog 1 </b></th>
-          <td><%= @subscriptions[num].breed.name %></td>
-          <td><%= @subscriptions[num].city.name %></td>
+          <td><%= @subscriptions[num].breed %></td>
+          <td><%= @subscriptions[num].city %></td>
           <td><%= @subscriptions[num].age_from %>..
             <%= @subscriptions[num].age_to %>
           </td>
@@ -34,9 +34,9 @@
         <p>Звертаю вашу увагу на те, що на сайті вже є потрібна вам собака: </p>
           <div>
             Ім'я собаки: <%= dog.name %> <br>
-            Порода: <%= dog.breed.name %> <br>
-            Місто: <%= dog.city.name %> <br>
-            Вік: <%= dog.age.years %> <br>
+            Порода: <%= dog.breed %> <br>
+            Місто: <%= dog.city %> <br>
+            Вік: <%= dog.age %> <br>
             <% puts dog.inspect %>
             Власник собаки: <%= dog.user.last_name %> <%= dog.user.first_name %><br>
             Email власника собаки: <%= dog.user.email %> <br>

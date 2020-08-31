@@ -19,7 +19,7 @@ module Api
 
       # GET /new_dog
       def new
-        render json: {status: "Success",  message: "Loaded dogs params", data: {breed: Breed.all, city: City.all, age: Age.all}}, status: :ok
+        render json: {status: "Success",  message: "Loaded dogs params", data: {breed: Dog.breeds, city: Dog.cities, age: Dog.ages}}, status: :ok
       end
 
       # Get /dogs/edit/1
@@ -87,7 +87,7 @@ module Api
 
         def set_new_dog
           @dog = Dog.new(dog_params)
-          @dog.user = current_user
+          @dog.user_id = current_user.id
         end
 
         def sort_dogs
@@ -103,7 +103,7 @@ module Api
         end
 
         def dog_params
-          params.require(:dog).permit(:name, :breed_id, :city_id, :age_id, :description, :user_id)
+          params.require(:dog).permit(:name, :breed, :city, :age, :description, :user_id)
         end
 
         def dogs_to_json dogs
@@ -112,11 +112,11 @@ module Api
             new_dog = {
               id: dog.id,
               name: dog.name,
-              breed: dog.breed.name,
-              city: dog.city.name,
-              age: dog.age.years,
+              breed: dog.breed,
+              city: dog.city,
+              age: dog.age,
               description: dog.description,
-              favorite: Favorite.favorite_exists?(dog, current_user) ? true : false,
+              favorite: Favorite.favorite_exists?(dog, current_user),
               user: dog.user,
               created_at: dog.created_at
             }            
