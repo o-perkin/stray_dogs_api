@@ -4,7 +4,8 @@ module Api
       include SendEmails
       before_action :authenticate_user!, only: [:my_dogs, :new, :create, :update, :destroy, :edit, :favorite_dogs]
       before_action :set_dog, only: [:show, :edit, :update, :destroy]
-      before_action :set_new_dog, only: [:create]      
+      before_action :set_new_dog, only: [:create]   
+      around_action :check_authorization, only: [:create, :update, :edit, :destroy]   
 
       # GET /dogs
       def index 
@@ -24,11 +25,7 @@ module Api
 
       # Get /dogs/edit/1
       def edit
-        if current_user.id == @dog.user_id   
-          render json: {status: "Success",  message: "Loaded dog", data: {dog: @dog}}, status: :ok 
-        else 
-          render json: {status: "Failed",  message: "Access denied"}, status: :forbidden
-        end
+        render json: {status: "Success",  message: "Loaded dog", data: {dog: @dog}}, status: :ok 
       end
 
       # GET /my_dogs
@@ -58,25 +55,17 @@ module Api
 
       # PATCH/PUT /dogs/1
       def update      
-        if current_user.id == @dog.user_id
-          if @dog.update(dog_params)
-            render json: {status: "Success",  message: "Updated a dog", data: @dog}, status: :ok 
-          else
-            render json: {status: "Error",  message: "Dog not updated", data: @dog.errors}, status: :unprocessable_entity 
-          end
+        if @dog.update(dog_params)
+          render json: {status: "Success",  message: "Updated a dog", data: @dog}, status: :ok 
         else
-          render json: {status: "Failed",  message: "Access denied"}, status: :forbidden
-        end      
+          render json: {status: "Error",  message: "Dog not updated", data: @dog.errors}, status: :unprocessable_entity 
+        end 
       end
 
       # DELETE /dogs/1
       def destroy
-        if current_user.id == @dog.user_id
-          @dog.destroy
-          render json: {status: "Success",  message: "Deleted a dog"}, status: :ok
-        else
-          render json: {status: "Failed",  message: "Access denied"}, status: :forbidden
-        end
+        @dog.destroy
+        render json: {status: "Success",  message: "Deleted a dog"}, status: :ok
       end
 
       private
@@ -124,6 +113,20 @@ module Api
           end
           dogs_json
         end
+
+        def check_authorization
+          ActiveRecord::Base.transaction do
+            begin
+              if current_user.id == @dog.user_id  
+                yield
+              else 
+                render json: {status: "Failed",  message: "Access denied"}, status: :forbidden
+              end
+            ensure
+              raise ActiveRecord::Rollback
+            end
+          end
+        end   
     end
   end
 end

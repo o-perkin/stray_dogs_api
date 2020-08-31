@@ -33,7 +33,7 @@ class Dog < ApplicationRecord
   scope :current_user, ->(id) { where(user_id: id) }
 
   def self.search search
-    (search && search != "") ? where(name: search) : all
+    search.present? ? where(name: search) : all
   end
 
   def self.filters params    
