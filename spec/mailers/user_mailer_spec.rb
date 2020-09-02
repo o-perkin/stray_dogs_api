@@ -38,8 +38,8 @@ RSpec.describe UserMailer, type: :mailer do
 
   describe "email_subscription_confirmation" do
     let!(:user) { create(:user, email: "email3@gmail.com") }
-    let!(:dog) { create(:dog) }
-    let!(:subscription) { create(:subscription, breed_id: dog.breed_id, city_id: dog.city_id) }
+    let!(:dog) { create(:dog, breed: 2, city: 3, age: 2) }
+    let!(:subscription) { create(:subscription) }
     let!(:mail) { UserMailer.email_subscription_confirmation(user, [subscription]) }
 
     it "renders the headers" do
@@ -50,8 +50,8 @@ RSpec.describe UserMailer, type: :mailer do
 
     it "renders the body" do
       expect(mail.body.encoded).to match(user.first_name)
-      expect(mail.body.encoded).to match(dog.breed.name)
-      expect(mail.body.encoded).to match(dog.city.name)
+      expect(mail.body.encoded).to match(dog.breed)
+      expect(mail.body.encoded).to match(dog.city)
     end
   end
 

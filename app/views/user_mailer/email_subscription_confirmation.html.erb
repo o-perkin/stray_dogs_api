@@ -10,24 +10,21 @@
     </tr>
   </thead>
   <tbody id="subscription-table-body">
-
-    <% (0..2).each do |num| %>
-      <% if @subscriptions[num] %>
-        <tr>
-          <th scope="row" class="subscription-number"><b>Dog 1 </b></th>
-          <td><%= @subscriptions[num].breed %></td>
-          <td><%= @subscriptions[num].city %></td>
-          <td><%= @subscriptions[num].age_from %>..
-            <%= @subscriptions[num].age_to %>
-          </td>
-        </tr>
-      <% end %>
+    <% @subscriptions.each do |subscription| %>
+      <tr>
+        <th scope="row" class="subscription-number"><b>Dog </b></th>
+        <td><%= subscription.breed %></td>
+        <td><%= subscription.city %></td>
+        <td><%= subscription.age_from %>..
+          <%= subscription.age_to %>
+        </td>
+      </tr>
     <% end %>
-
   </tbody>
 </table>
 
 <div>
+  <%= set_needed_dogs(@subscriptions).inspect.to_s %>
   <% if set_needed_dogs(@subscriptions) != [] %>
     <% set_needed_dogs(@subscriptions).each do |dogs| %>
       <% dogs.each do |dog| %>
@@ -37,7 +34,6 @@
             Порода: <%= dog.breed %> <br>
             Місто: <%= dog.city %> <br>
             Вік: <%= dog.age %> <br>
-            <% puts dog.inspect %>
             Власник собаки: <%= dog.user.last_name %> <%= dog.user.first_name %><br>
             Email власника собаки: <%= dog.user.email %> <br>
           </div>

@@ -2,46 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Dog, :type => :model do
 
-  context "Vadidations" do
-
-    before(:each) do
-      @dog = build(:dog)
-    end
-
-    it "is valid with valid attributes" do     
-      expect(@dog).to be_valid
-    end
-
-    it "is not valid without a name" do
-      @dog.name = nil
-      expect(@dog).to_not be_valid
-    end
-
-    it "is not valid without a breed" do
-      @dog.breed_id = nil
-      expect(@dog).to_not be_valid
-    end
-
-    it "is not valid without a city" do
-      @dog.city_id = nil
-      expect(@dog).to_not be_valid
-    end
-
-    it "is not valid without a age" do
-      @dog.age_id = nil
-      expect(@dog).to_not be_valid
-    end
-
-    it "is not valid without a user" do
-      @dog.user_id = nil
-      expect(@dog).to_not be_valid
-    end
-  end
-
   context "Associations" do
-    it { should belong_to(:breed) }
-    it { should belong_to(:city) }
-    it { should belong_to(:age) }
     it { should belong_to(:user) }
     it { should have_many(:favorites).dependent(:delete_all) }
   end
@@ -71,29 +32,29 @@ RSpec.describe Dog, :type => :model do
         @city = 2
         @age_from = 2
         @age_to = 4
-        @params = {breed_id: @breed, city_id: @city, age_from: @age_from, age_to: @age_to}
+        @params = {breed: @breed, city: @city, age_from: @age_from, age_to: @age_to}
       end
 
       it 'should return scope with all filtered params' do  
         filtered_by_method = Dog.filters(@params) 
-        filtered_without_method = Dog.where(breed_id: @breed, city_id: @city).where(age_id: @age_from.to_i..@age_to.to_i)
+        filtered_without_method = Dog.where(breed: @breed, city: @city).where(age: @age_from.to_i..@age_to.to_i)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
       it 'should return scope with all filtered params except breed' do   
-        @params[:breed_id] = ""     
+        @params[:breed] = ""     
 
         filtered_by_method = Dog.filters(@params) 
-        filtered_without_method = Dog.where(city_id: @city).where(age_id: @age_from.to_i..@age_to.to_i)
+        filtered_without_method = Dog.where(city: @city).where(age: @age_from.to_i..@age_to.to_i)
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
       it 'should return scope with all filtered params except city' do   
-        @params[:city_id] = ""  
+        @params[:city] = ""  
 
         filtered_by_method = Dog.filters(@params) 
-        filtered_without_method = Dog.where(breed_id: @breed).where(age_id: @age_from.to_i..@age_to.to_i)
+        filtered_without_method = Dog.where(breed: @breed).where(age: @age_from.to_i..@age_to.to_i)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
@@ -102,7 +63,7 @@ RSpec.describe Dog, :type => :model do
         @params[:age_from] = ""  
 
         filtered_by_method = Dog.filters(@params)
-        filtered_without_method = Dog.where(breed_id: @breed, city_id: @city).where(age_id: 1..@age_to.to_i)
+        filtered_without_method = Dog.where(breed: @breed, city: @city).where(age: 1..@age_to.to_i)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
@@ -111,17 +72,17 @@ RSpec.describe Dog, :type => :model do
         @params[:age_to] = "" 
 
         filtered_by_method = Dog.filters(@params)
-        filtered_without_method = Dog.where(breed_id: @breed, city_id: @city).where(age_id: @age_from.to_i..Age.last.id)
+        filtered_without_method = Dog.where(breed: @breed, city: @city).where(age: @age_from.to_i..10)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
       it 'should return scope with all filtered params except breed and city' do   
-        @params[:breed_id] = ""  
-        @params[:city_id] = ""  
+        @params[:breed] = ""  
+        @params[:city] = ""  
 
         filtered_by_method = Dog.filters(@params) 
-        filtered_without_method = Dog.where(age_id: @age_from.to_i..@age_to.to_i)
+        filtered_without_method = Dog.where(age: @age_from.to_i..@age_to.to_i)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
@@ -131,98 +92,98 @@ RSpec.describe Dog, :type => :model do
         @params[:age_to] = ""  
 
         filtered_by_method = Dog.filters(@params) 
-        filtered_without_method = Dog.where(breed_id: @breed, city_id: @city)
+        filtered_without_method = Dog.where(breed: @breed, city: @city)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
       it 'should return scope with all filtered params except breed and age_from' do           
-        @params[:breed_id] = ""  
+        @params[:breed] = ""  
         @params[:age_from] = ""  
 
         filtered_by_method = Dog.filters(@params) 
-        filtered_without_method = Dog.where(city_id: @city).where(age_id: 1..@age_to.to_i)
+        filtered_without_method = Dog.where(city: @city).where(age: 1..@age_to.to_i)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
       it 'should return scope with all filtered params except breed and age_to' do           
-        @params[:breed_id] = ""  
+        @params[:breed] = ""  
         @params[:age_to] = ""  
 
         filtered_by_method = Dog.filters(@params) 
-        filtered_without_method = Dog.where(city_id: @city).where(age_id: @age_from.to_i..Age.last.id)
+        filtered_without_method = Dog.where(city: @city).where(age: @age_from.to_i..10)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
       it 'should return scope with all filtered params except city and age_from' do           
-        @params[:city_id] = ""  
+        @params[:city] = ""  
         @params[:age_from] = ""  
 
         filtered_by_method = Dog.filters(@params) 
-        filtered_without_method = Dog.where(breed_id: @breed).where(age_id: 1..@age_to.to_i)
+        filtered_without_method = Dog.where(breed: @breed).where(age: 1..@age_to.to_i)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
       it 'should return scope with all filtered params except city and age_to' do           
-        @params[:city_id] = ""  
+        @params[:city] = ""  
         @params[:age_to] = ""  
 
         filtered_by_method = Dog.filters(@params)
-        filtered_without_method = Dog.where(breed_id: @breed).where(age_id: @age_from.to_i..Age.last.id)
+        filtered_without_method = Dog.where(breed: @breed).where(age: @age_from.to_i..10)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
       it 'should return scope filtered by breed only' do           
-        @params[:city_id] = ""  
+        @params[:city] = ""  
         @params[:age_from] = ""  
         @params[:age_to] = ""  
 
         filtered_by_method = Dog.filters(@params)
-        filtered_without_method = Dog.where(breed_id: @breed)
+        filtered_without_method = Dog.where(breed: @breed)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
       it 'should return scope filtered by city only' do           
-        @params[:breed_id] = ""  
+        @params[:breed] = ""  
         @params[:age_from] = ""  
         @params[:age_to] = ""  
 
         filtered_by_method = Dog.filters(@params) 
-        filtered_without_method = Dog.where(city_id: @city)
+        filtered_without_method = Dog.where(city: @city)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
       it 'should return scope filtered by age_from only' do           
-        @params[:breed_id] = ""  
-        @params[:city_id] = ""  
+        @params[:breed] = ""  
+        @params[:city] = ""  
         @params[:age_to] = ""  
 
         filtered_by_method = Dog.filters(@params) 
-        filtered_without_method = Dog.where(age_id: @age_from.to_i..Age.last.id)
+        filtered_without_method = Dog.where(age: @age_from.to_i..10)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
       it 'should return scope filtered by age_to only' do           
-        @params[:breed_id] = ''  
-        @params[:city_id] = ''  
+        @params[:breed] = ''  
+        @params[:city] = ''  
         @params[:age_from] = ''  
 
         filtered_by_method = Dog.filters(@params) 
-        filtered_without_method = Dog.where(age_id: 1..@age_to)
+        filtered_without_method = Dog.where(age: 1..@age_to)
 
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
       it 'should return all if all params are empty' do           
-        @params[:breed_id] = ''  
-        @params[:city_id] = ''  
+        @params[:breed] = ''  
+        @params[:city] = ''  
         @params[:age_from] = ''  
         @params[:age_to] = ''  
 
@@ -245,7 +206,7 @@ RSpec.describe Dog, :type => :model do
 
       it 'should return scope filtered by age_from and age_to' do 
         filtered_by_method = Dog.determine_age_range(@params)
-        filtered_without_method = Dog.where(age_id: @age_from.to_i..@age_to.to_i)
+        filtered_without_method = Dog.where(age: @age_from.to_i..@age_to.to_i)
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
@@ -254,7 +215,7 @@ RSpec.describe Dog, :type => :model do
         @params[:city] = nil
         @params[:age_to] = nil
         filtered_by_method = Dog.determine_age_range(@params)
-        filtered_without_method = Dog.where(age_id: @age_from.to_i..Age.last.id)
+        filtered_without_method = Dog.where(age: @age_from.to_i..10)
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 
@@ -263,7 +224,7 @@ RSpec.describe Dog, :type => :model do
         @params[:city] = nil
         @params[:age_from] = nil
         filtered_by_method = Dog.determine_age_range(@params)
-        filtered_without_method = Dog.where(age_id: 1..@age_to.to_i)
+        filtered_without_method = Dog.where(age: 1..@age_to.to_i)
         expect(filtered_by_method).to eq(filtered_without_method)
       end
 

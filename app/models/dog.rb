@@ -1,4 +1,7 @@
 class Dog < ApplicationRecord
+  has_many :favorites, dependent: :delete_all
+  belongs_to :user
+
   enum breed: {
     'Labrador' => 1, 
     'German Shepherd' => 2, 
@@ -24,11 +27,7 @@ class Dog < ApplicationRecord
     '8' => 8, 
     '9' => 9, 
     '10' => 10
-  }
-  has_many :favorites, dependent: :delete_all
-  belongs_to :user
-  validates :name, presence: true
-  validates :user_id, presence: true
+  }  
 
   scope :current_user, ->(id) { where(user_id: id) }
 
@@ -37,21 +36,21 @@ class Dog < ApplicationRecord
   end
 
   def self.filters params    
-    where(select_breed_and_city(convert_empty_to_nill(params)))
-    .determine_age_range(convert_empty_to_nill(params))
+    where(select_breed_and_city(convert_empty_to_nil(params)))
+    .determine_age_range(convert_empty_to_nil(params))
     .all
   end  
 
   private 
 
-    def self.convert_empty_to_nill params
+    def self.convert_empty_to_nil params
       {
         breed: params[:breed], 
         city: params[:city], 
         age_from: params[:age_from], 
         age_to: params[:age_to]
       }
-      .transform_values {|v| v == "" ? v = nil : v}   
+      .transform_values(&:presence)
     end
 
     def self.determine_age_range params
@@ -63,7 +62,7 @@ class Dog < ApplicationRecord
     end
 
     def self.select_breed_and_city params
-      params.select { |k, v| v != nil && (k == :breed || k == :city)}
+      params.select { |k, v| (k == :breed || k == :city) && v }
     end
 
     def self.determine_age_from age_from

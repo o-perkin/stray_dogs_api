@@ -4,9 +4,9 @@ FactoryBot.define do
 
   factory :dog do
     name { Faker::Creature::Dog.name }
-    breed_id { create(:breed).id }
-    city_id { create(:city).id }
-    age_id { create(:age).id }
+    breed { Faker::Number.between(from: 1, to: 5) }
+    city { Faker::Number.between(from: 1, to: 5) }
+    age { Faker::Number.between(from: 1, to: 10) }
     user_id { create(:user).id }
   end  
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_31_130917) do
+ActiveRecord::Schema.define(version: 2020_09_02_085241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(version: 2020_08_31_130917) do
   end
 
   create_table "dogs", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.integer "breed", null: false
     t.integer "city", null: false
     t.integer "age", null: false
@@ -69,13 +69,13 @@ ActiveRecord::Schema.define(version: 2020_08_31_130917) do
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.bigint "subscribe_id"
-    t.integer "age_from"
-    t.integer "age_to"
+    t.integer "subscribe_id", null: false
+    t.integer "age_from", null: false
+    t.integer "age_to", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "breed"
-    t.integer "city"
+    t.integer "breed", null: false
+    t.integer "city", null: false
     t.index ["subscribe_id"], name: "index_subscriptions_on_subscribe_id"
   end
 

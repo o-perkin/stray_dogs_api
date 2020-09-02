@@ -5,7 +5,7 @@ module Api
       before_action :find_favorites_by_dog
 
       def update     
-        if @favorites == []
+        if @favorites.empty?
           create_favorite
           @favorite_exists = true
         else

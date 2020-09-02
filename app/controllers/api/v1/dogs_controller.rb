@@ -1,15 +1,18 @@
 module Api
   module V1
     class DogsController < ApplicationController
-      include SendEmails
-      before_action :authenticate_user!, only: [:my_dogs, :new, :create, :update, :destroy, :edit, :favorite_dogs]
+      before_action :authenticate_user!, except: [:index, :show]
       before_action :set_dog, only: [:show, :edit, :update, :destroy]
+      before_action :find_subscriptions, only: [:create]
       before_action :set_new_dog, only: [:create]   
-      around_action :check_authorization, only: [:create, :update, :edit, :destroy]   
+      # before_action :sanitize_page_params
+      around_action :check_authorization, only: [:update, :edit, :destroy]   
+
+      NUMBER_OF_DOGS_PER_PAGE = 5
 
       # GET /dogs
       def index 
-        @dogs = sort_dogs.per(5).search(params[:search])        
+        @dogs = sort_dogs.per(NUMBER_OF_DOGS_PER_PAGE).search(params[:search])        
         render json: {status: "Success",  message: "Loaded dogs", data: dogs_to_json(@dogs)}, status: :ok
       end
 
@@ -30,7 +33,7 @@ module Api
 
       # GET /my_dogs
       def my_dogs
-        @dogs = sort_dogs.per(4).current_user(current_user.id)
+        @dogs = sort_dogs.per(NUMBER_OF_DOGS_PER_PAGE).current_user(current_user.id)
         render json: {status: "Success",  message: "Loaded dogs", data: {dogs: @dogs, user: current_user}}, status: :ok
       end
 
@@ -45,26 +48,25 @@ module Api
 
       # POST /dogs
       def create  
-        if @dog.save
-          send_emails(current_user, Subscription.find_by_dog_params(params[:dog]))
-          render json: {status: "Success",  message: "Created a dog", data: @dog}, status: :created 
+        @dog.save!          
+        if @subscriptions.empty?
+          UserMailer.email_confirmation_of_created_dog(current_user).deliver      
         else
-          render json: {status: "Error",  message: "Dog not saved", data: @dog.errors}, status: :unprocessable_entity 
+          UserMailer.email_that_dog_is_wanted(current_user, @subscriptions).deliver
+          UserMailer.email_that_dog_appeared(current_user, @subscriptions).deliver
         end
+        render json: {status: "Success",  message: "Created a dog", data: @dog}, status: :created 
       end
 
-      # PATCH/PUT /dogs/1
-      def update      
-        if @dog.update(dog_params)
-          render json: {status: "Success",  message: "Updated a dog", data: @dog}, status: :ok 
-        else
-          render json: {status: "Error",  message: "Dog not updated", data: @dog.errors}, status: :unprocessable_entity 
-        end 
+      # PATCH /dogs/1
+      def update    
+        @dog.update!(dog_params)
+        render json: {status: "Success",  message: "Updated a dog", data: @dog}, status: :ok 
       end
 
       # DELETE /dogs/1
       def destroy
-        @dog.destroy
+        @dog.destroy!
         render json: {status: "Success",  message: "Deleted a dog"}, status: :ok
       end
 
@@ -79,8 +81,12 @@ module Api
           @dog.user_id = current_user.id
         end
 
+        def find_subscriptions
+          @subscriptions = Subscription.find_by_dog_params(params[:dog])
+        end
+
         def sort_dogs
-          Dog.filters(params).order(sort_column + " " + sort_direction).page(params[:page])
+          Dog.filters(params).order("#{sort_column} #{sort_direction}").page(params[:page])
         end
 
         def sort_column
@@ -96,9 +102,8 @@ module Api
         end
 
         def dogs_to_json dogs
-          dogs_json = []
-          dogs.each do |dog|
-            new_dog = {
+          dogs.map do |dog|
+            {
               id: dog.id,
               name: dog.name,
               breed: dog.breed,
@@ -109,24 +114,24 @@ module Api
               user: dog.user,
               created_at: dog.created_at
             }            
-            dogs_json << new_dog
           end
-          dogs_json
         end
 
         def check_authorization
-          ActiveRecord::Base.transaction do
-            begin
-              if current_user.id == @dog.user_id  
-                yield
-              else 
-                render json: {status: "Failed",  message: "Access denied"}, status: :forbidden
-              end
-            ensure
-              raise ActiveRecord::Rollback
+          begin
+            if current_user.id == @dog.user_id  
+              yield
+            else 
+              render json: {status: "Failed",  message: "Access denied"}, status: :forbidden
             end
           end
         end   
+
+        # def sanitize_page_params
+        #   params[:breed] = params[:breed].to_i if params[:breed]
+        #   params[:city] = params[:city].to_i if params[:city]
+        #   params[:age] = params[:age].to_i if params[:age]
+        # end
     end
   end
 end

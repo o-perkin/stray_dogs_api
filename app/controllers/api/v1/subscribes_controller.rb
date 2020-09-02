@@ -12,47 +12,38 @@ module Api
 
       # POST /subscribes
       def create
-        if @subscribe.save
-          send_email(current_user, @subscribe.subscriptions, 'created')
-        else
-          render json: {status: "Error",  message: "Subscribe not saved", data: @subscribe.errors}, status: :unprocessable_entity 
-        end
+        @subscribe.save!
+        UserMailer.email_subscription_confirmation(current_user, @subscribe.subscriptions).deliver
+        render json: {status: "Success",  message: "Subscribe created", data: @subscribe.subscriptions}, status: :ok    
       end
 
       # PATCH/PUT /subscribes/1
       def update
-        if @subscribe.update(subscribe_params)
-          send_email(current_user, @subscribe.subscriptions, 'updated')
-        else
-          render json: {status: "Error",  message: "Subscribe not updated", data: @subscribe.errors}, status: :unprocessable_entity 
-        end   
+        @subscribe.update!(subscribe_params)
+        UserMailer.email_subscription_confirmation(current_user, @subscribe.subscriptions).deliver
+        render json: {status: "Success",  message: "Subscribe updated", data: @subscribe.subscriptions}, status: :ok 
       end
 
       # DELETE /subscribes/1
       def destroy
-        @subscribe.destroy
+        @subscribe.destroy!
         render json: {status: "Success",  message: "Subscribe deleted"}, status: :ok
       end
 
       private
 
         def set_subscribe
-          @subscribe ||= current_user.subscribe if current_user
+          @subscribe = current_user.try(:subscribe)
         end
 
         def set_subscribe_new
           @subscribe = Subscribe.new(subscribe_params)
-          @subscribe.user = current_user
+          @subscribe.user_id = current_user.id
         end  
 
-        def send_email(user, subscriptions, action)
-          UserMailer.email_subscription_confirmation(user, subscriptions).deliver
-          render json: {status: "Success",  message: "Subscribe #{action}", data: subscriptions}, status: :ok 
-        end
-
         def subscribe_params
-          params.require(:subscribe).permit(:user_id, subscriptions_attributes: [:id, :breed_id, :city_id, :age_from, :age_to, :_destroy])
-        end   
+          params.require(:subscribe).permit(subscriptions_attributes: [:id, :breed, :city, :age_from, :age_to, :_destroy])
+        end  
     end
   end
 end
