@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import { Route, Switch } from "react-router-dom";
-import {NotificationManager} from 'react-notifications';
+import { Route, Switch } from 'react-router-dom';
+import { NotificationManager } from 'react-notifications';
 // pages for this product
-import Components from "views/Components/Components.js";
-import LandingPage from "views/LandingPage/LandingPage.js";
-import ProfilePage from "views/ProfilePage/ProfilePage.js";
-import LoginPage from "views/LoginPage/LoginPage.js";
-import RegisterPage from "views/RegisterPage/RegisterPage.js";
-import MyListPage from "views/MyListPage/MyListPage.js";
-import FavoritesPage from "views/FavoritesPage/FavoritesPage.js";
-import SubscriptionsPage from "views/SubscriptionsPage/SubscriptionsPage.js";
-import NewDogsPage from "views/NewDogsPage/NewDogsPage.js";
-import EditDogsPage from "views/EditDogsPage/EditDogsPage.js";
-import DogsShowPage from "views/DogsShowPage/DogsShowPage.js";
-import { LoopCircleLoading } from 'react-loadingg';
+import Components from 'views/Components/Components.js';
+import LandingPage from 'views/LandingPage/LandingPage.js';
+import ProfilePage from 'views/ProfilePage/ProfilePage.js';
+import LoginPage from 'views/LoginPage/LoginPage.js';
+import RegisterPage from 'views/RegisterPage/RegisterPage.js';
+import MyListPage from 'views/MyListPage/MyListPage.js';
+import FavoritesPage from 'views/FavoritesPage/FavoritesPage.js';
+import SubscriptionsPage from 'views/SubscriptionsPage/SubscriptionsPage.js';
+import NewDogsPage from 'views/NewDogsPage/NewDogsPage.js';
+import EditDogsPage from 'views/EditDogsPage/EditDogsPage.js';
+import DogsShowPage from 'views/DogsShowPage/DogsShowPage.js';
 import axios from 'axios';
 import * as jwtDecode from 'jwt-decode';
 
@@ -25,10 +24,9 @@ export default class App extends Component {
       loggedInStatus: this.checkLoginStatus(),
       user: this.checkUser(),
       dogs: this.checkDogs(),
-      animate: false  
-    }
-    
-    console.log('state', this.state)
+      animate: false
+    };
+    console.log('state', this.state);
 
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
@@ -36,36 +34,35 @@ export default class App extends Component {
     this.checkUser = this.checkUser.bind(this);
     this.checkDogs = this.checkDogs.bind(this);
     this.updateFavoriteState = this.updateFavoriteState.bind(this);
-    this.checkDogsSearchParams = this.checkDogsSearchParams.bind(this);
   }
 
   checkLoginStatus() {
     if (localStorage.getItem('token') != null) {
-      var token = localStorage.getItem('token').replace('Bearer',''); 
+      var token = localStorage.getItem('token').replace('Bearer', '');
       var decoded = jwtDecode(token);
       var current_time = Date.now() / 1000;
-      if ( decoded.exp < current_time) {
+      if (decoded.exp < current_time) {
         return 'NOT_LOGGED_IN';
-      } else return 'LOGGED_IN'
+      } else return 'LOGGED_IN';
     } else {
       return 'NOT_LOGGED_IN';
     }
   }
 
-  handleLogin() {    
+  handleLogin() {
     this.setState({
       loggedInStatus: "LOGGED_IN"
-    })
+    });
   }
 
   handleLogout() {
     this.setState({
-      loggedInStatus: "NOT_LOGGED_IN"
-    })
+      loggedInStatus: 'NOT_LOGGED_IN'
+    });
   }
 
   checkUser() {
-    axios.get('http://localhost:3001/api/v1/my_list.json', {
+    axios.get('http://localhost:3001/api/v1/my_dogs.json', {
       headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
       withCredentials: true
     }).then(response => {
@@ -104,30 +101,10 @@ export default class App extends Component {
     }).catch(error => console.log(error))
   }
 
-  checkDogsSearchParams(params) {
-    this.setState({
-      animate: true
-    })
-    axios.get(`http://localhost:3001/api/v1/dogs?breed_id=${params.breed}&city_id=${params.city}&age_from=${params.age_from}&age_to=${params.age_to}`, {
-        headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
-        withCredentials: true
-    }).then(response => {
-       console.log("AMMAMAMA", response)  
-        this.setState({
-          dogs: response.data.data
-        })
-        this.setState({
-          animate: false
-        }) 
-    }).catch(error => console.log(error))  
-  }
-
   updateFavoriteState(id) {
     this.setState({
       dogs: this.state.dogs.map(dog => {
-        if (dog.id == id) {
-          dog.favorite == true ? dog.favorite = false : dog.favorite = true
-        } 
+        (dog.id == id && dog.favorite == true) ? dog.favorite = false : dog.favorite = true
         return dog
       })
     })
@@ -140,7 +117,7 @@ export default class App extends Component {
           exact 
           path="/dogs" 
           render={props => (
-            <LandingPage {...props} animate={this.state.animate} checkDogsSearchParams={this.checkDogsSearchParams} updateFavoriteState={this.updateFavoriteState} dogs={this.state.dogs ? this.state.dogs : []} current_user={this.state.user ? this.state.user : {}} createNotification={this.createNotification}   handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            <LandingPage {...props} animate={this.state.animate} checkDogsSearchParams={this.checkDogsSearchParams} updateFavoriteState={this.updateFavoriteState} current_user={this.state.user ? this.state.user : {}} createNotification={this.createNotification}   handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
         <Route 

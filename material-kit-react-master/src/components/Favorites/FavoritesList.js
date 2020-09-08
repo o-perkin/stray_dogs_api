@@ -3,7 +3,7 @@ import axios from 'axios';
 import DogCard from 'components/Dogs/DogCard.js';
 class FavoritesList extends Component {
     constructor(props){
-      super(props)
+      super(props) 
       this.state = {
           dogs: []
       }
@@ -11,7 +11,7 @@ class FavoritesList extends Component {
       this.updateFavoriteState = this.updateFavoriteState.bind(this);
     }
     componentDidMount() {
-      axios.get('http://localhost:3001/api/v1/favorites.json', {
+      axios.get('http://localhost:3001/api/v1/favorite_dogs.json', {
         headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
         withCredentials: true
     })

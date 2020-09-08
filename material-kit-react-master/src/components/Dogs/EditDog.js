@@ -20,7 +20,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+import CustomInput from "components/CustomInput/CustomInput.js"; 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -67,11 +67,12 @@ export default class EditDog extends Component {
           this.setState({
             dog: response.data.data.dog,
             name: response.data.data.dog.name,
-            breed: response.data.data.dog.breed_id,
-            city: response.data.data.dog.city_id,
-            age: response.data.data.dog.age_id,
+            breed: response.data.data.dog.breed,
+            city: response.data.data.dog.city,
+            age: response.data.data.dog.age,
             description: response.data.data.dog.description
           })
+          console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', response)
           this.setState({
             animate: false
           })
@@ -105,9 +106,9 @@ export default class EditDog extends Component {
     axios.patch(`http://localhost:3000/api/v1/dogs/${this.props.match.params.dogId}`, {
       dog: {
         name: this.state.name,
-        breed_id: this.state.breed,
-        city_id: this.state.city,
-        age_id: this.state.age,
+        breed: Number(this.state.breed),
+        city: Number(this.state.city),
+        age: Number(this.state.age),
         description: this.state.description
       }
     }, 
@@ -153,8 +154,8 @@ export default class EditDog extends Component {
             <Form.Label>Порода</Form.Label>
             <Form.Control as="select" required name="breed" type="breed" value={this.state.breed} onChange={this.handleChange} >
               {this.state.params 
-                ? this.state.params.breed.map(el => {
-                  return <option value={el.id} key={el.id}>{el.name}</option>
+                ? Object.keys(this.state.params.breed).map(k => {
+                 return <option value={this.state.params.breed[k]} key={this.state.params.breed[k]}>{k}</option>
                 })
 
                 : null
@@ -166,8 +167,8 @@ export default class EditDog extends Component {
             <Form.Label>Місто</Form.Label>
             <Form.Control as="select" required name="city" type="city" value={this.state.city} onChange={this.handleChange} >
               {this.state.params 
-                ? this.state.params.city.map(el => {
-                  return <option value={el.id} key={el.id}>{el.name}</option>
+                ? Object.keys(this.state.params.city).map(k => {
+                return <option value={this.state.params.city[k]} key={this.state.params.city[k]}>{k}</option>
                 })
 
                 : null
@@ -179,8 +180,8 @@ export default class EditDog extends Component {
             <Form.Label>Вік</Form.Label>
             <Form.Control as="select" required name="age" type="age" value={this.state.age} onChange={this.handleChange}>
               {this.state.params 
-                ? this.state.params.age.map(el => {
-                  return <option value={el.id} key={el.id}>{el.years}</option>
+                ? Object.keys(this.state.params.age).map(k => {
+                return <option value={this.state.params.age[k]} key={this.state.params.age[k]}>{k}</option>
                 })
 
                 : null

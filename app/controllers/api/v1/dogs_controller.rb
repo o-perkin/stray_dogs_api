@@ -1,19 +1,18 @@
 module Api
   module V1
     class DogsController < ApplicationController
-      before_action :authenticate_user!, except: [:index, :show]
+      before_action :authenticate_user!, except: [:index, :show, :new]
       before_action :set_dog, only: [:show, :edit, :update, :destroy]
       before_action :find_subscriptions, only: [:create]
       before_action :set_new_dog, only: [:create]   
-      # before_action :sanitize_page_params
       around_action :check_authorization, only: [:update, :edit, :destroy]   
 
       NUMBER_OF_DOGS_PER_PAGE = 5
 
       # GET /dogs
       def index 
-        @dogs = sort_dogs.per(NUMBER_OF_DOGS_PER_PAGE).search(params[:search])        
-        render json: {status: "Success",  message: "Loaded dogs", data: dogs_to_json(@dogs)}, status: :ok
+        @dogs = sort_dogs.search(params[:search])
+        render json: {status: "Success",  message: "Loaded dogs", data: {dogs: dogs_to_json(@dogs), number_of_pages: (Dog.filters(params).length.to_f / NUMBER_OF_DOGS_PER_PAGE).ceil}}, status: :ok
       end
 
       # GET /dogs/1
@@ -28,12 +27,12 @@ module Api
 
       # Get /dogs/edit/1
       def edit
-        render json: {status: "Success",  message: "Loaded dog", data: {dog: @dog}}, status: :ok 
+        render json: {status: "Success",  message: "Loaded dog", data: {dog: dog_to_json_for_edit(@dog)}}, status: :ok 
       end
 
       # GET /my_dogs
       def my_dogs
-        @dogs = sort_dogs.per(NUMBER_OF_DOGS_PER_PAGE).current_user(current_user.id)
+        @dogs = sort_dogs.current_user(current_user.id)
         render json: {status: "Success",  message: "Loaded dogs", data: {dogs: @dogs, user: current_user}}, status: :ok
       end
 
@@ -86,7 +85,7 @@ module Api
         end
 
         def sort_dogs
-          Dog.filters(params).order("#{sort_column} #{sort_direction}").page(params[:page])
+          Dog.filters(params).order("#{sort_column} #{sort_direction}").page(params[:page]).per(NUMBER_OF_DOGS_PER_PAGE)
         end
 
         def sort_column
@@ -99,6 +98,16 @@ module Api
 
         def dog_params
           params.require(:dog).permit(:name, :breed, :city, :age, :description, :user_id)
+        end
+
+        def dog_to_json_for_edit dog
+          {
+            name: dog.name,
+            breed: dog.breed_before_type_cast,
+            city: dog.city_before_type_cast,
+            age: dog.age_before_type_cast,
+            description: dog.description
+          }
         end
 
         def dogs_to_json dogs
@@ -126,12 +135,6 @@ module Api
             end
           end
         end   
-
-        # def sanitize_page_params
-        #   params[:breed] = params[:breed].to_i if params[:breed]
-        #   params[:city] = params[:city].to_i if params[:city]
-        #   params[:age] = params[:age].to_i if params[:age]
-        # end
     end
   end
 end

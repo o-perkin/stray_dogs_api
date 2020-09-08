@@ -24,9 +24,8 @@
 </table>
 
 <div>
-  <%= set_needed_dogs(@subscriptions).inspect.to_s %>
-  <% if set_needed_dogs(@subscriptions) != [] %>
-    <% set_needed_dogs(@subscriptions).each do |dogs| %>
+  <% if find_needed_dogs(@subscriptions) != [] %>
+    <% find_needed_dogs(@subscriptions).each do |dogs| %>
       <% dogs.each do |dog| %>
         <p>Звертаю вашу увагу на те, що на сайті вже є потрібна вам собака: </p>
           <div>

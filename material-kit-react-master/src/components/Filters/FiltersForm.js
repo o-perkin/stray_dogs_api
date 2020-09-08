@@ -36,8 +36,7 @@ export default class FiltersForm extends Component {
       breed: "",
       city: "",
       age_from: "",
-      age_to: "",
-      animate: false
+      age_to: ""
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -50,7 +49,7 @@ export default class FiltersForm extends Component {
       withCredentials: true
     }).then(response => {
         this.setState({
-          params: response.data.data,
+          params: response.data.data,          
         })
       }).catch(error => console.log(error))
   }
@@ -62,7 +61,8 @@ export default class FiltersForm extends Component {
   }
 
   handleSubmit(event) {
-    this.props.checkDogsSearchParams(this.state)
+    console.log(this.state)
+    this.props.handleFilters(this.state)
     event.preventDefault();
   }    
 
@@ -77,22 +77,24 @@ export default class FiltersForm extends Component {
           <Form.Control as="select" name="breed" type="breed" value={this.state.breed} onChange={this.handleChange} >
             <option value="" >Оберіть породу</option>
             {this.state.params 
-              ? this.state.params.breed.map(el => {
-                return <option value={el.id} key={el.id}>{el.name}</option>
-              })
+               ? Object.keys(this.state.params.breed).map(k => {
+                 return <option value={this.state.params.breed[k]} key={this.state.params.breed[k]}>{k}</option>
+               })
 
-              : null
+               : null
 
             }
+
           </Form.Control>
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Місто</Form.Label>
           <Form.Control as="select" name="city" type="city" value={this.state.city} onChange={this.handleChange} >
             <option value="" >Оберіть місто</option>
-            {this.state.params 
-              ? this.state.params.city.map(el => {
-                return <option value={el.id} key={el.id}>{el.name}</option>
+            {
+              this.state.params 
+              ? Object.keys(this.state.params.city).map(k => {
+                return <option value={this.state.params.city[k]} key={this.state.params.city[k]}>{k}</option>
               })
 
               : null
@@ -104,9 +106,10 @@ export default class FiltersForm extends Component {
           <Form.Label>Вік від</Form.Label>
           <Form.Control as="select" name="age_from" type="age_from" value={this.state.age_from} onChange={this.handleChange}>
             <option value="" >Оберіть вік</option>
-            {this.state.params 
-              ? this.state.params.age.map(el => {
-                return <option value={el.id} key={el.id}>{el.years}</option>
+            {
+              this.state.params 
+              ? Object.keys(this.state.params.age).map(k => {
+                return <option value={this.state.params.age[k]} key={this.state.params.age[k]}>{k}</option>
               })
 
               : null
@@ -118,9 +121,10 @@ export default class FiltersForm extends Component {
           <Form.Label>Вік до</Form.Label>
           <Form.Control as="select" name="age_to" type="age_to" value={this.state.age_to} onChange={this.handleChange}>
             <option value="" >Оберіть вік</option>
-            {this.state.params 
-              ? this.state.params.age.map(el => {
-                return <option value={el.id} key={el.id}>{el.years}</option>
+            {
+              this.state.params 
+              ? Object.keys(this.state.params.age).map(k => {
+                return <option value={this.state.params.age[k]} key={this.state.params.age[k]}>{k}</option>
               })
 
               : null

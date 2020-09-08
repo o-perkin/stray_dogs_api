@@ -72,9 +72,9 @@ export default class NewDog extends Component {
     axios.post("http://localhost:3000/api/v1/dogs", {
       dog: {
         name: this.state.name,
-        breed_id: this.state.breed,
-        city_id: this.state.city,
-        age_id: this.state.age,
+        breed: Number(this.state.breed),
+        city: Number(this.state.city),
+        age: Number(this.state.age),
         description: this.state.description
       }
     }, 
@@ -114,8 +114,8 @@ export default class NewDog extends Component {
           <Form.Control as="select" required name="breed" type="breed" value={this.state.breed} onChange={this.handleChange} >
             <option value="" disabled>Оберіть породу</option>
             {this.state.params 
-              ? this.state.params.breed.map(el => {
-                return <option value={el.id} key={el.id}>{el.name}</option>
+              ? Object.keys(this.state.params.breed).map(k => {
+                 return <option value={this.state.params.breed[k]} key={this.state.params.breed[k]}>{k}</option>
               })
 
               : null
@@ -128,8 +128,8 @@ export default class NewDog extends Component {
           <Form.Control as="select" required name="city" type="city" value={this.state.city} onChange={this.handleChange} >
             <option value="" disabled>Оберіть місто</option>
             {this.state.params 
-              ? this.state.params.city.map(el => {
-                return <option value={el.id} key={el.id}>{el.name}</option>
+              ? Object.keys(this.state.params.city).map(k => {
+                return <option value={this.state.params.city[k]} key={this.state.params.city[k]}>{k}</option>
               })
 
               : null
@@ -142,8 +142,8 @@ export default class NewDog extends Component {
           <Form.Control as="select" required name="age" type="age" value={this.state.age} onChange={this.handleChange}>
             <option value="" disabled>Оберіть вік</option>
             {this.state.params 
-              ? this.state.params.age.map(el => {
-                return <option value={el.id} key={el.id}>{el.years}</option>
+              ? Object.keys(this.state.params.age).map(k => {
+                return <option value={this.state.params.age[k]} key={this.state.params.age[k]}>{k}</option>
               })
 
               : null
