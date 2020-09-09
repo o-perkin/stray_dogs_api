@@ -36,7 +36,7 @@ const useStyles = makeStyles(styles);
 export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState('created_at');
   const [page, setPage] = React.useState(1);
   const [dogs, setDogs] = React.useState([]);
   const [filters, setFilters] = React.useState({
@@ -68,7 +68,7 @@ export default function LandingPage(props) {
     }).catch(error => console.log(error))
   }
   
-  const handleChange = (event, value) => {
+  const handlePaginations = (event, value) => {
     latestPage.current = value;
     loadDogs();
   };
@@ -79,8 +79,11 @@ export default function LandingPage(props) {
   }
 
   function handleSorting(value) {
-    latestSorting.current = value;
-    loadDogs();
+    latestSorting.current.sort != value || latestSorting.current.direction == 'asc'
+     ? latestSorting.current.direction = 'desc' 
+     : latestSorting.current.direction = 'asc' ;
+     latestSorting.current.sort = value;
+     loadDogs();
   } 
 
   function updateFavoriteState(id) {
@@ -142,14 +145,15 @@ export default function LandingPage(props) {
                     value={value}
                     onChange={(event, newValue) => {
                       setValue(newValue);
+                      handleSorting(newValue);
                     }}
                     showLabels
                     className={classes.root}
                   >
-                    <BottomNavigationAction onClick={handleSorting('date')} label="Дата публікації" icon={<AccessTimeIcon />} />
-                    <BottomNavigationAction label="Порода" icon={<PetsOutlinedIcon />} />
-                    <BottomNavigationAction label="Місто" icon={<LocationCityIcon />} />
-                    <BottomNavigationAction label="Вік" icon={<DateRangeIcon />} />
+                    <BottomNavigationAction value='created_at' label="Дата публікації" icon={<AccessTimeIcon />} />
+                    <BottomNavigationAction value='breed' label="Порода" icon={<PetsOutlinedIcon />} />
+                    <BottomNavigationAction value='city' label="Місто" icon={<LocationCityIcon />} />
+                    <BottomNavigationAction value='age' label="Вік" icon={<DateRangeIcon />} />
                   </BottomNavigation>  
               </GridItem>
               <GridItem xs={12} sm={12} md={4} style={{textAlign: 'right'}}>
@@ -170,7 +174,7 @@ export default function LandingPage(props) {
             </GridContainer>
           </div>
             <div className={classes.section}>
-              <Pagination style={{marginTop: '50px'}} count={dogs.number_of_pages}  size="large" onChange={handleChange} page={latestPage.current} />
+              <Pagination style={{marginTop: '50px'}} count={dogs.number_of_pages}  size="large" onChange={handlePaginations} page={latestPage.current} />
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={8}>          
                     <div>
@@ -193,7 +197,7 @@ export default function LandingPage(props) {
                     <FiltersForm handleFilters={handleFilters} animate={props.animate} checkDogsSearchParams={props.checkDogsSearchParams} {...props} classes={classes} />
                   </GridItem>
                 </GridContainer>
-              <Pagination style={{marginTop: '20px', marginBottom: '20px'}} count={dogs.number_of_pages} size="large" onChange={handleChange} page={latestPage.current} />
+              <Pagination style={{marginTop: '20px', marginBottom: '20px'}} count={dogs.number_of_pages} size="large" onChange={handlePaginations} page={latestPage.current} />
             </div>
           <br />
         </div>
