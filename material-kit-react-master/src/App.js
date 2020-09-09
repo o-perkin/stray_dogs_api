@@ -23,7 +23,6 @@ export default class App extends Component {
     this.state = {
       loggedInStatus: this.checkLoginStatus(),
       user: this.checkUser(),
-      dogs: this.checkDogs(),
       animate: false
     };
     console.log('state', this.state);
@@ -32,8 +31,6 @@ export default class App extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.checkLoginStatus = this.checkLoginStatus.bind(this);
     this.checkUser = this.checkUser.bind(this);
-    this.checkDogs = this.checkDogs.bind(this);
-    this.updateFavoriteState = this.updateFavoriteState.bind(this);
   }
 
   checkLoginStatus() {
@@ -90,26 +87,6 @@ export default class App extends Component {
     }
   }
 
-  checkDogs() {
-    axios.get(`http://localhost:3001/api/v1/dogs`, {
-        headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
-        withCredentials: true
-    }).then(response => {
-        this.setState({
-          dogs: response.data.data
-        })
-    }).catch(error => console.log(error))
-  }
-
-  updateFavoriteState(id) {
-    this.setState({
-      dogs: this.state.dogs.map(dog => {
-        (dog.id == id && dog.favorite == true) ? dog.favorite = false : dog.favorite = true
-        return dog
-      })
-    })
-  }
-
   render() {
     return (
       <Switch>
@@ -117,7 +94,7 @@ export default class App extends Component {
           exact 
           path="/dogs" 
           render={props => (
-            <LandingPage {...props} animate={this.state.animate} checkDogsSearchParams={this.checkDogsSearchParams} updateFavoriteState={this.updateFavoriteState} current_user={this.state.user ? this.state.user : {}} createNotification={this.createNotification}   handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            <LandingPage {...props} animate={this.state.animate} current_user={this.state.user ? this.state.user : {}} createNotification={this.createNotification} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
         <Route 
@@ -136,7 +113,7 @@ export default class App extends Component {
         <Route 
           path="/dogs/:dogId" 
           render={props => (
-            <DogsShowPage {...props} updateFavoriteState={this.updateFavoriteState} createNotification={this.createNotification}  handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            <DogsShowPage {...props} createNotification={this.createNotification}  handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
         <Route

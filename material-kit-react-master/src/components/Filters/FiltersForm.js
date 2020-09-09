@@ -68,7 +68,7 @@ export default class FiltersForm extends Component {
 
   render() {    
     return (
-      <Form className={this.props.classes.form} onSubmit={this.handleSubmit} >
+      <Form className={this.props.classes.form} onSubmit={this.handleSubmit} style={{marginTop: '90px', paddingTop: '90px'}}  >
         <CardHeader style={{marginBottom: 15 + 'px'}} color="primary" className={this.props.classes.cardHeader} >
           <h4 style={{textAlign: 'center'}}>Фільтри</h4>
         </CardHeader>

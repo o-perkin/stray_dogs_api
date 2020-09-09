@@ -119,7 +119,7 @@ module Api
               city: dog.city,
               age: dog.age,
               description: dog.description,
-              favorite: Favorite.favorite_exists?(dog, current_user),
+              favorite: Favorite.favorite_exists?(dog.id, current_user),
               user: dog.user,
               created_at: dog.created_at
             }            

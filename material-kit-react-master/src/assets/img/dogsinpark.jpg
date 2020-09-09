@@ -1,0 +1,1067 @@
+<!doctype html>
+<!-- NPSA Master - 2018 redev -->
+<html lang="en" xml:lang="en" class="npsa no-js" prefix="og: http://ogp.me/ns#">
+
+<head>
+	<!-- Published by Seamless.CMS.WebUI, 4.12.0.0 -->
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+	
+	<title>Dogs in parks&nbsp;-&nbsp;National Parks South Australia</title>
+	<meta name="generator" content="Seamless.CMS.WebUI - http://www.seamless.com.au" />
+
+
+	<meta name="description" content="Dogs are welcome in some of SA's national parks but not all. Find out where you are allowed to walk your dog. Assistance dogs, on lead are welcome in all national parks.">
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+	<meta name="google-site-verification" content="UzZTGdOL0xtu_7p8U2n6W2fFwuk4CdvFn98dhIHnppw" />
+	
+	
+	<!-- Prefetch (tries to make something non-critical happen earlier) -->
+
+	<link rel="dns-prefetch" href="//www.google-analytics.com">
+	<link rel="dns-prefetch" href="//gadgets.impartmedia.com">
+	<link rel="dns-prefetch" href="//au.openforms.com">
+	<link rel="dns-prefetch" href="//www.instagram.com">
+	<link rel="preconnect" href="//in.hotjar.com">
+	<link rel="dns-prefetch" href="//www.arcgis.com">
+	<link rel="preconnect" href="//pub.searchiq.co">
+	<link rel="preconnect" href="//api.searchiq.co">
+	<link rel="preconnect" href="//script.hotjar.com">
+	<link rel="preconnect" href="//vars.hotjar.com">
+	<link rel="dns-prefetch" href="//sjp.impartmedia.com">
+	<link rel="dns-prefetch" href="//static.arcgis.com">
+	<link rel="dns-prefetch" href="//webapi.bookeasy.com.au">
+	<link rel="dns-prefetch" href="//js.arcgis.com">
+	<link rel="dns-prefetch" href="//basemaps.arcgis.com">
+
+	<!-- End prefetch -->
+	
+
+	<!-- Open Graph metadata -->
+
+	<meta property="og:title" content="Dogs in parks" />
+    <meta property="og:description" content="Dogs are welcome in some of SA's national parks but not all. Find out where you are allowed to walk your dog. Assistance dogs, on lead are welcome in all national parks." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.parks.sa.gov.au/know-before-you-go/dogs-in-parks" />
+    <meta property="og:image" content="/files/sharedassets/parks/images/hero-images/dogs-in-parks-hero.jpg" />
+    
+	
+	<!-- End Open Graph metadata -->
+
+	<!--            O
+                       OO                              OO
+                   O   OO                              OO   O
+                   OO  OO OO                         OOOO  OO
+              OO   OOO OOOOO                         OOOO OOO   OO
+          O    OOO OOO OOOOO                         OOOOOOO  OOOO  OO
+          OOOO  OOOOOOOOOOOO                         OOOOOOOOOOOO OOOO
+      OOO OOOOOOOOOOOOOOOOOO                         OOOOOOOOOOOOOOOO
+      OOOOOOOOOOOOOOOOOOOOO                          OOOOOOOOOOOOOOO  OOO
+       OOOOOOOOOOOOOOOOOO O                          OOOOOOOOOOOOOOOOOOOO
+     OOOOOOOOOOOOOOOOOO O                              OOOOOOOOOOOOOOOOOOOO
+    OOOOOOOOOOOOOOOOOOOOO OO                            OOOOOOOOOOOOOOOOOOOOOOO
+    OOOOOOOOOOOOOOOOOOOOO OO                            OO OOOOOOOOOOOOOOOOOOOO
+    OOOOOOOOOOOOOOOOOOOOO  OO                           OO   OOOOOOOOOOOOOOOOOOO
+    OOOOOOOOOOOOOOOOOOOOOO OOO                          OO  OOOOOOOOOOOOOOOOOOOOOO
+    OOOOOOOOOOOOOOOOOOOOOOOOOOO      O OOOOO           OOOOOOOOOOOOOOOOOOOOOOOOO
+    OOOOOOOOOOOOOOOOOOOOOOOOOOOO       O OOOOOO         O OOOOOOOOOOOOOOOOOOOOOOOOOO
+    OOOOOOOOOOOOOOOOOOOOOOOO O  O     O OOOOOOOO       O   OOOOOOOOOOOOOOOOOOOOOOOOO
+    OOOOOOOOOOOOOOOOOOOOOO    O       OOOOO  OO     OO   OOOOOOOOOOOOOOOOOOOOOOOO
+    OOOOOOOOOOOOOOOOOOOOOOOOO      OOO  OOOOO   O    OO    OOOOOOOOOOOOOOOOOOOOOOOO
+    OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO         OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+    OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO         OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+    OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO         OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+     OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO         OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+     OOOOOOOOOOOOOOOOOOOOOOOOOOOOO          OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+        OOOOOOOOOOOOOOOOOOOOOOOOOO           OOOOOOOOOOOOOOOOOOOOOOOOO
+             OOOOOOOOOOOOOOOOOOO OO          O OOOOOOOOOOOOOOOOOOOO
+                OOOOOOOOOOOOOOOO  O         OO  OOOOOOOOOOOOOOO
+                      OOO OOOOO   OO        OO   OOOOOOOO O
+                                 OOO       OOOO
+                             O OO   O     O    OOO
+                       OOOOOOO OOOO OO   OOOOOOOOOOOOOOO
+                      OOOOOOOOO OOOO OOOOOO OOOOOOOOOOOOO
+                       OO OOOOOOO O   OOO O   O OOOOO OOO
+                       OO OOOOO OOOO O O OOO OOOOO OO OOO
+                            OOOOOOO O OO  O OOOOOOOO
+                            OOOOOOOOOOOOOOOOOOOOOOOO
+                              OOOOOOOOOOOOOOOOOOO
+                                 OOOOOO OOOOOOO           -->
+                                 
+	<!-- Icons -->
+
+	<link rel="apple-touch-icon" sizes="57x57" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-icon-57x57.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-icon" sizes="60x60" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-icon-60x60.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-icon" sizes="72x72" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-icon-72x72.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-icon" sizes="76x76" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-icon-76x76.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-icon" sizes="114x114" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-icon-114x114.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-icon" sizes="120x120" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-icon-120x120.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-icon" sizes="144x144" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-icon-144x144.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-icon" sizes="152x152" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-icon-152x152.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-icon" sizes="180x180" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-icon-180x180.png?seamlessts=637304336116414345">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="Parks SA">
+	<link rel="icon" type="image/png" sizes="32x32" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/favicon-32x32.png?seamlessts=637304336116414345">
+	<link rel="icon" type="image/png" sizes="16x16" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/favicon-16x16.png?seamlessts=637304336116414345">
+	<link rel="shortcut icon" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/favicon.ico?seamlessts=637304336116414345">
+	<link rel="yandex-tableau-widget" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/yandex-browser-manifest.json?seamlessts=637304336116414345">
+	<link rel="manifest" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/manifest.json?seamlessts=637304336116414345">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="application-name" content="Parks SA">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="mstile-144x144.png">
+	<meta name="msapplication-config" content="browserconfig.xml">
+	<link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-startup-image-320x460.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-startup-image-640x920.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-startup-image-640x1096.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-startup-image-750x1294.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3)" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-startup-image-1182x2208.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3)" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-startup-image-1242x2148.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-startup-image-748x1024.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-startup-image-768x1004.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-startup-image-1496x2048.png?seamlessts=637304336116414345">
+	<link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/apple-touch-startup-image-1536x2008.png?seamlessts=637304336116414345">
+	<meta name="theme-color" content="#184736">
+
+	<!-- End icons -->
+
+	<!-- Scripts -->
+
+	<!-- Avoid using unnecessary scripts in here; add them to the end of the body. If this can't be avoided, use inline or asynchronous scripts. -->
+
+	<script>
+		/* Set site variables */
+
+		window.SITE_OPTIONS = {
+	        brandColour: "#184736",
+	        sharedFiles: "http://www.parks.sa.gov.au/files/templates/00000000-0000-0000-0000-000000000000/94711000-b283-4fd9-be4b-79362aa64b47/",
+	        sitePrefix: "npsa",
+	        siteFiles: "http://www.parks.sa.gov.au/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/"
+	    };
+	</script>
+
+	<!--<script src="//fast.fonts.net/jsapi/e0cc203f-7221-4daf-a2d5-815483dba107.js" async></script>-->
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+
+	<!--[if lt IE 9]>
+	  <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  	<![endif]-->
+
+	<!-- Google Analytics -->
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-21306566-8', 'auto');
+        ga('create', 'UA-21306566-1', 'auto', {'name': 'rollup'})
+        ga('send', 'pageview');
+        ga('rollup.send', 'pageview');
+	</script>
+
+	<!-- End Google Analytics -->
+	
+	<!-- Hotjar Tracking Code for www.parks.sa.gov.au -->
+	<script>
+	    (function(h,o,t,j,a,r){
+	        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+	        h._hjSettings={hjid:1009835,hjsv:6};
+	        a=o.getElementsByTagName('head')[0];
+	        r=o.createElement('script');r.async=1;
+	        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+	        a.appendChild(r);
+	    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+	</script>
+	<!-- End Hotjar -->
+
+	<!-- End scripts -->
+
+
+	<!-- Stylesheets -->
+	
+	<style type="text/css">
+            @charset "UTF-8";html{box-sizing:border-box}*,:after,:before{box-sizing:inherit}html{line-height:1.15}body{margin:0}pre{font-family:monospace,monospace;font-size:1em}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}body,pre{margin:0;padding:0}pre{margin-bottom:20px;margin-bottom:1.25rem}html{font-family:sans-serif;font-size:1em;line-height:1.625;font-weight:200;overflow-y:scroll;min-height:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;color:#585451;background-color:#fff}@media (max-width:78.115em){body:after{content:"";background-color:rgba(0,0,0,.6);position:fixed;top:0;bottom:0;right:0;left:0;overflow:hidden;z-index:900;opacity:0;-webkit-transform:translateY(-100%);transform:translateY(-100%)}}
+        </style>
+	
+	<link rel="preload" as="font" crossorigin="crossorigin" type="font/woff2" href="https://www.parks.sa.gov.au/assets/fonts/c3eb6646-2557-4ced-8a71-fd9c6eb83c59.woff2">
+	<link rel="preload" as="font" crossorigin="crossorigin" type="font/woff2" href="https://www.parks.sa.gov.au/assets/fonts/4fb89ed5-baf5-425f-aba4-46e8c2c3aabe.woff2">
+	<!-- <link rel="preload" as="font" href="https://www.parks.sa.gov.au/assets/fonts/c3eb6646-2557-4ced-8a71-fd9c6eb83c59.woff2"> -->
+	<!-- <link rel="preload" as="font" href="https://www.parks.sa.gov.au/assets/fonts/4fb89ed5-baf5-425f-aba4-46e8c2c3aabe.woff2"> -->
+	
+	<link rel="stylesheet" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/main-2d6fd83a03.css?seamlessts=637304336116414345"><!-- main-3c0163ac8a.css -->
+	<!-- note IE11 hates onload="this.rel='stylesheet'" and freezes the entire browser OR ignores the stylesheet -->
+	
+
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	
+	<link rel="stylesheet" href="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/bookeasy-f371d4577d.css?seamlessts=637304336116414345"><!-- bookeasy-446cb769ec.css bookeasy-69485c5bd2.css bookeasy-c22674f0aa.css bookeasy-b20dd14352.css bookeasy-86897be30d.css bookeasy-b79c49b836.css bookeasy-a324ad9702.css -->
+
+	<noscript>
+    	<link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/e0cc203f-7221-4daf-a2d5-815483dba107.css">
+    </noscript>
+
+	<!-- End Stylesheets -->
+	
+	
+	
+	
+	<style>
+		/*#mti_wfs_colophon {display: none!important;}*/
+	</style>
+
+</head>
+
+<body class="category_know-before-you-go">
+	<a href="#main-content" id="skip-to-content" class="c-skip-to-content">Skip to content</a>
+	
+	<!-- Google Tag Manager -->
+
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5L9VKK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-5L9VKK');</script>
+
+    <!-- End Google Tag Manager -->
+	
+	<!-- Warnings -->
+	<noscript>
+	
+		<div class="c-box c-box--small c-box--danger">
+		
+		    <div class="o-wrapper o-wrapper--small">
+		    
+		        <strong>Warning!</strong> This website will not work properly until you <a href="http://www.enable-javascript.com/">turn on JavaScript</a>.
+		
+		    </div>
+		
+		</div>
+		
+    </noscript>
+	<!-- End warnings -->
+	
+	<!-- Site Header -->
+	<header class="c-page-header">
+		
+		<div class="o-wrapper o-wrapper--flex o-wrapper--flexwrap o-wrapper--flexcenter">
+			<a class="c-page-header__logo" href="https://www.parks.sa.gov.au/home" rel="home" itemprop="url"><img class="site-header__logo" src="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/npsa-logotype.svg?seamlessts=637304336116414345" alt="National Parks and Wildlife Service SA"></a>
+			
+			<div id="bookeasy__cart-gadget"></div>
+				
+			<button class="search-toggle" id="search-toggle" type="button" aria-controls="site-search" aria-expanded="false" data-toggle="active" data-toggle-target=".c-search-panel">
+	        	<span class="search-toggle-svg-wrapper" id="search-toggle-svg-wrapper">
+	            	<svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 40 40">
+		            	<defs>
+		            		<style>
+		                 		.cls-1 {
+		                   			fill: none;
+		                 		}
+		               		</style>
+		             	</defs>
+	              		<rect class="cls-1" width="40" height="40"></rect>
+	              		<g class="search-toggle__layer">
+	                		<path d="M24.27,23c2.79-3.76,2-9.06-1.76-11.85s-9.06-2-11.85,1.76c-2.79,3.76-2,9.06,1.76,11.85c3,2.22,7.09,2.22,10.09,0
+	            		l2.59,2.59l1.77-1.77L24.27,23z M21.51,22c-2.25,2.25-5.89,2.25-8.15,0.01c-2.25-2.25-2.25-5.89-0.01-8.15s5.89-2.25,8.15-0.01
+	            		c0,0,0,0,0.01,0.01C23.75,16.11,23.75,19.75,21.51,22z"/>
+	              			<rect x="27.42" y="27.12" transform="matrix(0.7067 -0.7075 0.7075 0.7067 -12.2281 28.8377)" width="2.5" height="4.1"/>
+	              		</g>
+	              		<path class="search-toggle__layer  search-toggle__layer--active" d="M12.94,27.06c0.59,0.58,1.53,0.58,2.12,0L20,22.12l4.94,4.94c0.61,0.56,1.56,0.53,2.12-0.07c0.54-0.58,0.54-1.47,0-2.05
+	            	L22.12,20l4.94-4.94c0.61-0.56,0.64-1.51,0.07-2.12c-0.56-0.61-1.51-0.64-2.12-0.07c-0.03,0.02-0.05,0.05-0.07,0.07L20,17.88
+	            	l-4.94-4.94c-0.56-0.61-1.51-0.64-2.12-0.07s-0.64,1.51-0.07,2.12c0.02,0.03,0.05,0.05,0.07,0.07L17.88,20l-4.94,4.94
+	            	C12.36,25.52,12.37,26.47,12.94,27.06z"></path>
+	            	</svg>
+	            </span>
+	        </button>
+	        
+	        <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
+				<span class="menu-toggle-svg-wrapper" id="menu-toggle-svg-wrapper">
+					<svg class="icon icon__menu-toggle" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100">
+						<g class="svg__menu-toggle">
+							<path class="bar line-1" d="M5 13h90v14H5z"/>
+							<path class="bar line-2" d="M5 43h90v14H5z"/>
+							<path class="bar line-3" d="M5 73h90v14H5z"/>
+						</g>
+					</svg>
+				</span>
+				<span class="menu-toggle-text" id="menu-toggle-text">Menu</span>
+			</button>
+			
+			<div class="c-page-header__search">
+				<div class="c-search-panel">
+					<label for="search-website" class="c-search-panel__label u-hide-visually">Search</label>
+					<input name="search-website" type="text" class="c-form-input c-search-panel__text" placeholder="Search..." autocomplete="off" id="site-search">
+					<button class="c-search-panel__button" type="submit">
+						<svg height="40" version="1.1" viewBox="0 0 40 40" width="40">
+							<g>
+								<path d="M24.762,22.988c2.448-3.305,2.176-8.01-0.82-11.006c-3.297-3.297-8.666-3.297-11.959,0c-3.295,3.297-3.297,8.662,0,11.959c2.996,2.996,7.699,3.269,11.008,0.815l2.591,2.595l1.771-1.771L24.762,22.988zM22.033,22.033c-2.245,2.244-5.898,2.244-8.143,0c-2.244-2.245-2.244-5.898,0-8.143c2.244-2.246,5.897-2.246,8.143,0C24.277,16.135,24.277,19.789,22.033,22.033z"/>
+								<rect x="27.904" y="27.107" transform="matrix(-0.7067 0.7075 -0.7075 -0.7067 70.3882 29.133)" width="2.504" height="4.098"/>
+							</g>
+						</svg>
+					</button>
+					<noscript>
+						<input type="submit" value="Search" class="c-btn c-btn--primary">
+					</noscript>
+				</div>
+			</div>
+			
+			<!-- Start Primary Navigation -->
+			<div class="c-nav-primary__wrap" id="c-nav-primary__wrap">
+				<nav class="c-nav-primary c-page-header__nav" id="c-nav-primary" aria-label="Primary menu">
+					<ul class="c-nav-primary__list">
+					
+						<!-- START HARDCODE -->
+						<li class="c-nav-primary__item    ">
+	<a class="c-nav-primary__link" href="https://www.parks.sa.gov.au/Home">
+		<span>Home</span>
+		<i></i>
+	</a>
+	<nav class="c-nav-primary__sub" role="group" aria-label="sub navigation menu">
+		<ul class="c-nav-primary__sub-links">
+			
+		</ul>
+	</nav>
+</li><li class="c-nav-primary__item  has-children  ">
+	<a class="c-nav-primary__link" href="https://www.parks.sa.gov.au/book-and-pay">
+		<span>Book & pay</span>
+		<i></i>
+	</a>
+	<nav class="c-nav-primary__sub" role="group" aria-label="sub navigation menu">
+		<ul class="c-nav-primary__sub-links">
+			<li class="">
+	<a href="https://www.parks.sa.gov.au/book-and-pay/book-now">Book now</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/book-and-pay/where-can-i-book">Where can I book and pay in person?</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/book-and-pay/parks-passes">Multiple Entry Parks Passes</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/book-and-pay/frequently-asked-questions">Book and pay FAQs</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/book-and-pay/school-bookings">School Bookings</a>
+</li>
+		</ul>
+	</nav>
+</li><li class="c-nav-primary__item    ">
+	<a class="c-nav-primary__link" href="https://www.parks.sa.gov.au/find-a-park">
+		<span>Find a Park</span>
+		<i></i>
+	</a>
+	<nav class="c-nav-primary__sub" role="group" aria-label="sub navigation menu">
+		<ul class="c-nav-primary__sub-links">
+			
+		</ul>
+	</nav>
+</li><li class="c-nav-primary__item  has-children  is-active">
+	<a class="c-nav-primary__link" href="https://www.parks.sa.gov.au/know-before-you-go">
+		<span>Know before you go</span>
+		<i></i>
+	</a>
+	<nav class="c-nav-primary__sub" role="group" aria-label="sub navigation menu">
+		<ul class="c-nav-primary__sub-links">
+			<li class="">
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/covid-19-faqs">COVID-19</a>
+</li><li class="is-active">
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/dogs-in-parks">Dogs in parks</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/bushwalking">Bushwalking</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/mountain-biking">Mountain biking</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/maps">Maps</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/fires-and-bbqs">Fires and BBQs</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/closures-and-alerts">Closures & alerts</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/safety">Safety</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/accessibility">Accessibility</a>
+</li>
+		</ul>
+	</nav>
+</li><li class="c-nav-primary__item  has-children  ">
+	<a class="c-nav-primary__link" href="https://www.parks.sa.gov.au/get-inspired">
+		<span>Get inspired</span>
+		<i></i>
+	</a>
+	<nav class="c-nav-primary__sub" role="group" aria-label="sub navigation menu">
+		<ul class="c-nav-primary__sub-links">
+			<li class="">
+	<a href="https://www.parks.sa.gov.au/get-inspired/insider-tips">Insider tips</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/get-inspired/park-of-the-month">Park of the month</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/get-inspired/parks-at-home">Parks @ home</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/get-inspired/google-street-view-trekker">Google Street View Trekker</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/get-inspired/junior-rangers">Junior Rangers - Autumn Diaries</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/get-inspired/npsa-adventure-list">30 park adventures</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/get-inspired/take-your-time">You can take your time in South Australia’s national parks</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/get-inspired/teach-and-learn">Teach and learn</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/get-inspired/list-your-event">List your event</a>
+</li>
+		</ul>
+	</nav>
+</li><li class="c-nav-primary__item  has-children  ">
+	<a class="c-nav-primary__link" href="https://www.parks.sa.gov.au/understanding-parks">
+		<span>Understanding parks</span>
+		<i></i>
+	</a>
+	<nav class="c-nav-primary__sub" role="group" aria-label="sub navigation menu">
+		<ul class="c-nav-primary__sub-links">
+			<li class="">
+	<a href="https://www.parks.sa.gov.au/understanding-parks/aboriginal-culture-and-heritage">Aboriginal culture and heritage</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/understanding-parks/conservation">Conservation</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/understanding-parks/heritage-sites">Heritage sites</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/understanding-parks/marine-parks">Marine parks</a>
+</li>
+		</ul>
+	</nav>
+</li><li class="c-nav-primary__item  has-children  ">
+	<a class="c-nav-primary__link" href="https://www.parks.sa.gov.au/permits-and-licences">
+		<span>Permits and licences</span>
+		<i></i>
+	</a>
+	<nav class="c-nav-primary__sub" role="group" aria-label="sub navigation menu">
+		<ul class="c-nav-primary__sub-links">
+			<li class="">
+	<a href="https://www.parks.sa.gov.au/permits-and-licences/drones-and-aircraft">Drones and aircraft</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/permits-and-licences/event-permits">Event permits</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/permits-and-licences/photography-and-filming-permits">Photography and filming permits</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/permits-and-licences/commercial-tour-operators">Commercial Tour Operators</a>
+</li>
+		</ul>
+	</nav>
+</li><li class="c-nav-primary__item  has-children  ">
+	<a class="c-nav-primary__link" href="https://www.parks.sa.gov.au/volunteer">
+		<span>Volunteer</span>
+		<i></i>
+	</a>
+	<nav class="c-nav-primary__sub" role="group" aria-label="sub navigation menu">
+		<ul class="c-nav-primary__sub-links">
+			<li class="">
+	<a href="https://www.parks.sa.gov.au/volunteer/friends-and-volunteers-groups">Friends & volunteers groups</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/volunteer/campground-hosts-program">Campground Hosts Program</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/volunteer/volunteer-ranger-program">Volunteer Ranger Program</a>
+</li>
+		</ul>
+	</nav>
+</li><li class="c-nav-primary__item  has-children  ">
+	<a class="c-nav-primary__link" href="https://www.parks.sa.gov.au/park-management">
+		<span>Park management</span>
+		<i></i>
+	</a>
+	<nav class="c-nav-primary__sub" role="group" aria-label="sub navigation menu">
+		<ul class="c-nav-primary__sub-links">
+			<li class="">
+	<a href="https://www.parks.sa.gov.au/park-management/parks2025">Parks 2025</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/park-management/co-management-of-parks">Co-management of parks</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/park-management/nature-based-tourism">Nature-based tourism</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/park-management/bushfire-recovery">Bushfire recovery</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/park-management/what-to-do-if-you-find-an-injured-animal">What to do if you find an injured animal</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/park-management/management-plans">Management plans</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/park-management/news">News</a>
+</li><li class="">
+	<a href="https://www.parks.sa.gov.au/park-management/wild-south-coast-way">Wild South Coast Way on the Heysen Trail</a>
+</li>
+		</ul>
+	</nav>
+</li>
+						<!-- END HARDCODE -->
+						
+					</ul>				
+				</nav>				
+			</div>
+			<!-- End Primary Navigation -->
+			
+		</div> 
+			
+	</header>
+	<!-- End site header -->
+	
+	
+	
+	
+	<!-- Main content -->
+
+	<div id="main-content">
+		<form name="mainForm" method="post" action="/know-before-you-go/dogs-in-parks" id="mainForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__SEAMLESSVIEWSTATE" id="__SEAMLESSVIEWSTATE" value="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" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['mainForm'];
+if (!theForm) {
+    theForm = document.mainForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=kFI4GtuWzOwgF8pA_q6_7fEZvdFWu48YmHLiXxjOX9PuPUG_uYTQZCB5rlrhIb9W93MgqN3MPqKCEG-60cKhqgrzSzo1&amp;t=637291099350350503" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=ercqtb3IcPm-M_NTpgweAZogLESmsLIM7_CTYfxmGPVsIWZRSEg3ido2H8WKVkJ16g3e3xXmPCi4WG0kksJtjSN3fCOqkCy_lWeALyMcBrerXXGjWWdauIeceHPS1GYxzEUTan0NIWT8YkFbNukXWNvEBOkRbKczz_ECFaWix7e9FveZ0&amp;t=ffffffffce034dab" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="/ScriptResource.axd?d=VHi8ufIWawmyHtUapYTTdPkWNYauq_eJbRJgrMzSZtIiNnR7S0OH8jTs4pFP9aUR6zxtHlesddp7n5iDOVgb0gL3b5p_GExnx7QdJbyvW7FzaNLhRL0gR2LeRdxnWECTM41LtOShrnSxNunZsZQ5yCJdNVKZKNUd5CEK7JIrPMS04taU0&amp;t=ffffffffce034dab" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=ymH7qTD7pYJ10QQjIHeyYH9-vqvhmz1QZptR60he-qrjzcXBub-Qi8YmNKO4-JZ_ysGXDyt8jVhNhk8cW_hD3-ZnpaBL1T08tDWvqRhtUZBhlc818P__v77dOm0DcqOl3WQngA2&amp;t=ffffffff955a8460" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=X0QKd9yrCugME0kpg_LdG94Z8VloiGZE7GIfNNLn65S2_xfLHV4m6L11vBoIV99MINNDHtt0I4d595e8a03CU3WBp9PbdlwMXBzP9rL-WS9kY9wdfhk8d7JqpXadCN5es3aXQQ2&amp;t=ffffffff955a8460" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=bKi0VlYQHLsNxbRfPxezoSG4aKpFa4lcAYC_MnWwlx5viN5riA5tqB3BnfOqR88h4jdH3sD85_StBixxMHdy9r_WMZVi2TftmqHDWTR2wz7RN-WBJ2rHv6vzDiyiobsrSgocCg2&amp;t=ffffffff91554b70" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=JQHcFEjO6rjaKYz6RhrESMQXKIwJmORPN6kP7NxsQQMtayUOstLEWjnEbLUi7W3v8GdZ43S1y5X06ddZcSep-yY6w3wHhEj09SAAHCAQZL6qRPbHEgfrpH3mbBYV3cXcEkFpIQ2&amp;t=ffffffff91554b70" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=V6xSDQ-5-dHiLb2B-1WaDE9MtT3OCJii2jT8wG0QP-0t46TOVf7UJedhZFid3fK8IKi3byuBb2dLR5rCv7Ns7AKge6Eqgx_f7YFsITIIWuZ3zAjLA3b7BUf2im73EEbVE4NA56u4g-89aTkdbpyDo5hshgA1&amp;t=ffffffff91554b70" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=qVh8ERUpeE05yuOmBMY_jFzpoL5Fyppvqzdy0HNmTwN4n5ohda_24zCTfDFUruiDBOYrPQ5PwtPJaf85zEI3J6BU-YPXmiqNV1WFTmiC5TPtktiw6kHtc4RFFJsVFcPs8_FySD7LQTtbo0KeQc8KgAEO1Ss1&amp;t=ffffffff91554b70" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=SDP7MQVuKasG3jHyNZ50lAM7bciJsBbK5GbTml0TwvMsQuGe28a_KJ87mLRaZk3vype4a4N6eNg7jlZ88bOmTbXtHdTh6LHzZx0vZVxOK3oRh0Dz_XfYfQv9ag439As2d0mMR-t8ziF1ZqVqF073V-yew-g1&amp;t=ffffffff91554b70" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl04$seamless_script_manager', 'mainForm', [], [], [], 90, '');
+//]]>
+</script>
+
+<script type="text/javascript">
+    try{
+        function SeamlessEndRequestHandler(sender, args) {
+            try {
+                var dataItems = args.get_dataItems();
+                if(dataItems.ctl04_seamless_script_manager)
+                    document.getElementById('__SEAMLESSVIEWSTATE').value = dataItems.ctl04_seamless_script_manager;
+            }
+            catch (e) { }
+        }
+
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(SeamlessEndRequestHandler);
+    }
+    catch (e) { }
+</script>
+		<!--groupTemplateStart--><div class="c-page-banner" style="background-image: url('/files/sharedassets/parks/images/hero-images/dogs-in-parks-hero.jpg?w=1920')">
+	<img class="c-page-banner__image" src="/files/sharedassets/parks/images/hero-images/dogs-in-parks-hero.jpg?w=720" alt="" />
+	<div class="c-page-banner--fluid">
+		<div class="c-page-banner__header">        
+			<div class="o-wrapper  o-wrapper--small">
+				<div class="c-page-banner__header-text">
+					<span class="c-page-banner__breadcrumb">
+	
+	<span class="temp-breadcrumb">
+		
+		<a href="https://www.parks.sa.gov.au/know-before-you-go">Know before you go</a>
+		
+	</span><!-- /.temp-breadcrumb -->
+	
+</span>
+					<h1 class="c-content__title">Dogs in parks</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!-- /.page-banner -->
+
+<div id="content" class="c-page-content">
+	<div class="o-wrapper o-wrapper--flex@md o-wrapper--small">
+		<div class="c-page-aside">
+			<!-- this is where the side menu goes -->
+			<nav class="c-nav-side">
+				<ul class="c-nav-side__list c-nav-side__list--lvl-0">
+					<li class="c-nav-side__item  ">
+	<a class="c-nav-side__link " href="https://www.parks.sa.gov.au/know-before-you-go/covid-19-faqs">
+		<i></i>
+		<span>COVID-19</span>
+	</a>
+	<ul class="c-nav-side__list c-nav-side__list-sub c-nav-side__list--lvl-1">
+		
+	</ul>
+</li><li class="c-nav-side__item  c-nav-side__item--active">
+	<a class="c-nav-side__link c-nav-side__link--active" href="https://www.parks.sa.gov.au/know-before-you-go/dogs-in-parks">
+		<i></i>
+		<span>Dogs in parks</span>
+	</a>
+	<ul class="c-nav-side__list c-nav-side__list-sub c-nav-side__list--lvl-1">
+		
+	</ul>
+</li><li class="c-nav-side__item  ">
+	<a class="c-nav-side__link " href="https://www.parks.sa.gov.au/know-before-you-go/bushwalking">
+		<i></i>
+		<span>Bushwalking</span>
+	</a>
+	<ul class="c-nav-side__list c-nav-side__list-sub c-nav-side__list--lvl-1">
+		
+	</ul>
+</li><li class="c-nav-side__item  ">
+	<a class="c-nav-side__link " href="https://www.parks.sa.gov.au/know-before-you-go/mountain-biking">
+		<i></i>
+		<span>Mountain biking</span>
+	</a>
+	<ul class="c-nav-side__list c-nav-side__list-sub c-nav-side__list--lvl-1">
+		
+	</ul>
+</li><li class="c-nav-side__item  ">
+	<a class="c-nav-side__link " href="https://www.parks.sa.gov.au/know-before-you-go/maps">
+		<i></i>
+		<span>Maps</span>
+	</a>
+	<ul class="c-nav-side__list c-nav-side__list-sub c-nav-side__list--lvl-1">
+		
+	</ul>
+</li><li class="c-nav-side__item  ">
+	<a class="c-nav-side__link " href="https://www.parks.sa.gov.au/know-before-you-go/fires-and-bbqs">
+		<i></i>
+		<span>Fires and BBQs</span>
+	</a>
+	<ul class="c-nav-side__list c-nav-side__list-sub c-nav-side__list--lvl-1">
+		
+	</ul>
+</li><li class="c-nav-side__item c-nav-side__item--parent ">
+	<a class="c-nav-side__link " href="https://www.parks.sa.gov.au/know-before-you-go/closures-and-alerts">
+		<i></i>
+		<span>Closures & alerts</span>
+	</a>
+	<ul class="c-nav-side__list c-nav-side__list-sub c-nav-side__list--lvl-1">
+		<li class="c-nav-side__item  ">
+	<a class="c-nav-side__link " href="https://www.parks.sa.gov.au/know-before-you-go/closures-and-alerts/park-closure-descriptions"><span>Park closure descriptions</span></a>	
+	<ul class="c-nav-side__list c-nav-side__list-sub c-nav-side__list--lvl-2"></ul>
+</li>
+	</ul>
+</li><li class="c-nav-side__item  ">
+	<a class="c-nav-side__link " href="https://www.parks.sa.gov.au/know-before-you-go/safety">
+		<i></i>
+		<span>Safety</span>
+	</a>
+	<ul class="c-nav-side__list c-nav-side__list-sub c-nav-side__list--lvl-1">
+		
+	</ul>
+</li><li class="c-nav-side__item  ">
+	<a class="c-nav-side__link " href="https://www.parks.sa.gov.au/know-before-you-go/accessibility">
+		<i></i>
+		<span>Accessibility</span>
+	</a>
+	<ul class="c-nav-side__list c-nav-side__list-sub c-nav-side__list--lvl-1">
+		
+	</ul>
+</li>
+				</ul>
+			</nav>
+			<a class="c-btn c-btn--secondary side-toggle" href="#">Open navigation</a>
+			
+						
+		</div>
+		<!--normalTemplateStart--><style>
+	.c-content__video {
+		clear: both;
+	}
+	.parksfive__col {
+		width: 50%;
+		float: left;
+	}
+</style>
+<div class="c-content">
+	<div class="c-content__body">		
+		<p>Although most national parks do not allow dogs (assistance dogs allowed) there are a number of parks where dogs are welcome. Keep your dog on designated walking trails and under your control on a lead of no more than two meters&nbsp;at all times.&nbsp;</p>
+<h2>Where can I walk my dog?</h2>
+<p>To find out which national parks you can walk your dog in use our <a href="https://www.environment.sa.gov.au/parks/find-a-park#/list/">find a park</a> tool and refine your search to &lsquo;Dog walking (restrictions apply)&rsquo;.</p>
+<ul>
+<li>
+<p><a href="https://www.parks.sa.gov.au/insider-tips/dogs-part-1" target="_self">Everything you need to know about taking dogs in SA&rsquo;s national parks</a></p>
+</li>
+<li>
+<p><a href="https://www.parks.sa.gov.au/insider-tips/dogs-part-2" target="_self">18 dog-friendly walks in Adelaide parks</a>&nbsp;</p>
+</li>
+</ul>
+<h2>Assistance dogs</h2>
+<p>Assistance dogs are permitted in most public places and are therefore welcome in South Australia&rsquo;s parks and reserves. Assistance dogs must be appropriately restrained and remain under your effective control at all times while in a park or reserve.</p>
+<p>Before taking your assistance dog into a park or reserve, other than those listed above, it is highly recommended that you contact us so we can provide you with the latest information on any potential hazards within specific parks that may affect your dog. Please contact the park via the phone numbers listed on each park page or contact the visitor services centre via <a href="https://www.parks.sa.gov.au/contact-us/get-in-touch-online" target="_self">email</a>&nbsp;or on&nbsp;<a href="https://www.facebook.com/NPWSSA" target="_blank">Facebook</a>, or you can live chat with a customer service representative on the website Monday to Friday from 9am to 5pm.</p>
+<h2>Why does my dog need to be on a lead?</h2>
+<p>If your dog is unleashed, it is more likely to impact on native wildlife and other visitors in a park and be at risk itself.</p>
+<h3>Risks to wildlife:</h3>
+<ul>
+<li>Dogs off tracks will leave a scent in the bush that will keep wildlife away.</li>
+<li>Uncontrolled dogs may frighten wildlife and disrupt their natural behavior.</li>
+<li>Some dogs will kill or injure wildlife.</li>
+</ul>
+<h3>Risks to other park visitors</h3>
+<ul>
+<li>Dogs may be aggressive to other park visitors.</li>
+<li>Even friendly dogs can knock people over causing injury.</li>
+<li>Some people want to enjoy parks without dogs.</li>
+</ul>
+<h3>Risks to your dog</h3>
+<ul>
+<li>Poison baits may be laid to control foxes. Baits can be fatal to dogs.</li>
+<li>Even if your dog is friendly, other dogs may not be.</li>
+<li>Your dog can catch parasites (such as fleas and ticks) from wildlife.</li>
+<li>Snake bites are a real risk in natural areas such as parks.</li>
+<li>Wildlife such as kangaroos and koalas will defend themselves if threatened by a dog and can cause significant injury to or the death of your dog.</li>
+</ul>
+<h3>Dog walking tips from Adelady&nbsp;</h3>
+<p class="fixed-aspect-ratio fixed-aspect-ratio--16x9"><iframe class="fixed-aspect-ratio__content" title="Justin Holmes presents Innes National Park" src="https://www.youtube.com/embed/e-Fb4rsGixU?wmode=transparent" frameborder="0"></iframe></p>
+
+		
+        
+        
+	</div>
+	<div class="c-content__extras"><!--Blog stories coming soon--></div>
+</div><!--normalTemplateEnd-->
+			
+		</div>
+	</div>
+</div><!-- /.c-page--content --><!--groupTemplateEnd-->
+
+		</form>
+	</div>
+
+	<!-- End main content -->
+	
+	
+	
+	
+	<!-- Page footer -->
+	<div class="o-wrapper--footer">
+	    <div class="c-acknowledgement">
+	        <div class="o-wrapper">
+	            <div class="c-acknowledgement__content">
+	                <div class="c-acknowledgement__image">
+	                    <img src="/files/sharedassets/parks/acknowledgement-of-country.jpg" alt="Acknowledgement of Country">
+	                </div>
+	                <div class="c-acknowledgement__description">
+	                    <h2 class="c-acknowledgement__title">Acknowledgement of Country</h2>
+	                    <p>The Department for Environment and Water acknowledges Aboriginal
+people as the First Peoples and Nations of the lands and waters we live and
+work upon and we pay our respects to their Elders past, present and emerging.
+We acknowledge and respect the deep spiritual connection and the relationship
+that Aboriginal and Torres Strait Islander people have to Country.</p>
+	                    <p>The Department works in partnership with the First Peoples of South Australia
+and supports their Nations to take a leading role in caring for their Country.</p>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    
+	    <footer class="c-page-footer">                   
+            
+
+<!-- NPSA-CL_sitemap-2018 -->
+<div class="o-wrapper">
+  <div class="c-page-footer__top">
+<div class="footer-list u-hidden u-display-inline-block-large-and-up">
+
+  	<h4>Find a park</h2>
+
+  	<ul class="o-list-bare">
+
+    	<li>
+	<a href="https://www.parks.sa.gov.au/find-a-park#/list/" target="_self">Search by activities, facilities and more</a>
+</li><li>
+	<a href="https://www.parks.sa.gov.au/find-a-park#/list/" target="_self">Search by park name</a>
+</li><li>
+	<a href="https://www.parks.sa.gov.au/find-a-park#/map/" target="_self">Find on a map</a>
+</li>
+
+  	</ul><!-- /.o-list-bare -->
+
+</div><!-- /.footer-list --><div class="footer-list u-hidden u-display-inline-block-large-and-up">
+
+  	<h4>Book & pay</h2>
+
+  	<ul class="o-list-bare">
+
+    	<li>
+	<a href="https://www.parks.sa.gov.au/booking" target="_self">Book now</a>
+</li><li>
+	<a href="https://www.parks.sa.gov.au/book-and-pay/frequently-asked-questions" target="_self">Online booking FAQ's</a>
+</li><li>
+	<a href="https://www.parks.sa.gov.au/book-and-pay/where-can-i-book" target="_self">Where to book and pay in person</a>
+</li><li>
+	<a href="https://www.parks.sa.gov.au/book-and-pay/parks-passes" target="_self">Multiple entry park passes</a>
+</li>
+
+  	</ul><!-- /.o-list-bare -->
+
+</div><!-- /.footer-list --><div class="footer-list u-hidden u-display-inline-block-large-and-up">
+
+  	<h4>Know before you go</h2>
+
+  	<ul class="o-list-bare">
+
+    	<li>
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/dogs-in-parks" target="_self">Dogs in parks</a>
+</li><li>
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/maps" target="_self">Maps</a>
+</li><li>
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/fires-and-bbqs" target="_self">Fires and BBQ's</a>
+</li><li>
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/closures-and-alerts" target="_self">Closures and alerts</a>
+</li><li>
+	<a href="https://www.parks.sa.gov.au/know-before-you-go/accessibility" target="_self">Accessibility</a>
+</li>
+
+  	</ul><!-- /.o-list-bare -->
+
+</div><!-- /.footer-list --><div class="footer-list u-hidden u-display-inline-block-large-and-up">
+
+  	<h4>Our places</h2>
+
+  	<ul class="o-list-bare">
+
+    	<li>
+	<a href="https://www.environment.sa.gov.au/marineparks/home" target="_blank">Marine parks</a>
+</li><li>
+	<a href="https://www.clelandwildlifepark.sa.gov.au/Home" target="_blank">Cleland Wildlife Park</a>
+</li><li>
+	<a href="https://www.sealbay.sa.gov.au/home" target="_blank">Seal Bay</a>
+</li><li>
+	<a href="https://www.naracoortecaves.sa.gov.au/Home" target="_blank">Naracoorte Caves</a>
+</li><li>
+	<a href="https://www.parks.sa.gov.au/find-a-park/Browse_by_region/Adelaide_Hills/mount-lofty-summit" target="_self">Mount Lofty Summit</a>
+</li><li>
+	<a href="https://www.botanicgardens.sa.gov.au/home" target="_blank">Botanic Gardens of South Australia</a>
+</li><li>
+	<a href="https://www.adelaidegaol.sa.gov.au/Home" target="_blank">Adelaide Gaol</a>
+</li><li>
+	<a href="https://www.kangarooislandwildernesstrail.sa.gov.au/home" target="_self">Kangaroo Island Wilderness Trail</a>
+</li>
+
+  	</ul><!-- /.o-list-bare -->
+
+</div><!-- /.footer-list -->
+<!-- Contact us is hardcoded into the CL -->
+<div class="footer-list">
+    <h4>Contact Us</h4>
+    <ul class="o-list-bare">                        
+        <li>
+        	<a href="/contact-us">Visitor information and emergencies</a>
+        </li>
+        <li class="">
+        	<a href="http://www.facebook.com/NPWSSA/">
+        		<i class="fa fa-facebook-square fa-2x u-margin-right-small"></i>
+    		Facebook</a>
+    	</li>
+        <li>
+        	<a href="https://www.instagram.com/nationalparkssa/">
+        		<i class="fa fa-instagram fa-2x u-margin-right-small"></i>
+    		Instagram</a>
+    	</li>
+    </ul>
+</div>
+
+</div><!-- /.o-wrapper -->
+</div><!-- /.c-page-footer__top -->
+<!-- End NPSA-CL_sitemap -->
+
+
+
+
+
+
+	           
+	        
+	        
+	        <div class="c-page-footer__bottom">
+	            <div class="o-wrapper">
+	                <div class="o-layout">
+	                    <div class="o-layout__item u-6/12@lg">
+	                        <ul class="c-page-footer__nav">
+	                            <li class="c-page-footer__nav-item"><a href="//www.environment.sa.gov.au/disclaimer">Disclaimer</a></li>
+	                            <li class="c-page-footer__nav-item"><a href="//www.environment.sa.gov.au/privacy_statement">Privacy</a></li>
+	                            <li class="c-page-footer__nav-item"><a href="//www.environment.sa.gov.au/accessibility">Accessibility</a></li>
+	                            <li class="c-page-footer__nav-item"><a href="https://www.parks.sa.gov.au/agent-login">Agent Login</a></li>
+	                        </ul>
+	                        <p class="c-page-footer__smallprint"><a href="//www.environment.sa.gov.au/copyright">Copyright &copy; Department for Environment and Water 2020</a>. All rights reserved.</p>
+	                    </div>
+	                    <div class="o-layout__item u-6/12@lg">
+	                        <ul class="c-footer-logos">
+	                            <li><a href="//www.environment.sa.gov.au/home" target="_blank"><img src="https://www.environment.sa.gov.au/files/templates/00000000-0000-0000-0000-000000000000/f88a7f3c-df7e-430a-825c-24cfa8dec9a8/alpha-footer-gosa.svg" alt="Government of South Australia"></a></li>
+	                            <li><a href="http://www.southaustralia.com/" target="_blank"><img src="https://www.environment.sa.gov.au/files/templates/00000000-0000-0000-0000-000000000000/f88a7f3c-df7e-430a-825c-24cfa8dec9a8/alpha-footer-south-australia.svg" alt="southaustralia.com"></a></li>
+	                            <li><a href="http://sa.gov.au/" target="_blank"><img src="https://www.environment.sa.gov.au/files/templates/00000000-0000-0000-0000-000000000000/f88a7f3c-df7e-430a-825c-24cfa8dec9a8/alpha-footer-sagovau.svg" alt="sa.gov.au"></a></li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </footer>
+    </div>
+	<!-- End page footer -->
+	
+	
+	<!-- Scripts -->
+	
+	<!-- jQuery -->
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<!-- Local fallback -->
+
+	<script>
+		window.jQuery || document.write('<script src="/files/templates/00000000-0000-0000-0000-000000000000/f88a7f3c-df7e-430a-825c-24cfa8dec9a8/jquery1111min.js">\x3C/script>')
+	</script>
+
+	<!-- End local fallback -->
+
+	<!-- End jQuery -->
+	
+	<!-- BookEasy scripts -->
+
+            <script type="text/javascript">BEcssOverride = "none";</script>
+            
+            <script src="//gadgets.impartmedia.com/gadgets.jsz?key=e65c851dcdc492aaa7db1e22e2bd2283"></script>
+            <script src="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/bookeasy-mods-0469dba080.js?seamlessts=637304336116414345"></script><!-- bookeasy-mods-031401fc6c.js bookeasy-mods-e465553e52.js bookeasy-mods-55e2a3db23.js bookeasy-mods-0b7f10c815.js bookeasy-mods-a0fa3c3835.js bookeasy-mods-29f21360d7.jsbookeasy-mods-3297560195.js bookeasy-mods-271e6f8d68.js bookeasy-mods-5b93c4a0c3.js -- bookeasy-mods-5c4597ff4e.js bookeasy-mods-9d3463fcbd.js bookeasy-mods-c862041a53.js -->
+            
+            <script src="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/details-gadget-6f938271ae.js?seamlessts=637304336116414345"></script><!-- details-gadget-ec534f01ed.js details-gadget-3baab499a6.js -->
+            
+            <script src="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/cart-gadget-3dd74dc1a7.js?seamlessts=637304336116414345"></script><!-- cart-gadget-3dd74dc1a7.js -->
+            
+            <!--  WebUserControl-- Parks DLV BookEasy data !--/WebUserControl  -->
+            <script src="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/booking-statewide-9c3c752e3e.js?seamlessts=637304336116414345"></script><!-- booking-statewide-0cdf7de9ea.js booking-statewide-113acd2cb0.js booking-statewide-e7b4bff672.js -- booking-statewide-0cdf7de9ea.js booking-statewide-36ebaa8a5f.js  -->
+            
+			<script>
+			    $w(function() {
+			        BE.gadget.auth('#bookeasy__auth-gadget', { providers: [ "Guest" ] } );
+			    });
+			</script>
+            
+
+    <!-- custom script for 'Book before you go' button on Cape Borda Lightstation -->
+    <script>
+        // $( document ).ready(function() {
+        //     if ( $('.c-content__title').text() === 'Cape Borda Lightstation' ) {
+        //         $('.c-page-banner__header-text').after('<div class="park-booking"><a class="button" href="/booking/details#/accom/65308">Book & pay</a></div>');
+        //     }
+        // });
+    </script>
+    <!-- End custom script for 'Book before you go' button on Cape Borda Lightstation -->
+
+    <!-- End BookEasy scripts -->
+    
+	<script src="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/plugins-615414281d.js?seamlessts=637304336116414345"></script>
+	<script src="/files/templates/00000000-0000-0000-0000-000000000000/f36c20be-5588-4434-ab12-03ec1af54377/main-582dd5ff72.js?seamlessts=637304336116414345"></script><!-- main-e9a7ef7956.js main-cd80006062.js main-28da0073e6.js main-612c0a46d8.js -->
+	
+	
+	
+<!-- NPSA-CL_park-script-helper -->
+
+
+
+<!-- Did not find a park tab one content type -->
+
+
+
+
+
+	
+	<!-- Open Forms script -->
+    <script src="https://au.openforms.com/Scripts/embed-iframe.js" type="text/javascript"></script>
+    <!-- End Open Forms script -->
+	
+	
+	<!-- schema microdata -->
+        <script type='application/ld+json'>
+        {
+            "@context": "http:\/\/schema.org",
+            "@type": "WebSite",
+            "@id": "#website",
+            "url": "http:\/\/www.parks.sa.gov.au\/",
+            "sameAs": ["https:\/\/www.facebook.com\/parkssa", "https:\/\/www.instagram.com\/nationalparkssa"],
+            "name": "National Parks South Australia",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "http:\/\/www.parks.sa.gov.au\/search?q={search_term}",
+                "query-input": "required name=search_term"
+            }
+        }
+        </script>
+        <script type='application/ld+json'>
+        {
+            "@context": "http:\/\/schema.org",
+            "@type": "Organization",
+            "url": "http:\/\/www.environment.sa.gov.au/\/",
+            "sameAs": ["https:\/\/twitter.com\/SAEnvirWater"],
+            "@id": "#organization",
+            "name": "Department for Environment and Water",
+            "logo": "https:\/\/www.environment.sa.gov.au\/files\/templates\/00000000-0000-0000-0000-000000000000\/f36c20be-5588-4434-ab12-03ec1af54377\/npsa-logotype.svg"
+        }
+        </script>
+        <!-- end schema microdata -->
+        
+        
+        
+
+
+
+
+<!-- NPSA_CL_find-a-park_helper : not find-a-park-test page -->
+<!-- 
+DC_Title: , 
+Name: ,
+DC_Title_menu: 
+-->
+
+
+
+
+
+        
+        <!-- Live chat widget -->
+        <!-- Hide from booking pages -->
+        <script type='text/javascript' data-cfasync='false'>
+        	if (!window.location.href.match('booking|park-passes-online')) {
+    			window.purechatApi = { l: [], t: [], on: function () { this.l.push(arguments); } }; (function () { var done = false; var script = document.createElement('script'); script.async = true; script.type = 'text/javascript'; script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript'; document.getElementsByTagName('HEAD').item(0).appendChild(script); script.onreadystatechange = script.onload = function (e) { if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) { var w = new PCWidget({c: 'da23f384-ed44-40bd-b983-3bee08447aa2', f: true }); done = true; } }; })();
+    		}
+    	</script>
+	
+	<!-- End scripts -->
+</body>
+</html>

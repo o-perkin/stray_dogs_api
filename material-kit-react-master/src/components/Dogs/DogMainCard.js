@@ -42,9 +42,10 @@ class DogMainCard extends Component {
     })
     .then(response => {
         this.setState({
-          dog: response.data.data.dog,
-          user: response.data.data.dog.user
+          dog: response.data.data.dog[0],
+          user: response.data.data.dog[0].user
         })
+        console.log('pomidor', this.state.dog[0])
     })
     .catch(error => {
       if (error.response.status === 401) {
@@ -110,7 +111,6 @@ class DogMainCard extends Component {
   }
   
   render() {
-    console.log('PUSSY', this.state.dog)
     if (this.state.dog == null) {
       this.props.history.push('/dogs');
       return <div></div> 
@@ -138,31 +138,30 @@ class DogMainCard extends Component {
             <Typography color="textPrimary" paragraph>{this.state.dog.description}</Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton onClick={this.favoriteUpdate} aria-label="add to favorites">
-              <FavoriteIcon color={this.state.dog.favorite ? 'secondary' : 'disabled' } />
-            </IconButton>
             {this.props.loggedInStatus == 'LOGGED_IN'
               ? <>
-                <Button
-                  variant="contained"
-                  style={{marginLeft: 'auto', backgroundColor: 'yellow'}}
-                  href={`/dogs/edit/${this.props.match.params.dogId}`}
-                  className={this.props.classes.button}
-                  startIcon={<EditIcon />}
-                >
-                  Редагувати
-                </Button>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  className={this.props.classes.button}
-                  startIcon={<DeleteIcon />}
-                  onClick={this.deleteDog}
-                  disabled={this.state.animate ? true : false}
-                >
-                  Видалити
-                </Button>
-
+                  <IconButton onClick={this.favoriteUpdate} aria-label="add to favorites">
+                    <FavoriteIcon color={this.state.dog.favorite ? 'secondary' : 'disabled' } />
+                  </IconButton>
+                  <Button
+                    variant="contained"
+                    style={{marginLeft: 'auto', backgroundColor: 'yellow'}}
+                    href={`/dogs/edit/${this.props.match.params.dogId}`}
+                    className={this.props.classes.button}
+                    startIcon={<EditIcon />}
+                  >
+                    Редагувати
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={this.props.classes.button}
+                    startIcon={<DeleteIcon />}
+                    onClick={this.deleteDog}
+                    disabled={this.state.animate ? true : false}
+                  >
+                    Видалити
+                  </Button>
                 </>
               : null
             }
