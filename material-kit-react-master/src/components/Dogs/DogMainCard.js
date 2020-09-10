@@ -97,6 +97,7 @@ class DogMainCard extends Component {
       if(response.status === 200) {
         this.updateFavoriteState(this.props.match.params.dogId);
       }
+      console.log("BYABYA", this.state.user)
     }).catch(error => {
       console.log("delete dog errors", error);
     })
@@ -139,33 +140,34 @@ class DogMainCard extends Component {
           </CardContent>
           <CardActions disableSpacing>
             {this.props.loggedInStatus == 'LOGGED_IN'
-              ? <>
-                  <IconButton onClick={this.favoriteUpdate} aria-label="add to favorites">
-                    <FavoriteIcon color={this.state.dog.favorite ? 'secondary' : 'disabled' } />
-                  </IconButton>
-                  <Button
-                    variant="contained"
-                    style={{marginLeft: 'auto', backgroundColor: 'yellow'}}
-                    href={`/dogs/edit/${this.props.match.params.dogId}`}
-                    className={this.props.classes.button}
-                    startIcon={<EditIcon />}
-                  >
-                    Редагувати
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    className={this.props.classes.button}
-                    startIcon={<DeleteIcon />}
-                    onClick={this.deleteDog}
-                    disabled={this.state.animate ? true : false}
-                  >
-                    Видалити
-                  </Button>
-                </>
-              : null
-            }
-            
+              ? <IconButton onClick={this.favoriteUpdate} aria-label="add to favorites">
+                  <FavoriteIcon color={this.state.dog.favorite ? 'secondary' : 'disabled' } />
+                </IconButton>
+              : null}
+            {this.state.user ? 
+              this.state.user.id == this.props.current_user.id && this.props.loggedInStatus == "LOGGED_IN" 
+                ? <>
+                    <Button
+                      variant="contained"
+                      style={{marginLeft: 'auto', backgroundColor: 'yellow'}}
+                      href={`/dogs/edit/${this.props.match.params.dogId}`}
+                      className={this.props.classes.button}
+                      startIcon={<EditIcon />}
+                    >
+                      Редагувати
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      className={this.props.classes.button}
+                      startIcon={<DeleteIcon />}
+                      onClick={this.deleteDog}
+                      disabled={this.state.animate ? true : false}
+                    >
+                      Видалити
+                    </Button>
+                  </>
+                : null : null}          
             <LoopCircleLoading color='purple' style={this.state.animate ? {} : {display: "none"}} />
           </CardActions>
         </Card>

@@ -3,11 +3,11 @@ import { Route, Switch } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
 // pages for this product
 import Components from 'views/Components/Components.js';
-import LandingPage from 'views/LandingPage/LandingPage.js';
+import DogsPage from 'views/DogsPage/DogsPage.js';
 import ProfilePage from 'views/ProfilePage/ProfilePage.js';
 import LoginPage from 'views/LoginPage/LoginPage.js';
 import RegisterPage from 'views/RegisterPage/RegisterPage.js';
-import MyListPage from 'views/MyListPage/MyListPage.js';
+import MyDogsPage from 'views/MyDogsPage/MyDogsPage.js';
 import FavoritesPage from 'views/FavoritesPage/FavoritesPage.js';
 import SubscriptionsPage from 'views/SubscriptionsPage/SubscriptionsPage.js';
 import NewDogsPage from 'views/NewDogsPage/NewDogsPage.js';
@@ -94,7 +94,7 @@ export default class App extends Component {
           exact 
           path="/dogs" 
           render={props => (
-            <LandingPage {...props} animate={this.state.animate} current_user={this.state.user ? this.state.user : {}} createNotification={this.createNotification} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            <DogsPage {...props} animate={this.state.animate} current_user={this.state.user ? this.state.user : {}} createNotification={this.createNotification} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
         <Route 
@@ -113,7 +113,7 @@ export default class App extends Component {
         <Route 
           path="/dogs/:dogId" 
           render={props => (
-            <DogsShowPage {...props} createNotification={this.createNotification}  handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            <DogsShowPage {...props} current_user={this.state.user ? this.state.user : {}} createNotification={this.createNotification}  handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
         <Route
@@ -148,7 +148,7 @@ export default class App extends Component {
           exact 
           path="/my_list" 
           render={props => (
-            <MyListPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            <MyDogsPage {...props} animate={this.state.animate} current_user={this.state.user ? this.state.user : {}} createNotification={this.createNotification} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
         <Route

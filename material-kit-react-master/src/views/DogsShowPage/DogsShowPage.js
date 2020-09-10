@@ -95,7 +95,7 @@ export default function DogsShowPage(props) {
           <div className={classes.container}>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={6} >
-                <DogMainCard updateFavoriteState={props.updateFavoriteState} createNotification={props.createNotification} {...props} classes={classes} handleExpandClick={handleExpandClick} expanded={expanded} loggedInStatus={props.loggedInStatus} />
+                <DogMainCard current_user={props.current_user} updateFavoriteState={props.updateFavoriteState} createNotification={props.createNotification} {...props} classes={classes} handleExpandClick={handleExpandClick} expanded={expanded} loggedInStatus={props.loggedInStatus} />
               </GridItem>
             </GridContainer>
           </div>

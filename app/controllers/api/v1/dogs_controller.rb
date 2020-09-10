@@ -33,7 +33,7 @@ module Api
       # GET /my_dogs
       def my_dogs
         @dogs = sort_dogs.current_user(current_user.id)
-        render json: {status: "Success",  message: "Loaded dogs", data: {dogs: @dogs, user: current_user}}, status: :ok
+        render json: {status: "Success",  message: "Loaded dogs", data: {dogs: dogs_to_json(@dogs), user: current_user, number_of_pages: (Dog.filters(params).current_user(current_user.id).length.to_f / NUMBER_OF_DOGS_PER_PAGE).ceil}}, status: :ok
       end
 
       # GET /favorite_dogs
@@ -128,7 +128,7 @@ module Api
 
         def check_authorization
           begin
-            if current_user.id == @dog.user_id  
+            if current_user.id == @dog.user_id || current_user.roles == 'site_admin' 
               yield
             else 
               render json: {status: "Failed",  message: "Access denied"}, status: :forbidden
