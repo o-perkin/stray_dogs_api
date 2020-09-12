@@ -72,7 +72,6 @@ export default class EditDog extends Component {
             age: response.data.data.dog.age,
             description: response.data.data.dog.description
           })
-          console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', response)
           this.setState({
             animate: false
           })

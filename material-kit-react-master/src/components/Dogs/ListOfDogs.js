@@ -52,7 +52,7 @@ export default function ListOfDogs(props) {
         </GridItem>
 
         <GridItem xs={12} sm={12} md={4}>
-          {props.current_user.roles == 'site_admin' ? (
+          {props.loggedInStatus == 'LOGGED_IN' ? (
             <Button
               variant="contained"
               color="primary"

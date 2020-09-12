@@ -13,6 +13,7 @@ import SubscriptionsPage from 'views/SubscriptionsPage/SubscriptionsPage.js';
 import NewDogsPage from 'views/NewDogsPage/NewDogsPage.js';
 import EditDogsPage from 'views/EditDogsPage/EditDogsPage.js';
 import DogsShowPage from 'views/DogsShowPage/DogsShowPage.js';
+import NewSubscription from 'views/SubscriptionsPage/Sections/NewSubscription.js';
 import axios from 'axios';
 import * as jwtDecode from 'jwt-decode';
 
@@ -159,10 +160,17 @@ export default class App extends Component {
           )}
         />
         <Route
-          exact 
+          exact
           path="/subscriptions" 
           render={props => (
             <SubscriptionsPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+          )}
+        />
+        <Route
+          exact
+          path="/subscriptions/new" 
+          render={props => (
+            <NewSubscription {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
           )}
         />
       </Switch>

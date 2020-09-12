@@ -57,7 +57,7 @@ export default class NewDog extends Component {
           console.log('params', this.state.params)
       })
       .catch(error => console.log(error))
-  }
+  } 
 
   handleChange(event) {
     this.setState({
