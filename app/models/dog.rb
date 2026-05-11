@@ -33,25 +33,32 @@ class Dog < ApplicationRecord
   scope :current_user, ->(id) { where(user_id: id) }
 
   def self.search search
-    (search && search != "") ? where(name: search) : all
+    search.present? ? where('LOWER(name) LIKE ?', "%#{sanitize_sql_like(search.downcase)}%") : all
   end
 
-  def self.filters params    
-    where(select_breed_and_city(convert_empty_to_nill(params)))
-    .determine_age_range(convert_empty_to_nill(params))
-    .all
+  def self.filters params
+    normalized_params = normalize_filter_params(params)
+
+    where(select_breed_and_city(normalized_params))
+      .determine_age_range(normalized_params)
   end  
 
   private 
 
-    def self.convert_empty_to_nill params
+    def self.normalize_filter_params params
       {
-        breed: params[:breed], 
-        city: params[:city], 
-        age_from: params[:age_from], 
-        age_to: params[:age_to]
+        breed: enum_filter_value(breeds, params[:breed]),
+        city: enum_filter_value(cities, params[:city]),
+        age_from: params[:age_from].presence,
+        age_to: params[:age_to].presence
       }
-      .transform_values {|v| v == "" ? v = nil : v}   
+    end
+
+    def self.enum_filter_value enum_values, value
+      return nil if value.blank?
+
+      value_string = value.to_s
+      enum_values.key?(value_string) ? enum_values[value_string] : value_string
     end
 
     def self.determine_age_range params

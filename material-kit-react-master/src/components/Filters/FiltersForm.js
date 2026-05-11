@@ -64,6 +64,24 @@ export default class FiltersForm extends Component {
   handleSubmit(event) {
     this.props.checkDogsSearchParams(this.state)
     event.preventDefault();
+  }
+
+  enumOptions(options) {
+    if (!options) {
+      return [];
+    }
+
+    if (Array.isArray(options)) {
+      return options.map(option => ({
+        value: option.id || option[1],
+        label: option.name || option.years || option[0]
+      }));
+    }
+
+    return Object.keys(options).map(key => ({
+      value: key,
+      label: key
+    }));
   }    
 
   render() {    
@@ -76,56 +94,36 @@ export default class FiltersForm extends Component {
           <Form.Label>Порода</Form.Label>
           <Form.Control as="select" name="breed" type="breed" value={this.state.breed} onChange={this.handleChange} >
             <option value="" >Оберіть породу</option>
-            {this.state.params 
-              ? this.state.params.breed.map(el => {
-                return <option value={el.id} key={el.id}>{el.name}</option>
-              })
-
-              : null
-
-            }
+            {this.enumOptions(this.state.params && this.state.params.breed).map(el => {
+              return <option value={el.value} key={el.value}>{el.label}</option>
+            })}
           </Form.Control>
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Місто</Form.Label>
           <Form.Control as="select" name="city" type="city" value={this.state.city} onChange={this.handleChange} >
             <option value="" >Оберіть місто</option>
-            {this.state.params 
-              ? this.state.params.city.map(el => {
-                return <option value={el.id} key={el.id}>{el.name}</option>
-              })
-
-              : null
-
-            }
+            {this.enumOptions(this.state.params && this.state.params.city).map(el => {
+              return <option value={el.value} key={el.value}>{el.label}</option>
+            })}
           </Form.Control>
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Вік від</Form.Label>
           <Form.Control as="select" name="age_from" type="age_from" value={this.state.age_from} onChange={this.handleChange}>
             <option value="" >Оберіть вік</option>
-            {this.state.params 
-              ? this.state.params.age.map(el => {
-                return <option value={el.id} key={el.id}>{el.years}</option>
-              })
-
-              : null
-
-            }
+            {this.enumOptions(this.state.params && this.state.params.age).map(el => {
+              return <option value={el.value} key={el.value}>{el.label}</option>
+            })}
           </Form.Control>
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Вік до</Form.Label>
           <Form.Control as="select" name="age_to" type="age_to" value={this.state.age_to} onChange={this.handleChange}>
             <option value="" >Оберіть вік</option>
-            {this.state.params 
-              ? this.state.params.age.map(el => {
-                return <option value={el.id} key={el.id}>{el.years}</option>
-              })
-
-              : null
-
-            }
+            {this.enumOptions(this.state.params && this.state.params.age).map(el => {
+              return <option value={el.value} key={el.value}>{el.label}</option>
+            })}
           </Form.Control>
         </Form.Group>
         <CardFooter style={{display: 'flex', justifyContent: 'center'}} className={this.props.classes.cardFooter}>
