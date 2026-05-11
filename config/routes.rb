@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   namespace :api do 
     namespace :v1 do 
+      get 'ai_agent_status', to: 'ai_agent_status#show'
       resources :dogs      
       resources :subscribes
       get 'new_dog', to: 'dogs#new'
