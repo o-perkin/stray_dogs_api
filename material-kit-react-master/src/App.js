@@ -108,18 +108,28 @@ export default class App extends Component {
     this.setState({
       animate: true
     })
-    axios.get(`http://localhost:3001/api/v1/dogs?breed_id=${params.breed}&city_id=${params.city}&age_from=${params.age_from}&age_to=${params.age_to}`, {
+
+    const searchParams = new URLSearchParams();
+    ['breed', 'city', 'age_from', 'age_to', 'search', 'sort', 'direction', 'page'].forEach(key => {
+      if (params[key] !== undefined && params[key] !== null && params[key] !== '') {
+        searchParams.append(key, params[key]);
+      }
+    });
+
+    axios.get(`http://localhost:3001/api/v1/dogs?${searchParams.toString()}`, {
         headers: {'Accept': '*/*', 'Authorization': localStorage.getItem('token')},
         withCredentials: true
     }).then(response => {
-       console.log("AMMAMAMA", response)  
         this.setState({
-          dogs: response.data.data
-        })
-        this.setState({
+          dogs: response.data.data,
           animate: false
         }) 
-    }).catch(error => console.log(error))  
+    }).catch(error => {
+      console.log(error);
+      this.setState({
+        animate: false
+      })
+    })  
   }
 
   updateFavoriteState(id) {
