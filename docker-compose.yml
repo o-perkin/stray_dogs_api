@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    depends_on:
+      - db
+    environment:
+      RAILS_ENV: test
+      PGHOST: db
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      gmail_username: work.perkin@gmail.com
+      DEVISE_JWT_SECRET_KEY: test-secret-key-for-docker-rspec
+    volumes:
+      - /Users/oleksiiperkin/Documents/glendeal/openclaw-poc/openclaw-docker/workspace/github-pet-target-repo:/app
+    command: bash
+
+volumes:
+  postgres_data:

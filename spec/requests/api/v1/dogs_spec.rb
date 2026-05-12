@@ -25,11 +25,19 @@ RSpec.describe "Dogs", type: :request do
     end
 
     it 'sends dog that fits the filters parameters' do
-      breed = create(:breed)
-      city = create(:city)
-      age = create(:age)
+      breed = "Poodle"
+      city = "Dnipro"
+      age = "5"
+
       dog = create(:dog, name: "Albus", breed: breed, city: city, age: age)
-      get "/api/v1/dogs?breed_id=#{breed.id}&city_id=#{city.id}&age_from=#{age.id - 1}&age_to=#{age.id + 1}"
+
+      get "/api/v1/dogs", params: {
+        breed: breed,
+        city: city,
+        age_from: 5,
+        age_to: 5
+      }
+
       expect(response).to have_http_status(200)
       expect(json['data'].length).to eq(1)
       expect(json['data'][0]["name"]).to eq("Albus")
@@ -44,12 +52,14 @@ RSpec.describe "Dogs", type: :request do
     end
 
     it 'sends dog that fits the sort parameters' do
-      age = create(:age, id: "1", years: '1')
-      dog = create(:dog, age: age)
-      get "/api/v1/dogs?sort=age_id&direction=asc"
+      create(:dog, age: "1")
+      create(:dog, age: "10")
+
+      get "/api/v1/dogs?sort=age&direction=asc"
       expect(response).to have_http_status(200)
       expect(json['data'][0]["age"]).to eq('1')
-      get "/api/v1/dogs?sort=age_id&direction=desc"
+
+      get "/api/v1/dogs?sort=age&direction=desc"
       expect(json['data'][0]["age"]).to_not eq('1')
     end
   end
@@ -85,27 +95,31 @@ RSpec.describe "Dogs", type: :request do
 
     before(:each) do
       @user = create(:user)
-      @breed = create(:breed)
-      @city = create(:city)
-      @age = create(:age)      
+      @breed = Dog.breeds.keys.first
+      @city = Dog.cities.keys.first
+      @age = Dog.ages.keys.first
     end
 
     it 'sends error that you need to login first' do 
-      post "/api/v1/dogs", params: {dog: {name: "Fred", breed_id: @breed.id, city_id: @city.id, age_id: @age.id}}
+      post "/api/v1/dogs", params: {dog: {name: "Fred", breed: @breed, city: @city, age: @age}}
       expect(response).to have_http_status(401)
       expect(response.body).to eq("You need to sign in or sign up before continuing.")
     end
 
-    it 'sends created dog info if all params exist' do   
-      sign_in @user    
-      post "/api/v1/dogs", params: {dog: {name: "Fred", breed_id: @breed.id, city_id: @city.id, age_id: @age.id}}
+    it 'sends created dog info if all params exist' do
+      mail = double("mail", deliver: true)
+      allow(UserMailer).to receive(:email_confirmation_of_created_dog).and_return(mail)
+
+      sign_in @user
+      post "/api/v1/dogs", params: {dog: {name: "Fred", breed: @breed, city: @city, age: @age}}
+
       expect(response).to have_http_status(201)
       expect(json["data"]["name"]).to eq("Fred")
     end
 
     it 'sends error if not all parameters exist' do 
       sign_in @user
-      post "/api/v1/dogs", params: {dog: {name: "", breed_id: @breed.id, city_id: @city.id, age_id: @age.id}}
+      post "/api/v1/dogs", params: {dog: {name: "", breed: @breed, city: @city, age: @age}}
       expect(response).to have_http_status(422)
       expect(json["data"]["name"]).to eq(["can't be blank"])
     end
