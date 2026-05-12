@@ -51,7 +51,7 @@ module Api
         end
 
         def subscribe_params
-          params.require(:subscribe).permit(:user_id, subscriptions_attributes: [:id, :breed_id, :city_id, :age_from, :age_to, :_destroy])
+          params.require(:subscribe).permit(:user_id, subscriptions_attributes: [:id, :breed, :city, :age_from, :age_to, :_destroy])
         end   
     end
   end

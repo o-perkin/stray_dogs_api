@@ -1,13 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Subscription, :type => :model do
-
-  context "Validations" do
+RSpec.describe Subscription, type: :model do
+  describe "validations" do
     before(:each) do
       @subscription = build(:subscription)
     end
 
-    it "is valid with valid attributes" do     
+    it "is valid with valid attributes" do
       expect(@subscription).to be_valid
     end
 
@@ -16,31 +15,19 @@ RSpec.describe Subscription, :type => :model do
       expect(@subscription).to_not be_valid
     end
 
-    it "is not valid without a breed" do
-      @subscription.breed_id = nil
-      expect(@subscription).to_not be_valid
-    end
-
-    it "is not valid without a city" do
-      @subscription.city_id = nil
-      expect(@subscription).to_not be_valid
-    end
-
     it "is not valid without age_to" do
       @subscription.age_to = nil
       expect(@subscription).to_not be_valid
     end
 
-    it "is not valid if age_from greater_than age_to" do
+    it "is not valid if age_from greater than age_to" do
       @subscription.age_from = 5
-      @subscription.age_to = 2      
+      @subscription.age_to = 2
       expect(@subscription).to_not be_valid
     end
   end
 
-  context "Associations" do
+  describe "associations" do
     it { should belong_to(:subscribe) }
-    it { should belong_to(:breed) }
-    it { should belong_to(:city) }
   end
 end

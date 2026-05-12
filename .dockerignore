@@ -1,0 +1,7 @@
+.git
+log/*
+tmp/*
+node_modules
+material-kit-react-master/node_modules
+storage/*
+coverage
