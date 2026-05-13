@@ -37,7 +37,7 @@ class Dog < ApplicationRecord
   end
 
   def self.filters params    
-    where(select_breed_and_city(convert_empty_to_nill(params)))
+    where(select_filters(convert_empty_to_nill(params)))
     .determine_age_range(convert_empty_to_nill(params))
     .all
   end  
@@ -49,7 +49,8 @@ class Dog < ApplicationRecord
         breed: params[:breed], 
         city: params[:city], 
         age_from: params[:age_from], 
-        age_to: params[:age_to]
+        age_to: params[:age_to],
+        name: params[:name]
       }
       .transform_values {|v| v == "" ? v = nil : v}   
     end
@@ -62,8 +63,8 @@ class Dog < ApplicationRecord
       end
     end
 
-    def self.select_breed_and_city params
-      params.select { |k, v| v != nil && (k == :breed || k == :city)}
+    def self.select_filters params
+      params.select { |k, v| v != nil && (k == :breed || k == :city || k == :name)}
     end
 
     def self.determine_age_from age_from
