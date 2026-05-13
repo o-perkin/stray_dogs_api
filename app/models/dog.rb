@@ -37,9 +37,11 @@ class Dog < ApplicationRecord
   end
 
   def self.filters params    
-    where(select_breed_and_city(convert_empty_to_nill(params)))
-    .determine_age_range(convert_empty_to_nill(params))
-    .all
+    sanitized_params = convert_empty_to_nill(params)
+    dogs = where(select_breed_and_city(sanitized_params))
+      .determine_age_range(sanitized_params)
+
+    params.key?(:description) ? dogs.where(description: params[:description]) : dogs.all
   end  
 
   private 

@@ -6,10 +6,24 @@ RSpec.describe "Dogs", type: :request do
 
     before(:each) { create_list(:dog, 10) }
 
-    it 'sends 5 dogs on first page' do      
+    it 'sends 5 dogs on first page when description filter is absent' do      
       get '/api/v1/dogs'
       expect(response).to have_http_status(200)
       expect(json['data'].length).to eq(5)
+    end
+
+    it 'sends dogs that exactly match the description parameter' do
+      matching_description = "Friendly with cats"
+      create(:dog, name: "Albus", description: matching_description)
+      create(:dog, name: "Sirius", description: matching_description)
+      create(:dog, name: "Buckbeak", description: "Friendly with cats and dogs")
+
+      get "/api/v1/dogs", params: { description: matching_description }
+
+      expect(response).to have_http_status(200)
+      expect(json['data'].length).to eq(2)
+      expect(json['data'].map { |dog| dog['description'] }).to all(eq(matching_description))
+      expect(json['data'].map { |dog| dog['name'] }).to contain_exactly("Albus", "Sirius")
     end
 
     it 'sends 5 dogs on second page' do
