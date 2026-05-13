@@ -91,7 +91,9 @@ module Api
         end
 
         def sort_dogs
-          Dog.filters(params).order(sort_column + " " + sort_direction).page(params[:page])
+          dogs = Dog.filters(params.except(:city))
+          dogs = dogs.where(city: params[:city]) if params[:city].present?
+          dogs.order(sort_column + " " + sort_direction).page(params[:page])
         end
 
         def sort_column
