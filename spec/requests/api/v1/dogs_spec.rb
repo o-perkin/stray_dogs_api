@@ -6,10 +6,22 @@ RSpec.describe "Dogs", type: :request do
 
     before(:each) { create_list(:dog, 10) }
 
-    it 'sends 5 dogs on first page' do      
+    it 'sends 5 dogs on first page without city filter' do      
       get '/api/v1/dogs'
       expect(response).to have_http_status(200)
       expect(json['data'].length).to eq(5)
+    end
+
+    it 'sends only dogs from the requested city' do
+      create(:dog, name: "Lviv Dog", city: "Lviv")
+      create(:dog, name: "Dnipro Dog", city: "Dnipro")
+
+      get '/api/v1/dogs', params: { city: "Dnipro" }
+
+      expect(response).to have_http_status(200)
+      expect(json['data'].length).to eq(1)
+      expect(json['data'][0]["name"]).to eq("Dnipro Dog")
+      expect(json['data'][0]["city"]).to eq("Dnipro")
     end
 
     it 'sends 5 dogs on second page' do
