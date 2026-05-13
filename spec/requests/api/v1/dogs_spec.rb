@@ -10,6 +10,7 @@ RSpec.describe "Dogs", type: :request do
       get '/api/v1/dogs'
       expect(response).to have_http_status(200)
       expect(json['data'].length).to eq(5)
+      expect(json['data']).to all(include('service' => 'stray_dogs'))
     end
 
     it 'sends 5 dogs on second page' do
