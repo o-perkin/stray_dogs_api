@@ -105,6 +105,7 @@ export default function DogCard(props) {
             <p>Breed {props.dog.breed}</p>
             <p>City {props.dog.city}</p>
             <p>Age {props.dog.age}</p>
+            <p>Service: Documentation</p>
           </div>
         </Typography>
       </CardContent>
