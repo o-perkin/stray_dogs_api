@@ -43,6 +43,30 @@ RSpec.describe "Dogs", type: :request do
       expect(json['data'][0]["name"]).to eq("Albus")
     end
 
+    it 'sends dogs whose name exactly matches the name parameter' do
+      Dog.update_all(name: "Buddy")
+      create(:dog, name: "Rex")
+      create(:dog, name: "Rex")
+      create(:dog, name: "Rexie")
+      create(:dog, name: "rex")
+
+      get "/api/v1/dogs", params: { name: "Rex" }
+
+      expect(response).to have_http_status(200)
+      expect(json['data'].length).to eq(2)
+      expect(json['data'].map { |dog| dog["name"] }).to all(eq("Rex"))
+    end
+
+    it 'sends the normal unfiltered dog list without the name parameter' do
+      create(:dog, name: "Rex")
+      create(:dog, name: "Rexie")
+
+      get "/api/v1/dogs"
+
+      expect(response).to have_http_status(200)
+      expect(json['data'].length).to eq(5)
+    end
+
     it 'sends dog that fits the search parameter' do
       dog = create(:dog, name: "Sivirus")
       get "/api/v1/dogs?search=Sivirus"
