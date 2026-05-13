@@ -1,0 +1,13 @@
+{
+  "test_commands": {
+    "backend_all": "docker compose run --rm web bash -lc \"bundle exec rails db:prepare && bundle exec rspec\"",
+    "backend_spec_file": "docker compose run --rm web bash -lc \"bundle exec rails db:prepare && bundle exec rspec {file}\""
+  },
+  "test_selection_rules": [
+    "If backend model changed, run the related model spec if it exists.",
+    "If backend controller/API endpoint changed, run the related request/controller spec if it exists.",
+    "If serializer/service/job changed, run the related spec if it exists.",
+    "If only documentation changed, tests may be skipped with a clear reason.",
+    "Do not run the full test suite unless targeted tests cannot reasonably cover the change."
+  ]
+}
