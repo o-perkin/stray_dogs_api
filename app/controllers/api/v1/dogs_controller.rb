@@ -9,7 +9,7 @@ module Api
       # GET /dogs
       def index 
         @dogs = sort_dogs.per(5).search(params[:search])        
-        render json: {status: "Success",  message: "Loaded dogs", data: dogs_to_json(@dogs)}, status: :ok
+        render json: {status: "Success",  message: "Loaded dogs", data: dogs_to_json(@dogs).map { |dog| dog.merge(service: "stray_dogs") }}, status: :ok
       end
 
       # GET /dogs/1
